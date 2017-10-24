@@ -17,6 +17,19 @@ Route::get('/', function () {
 });
 
 // ADministrador
-Route::get('adm', function(){
-	return view('adm.index');
+
+Route::group(['prefix' => 'adm'], function() {
+    //Login
+	Route::get('/', function(){
+		return view('adm.usuarios.login');
+	});
+
+	Route::post('procesarLogin', function() {
+	    //
+	});
+
+	// CRUD usuarios de administracion
+	Route::resource('usuario', 'UsuarioController');
+
 });
+

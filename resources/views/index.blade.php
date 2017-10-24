@@ -1,4 +1,4 @@
-@extends('layout.basico')
+@extends('layouts.basico')
 
 @section('titulo', '')
 
