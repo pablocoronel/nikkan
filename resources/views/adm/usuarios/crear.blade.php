@@ -1,18 +1,5 @@
-@extends('layouts.basico')
+@extends('layouts.administracion')
 
-<div class="row">
-    <div class="col-xs-12 col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-        	<div class="panel-heading">
-                <h3 class="panel-title">Crear usuario</h3>
-            </div>
+@section('nombreDeAccion', 'Crear usuario')
 
-
-			
-			@extends('adm.usuarios.formulario')
-			
-			
-
-		</div>
-    </div>
-</div>
+@extends('adm.usuarios.formulario')
