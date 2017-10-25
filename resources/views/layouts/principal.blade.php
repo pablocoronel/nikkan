@@ -13,14 +13,10 @@
     {{-- Archivo particulares de cada pagina --}}
     @yield('scriptsSuperior')
 
-    <!-- Archivos JS de bootstrap -->
-    <script src="{{asset('js/jquery-2.1.4.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-
 	<title>NIKKA-N @yield('titulo')</title>
 </head>
 <body>
-	@yield('plantillaHija')
+	@yield('contenidoPadre')
 
     @yield('scriptsInferior')
 </body>

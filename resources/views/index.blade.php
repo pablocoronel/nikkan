@@ -1,6 +1,6 @@
-@extends('layouts.basico')
+@extends('layouts.sitio')
 
-@section('titulo', '')
+@section('titulo', 'inicio')
 
 @section('contenido')
 pagina de inicio

@@ -13,6 +13,11 @@ use Session;
 
 class UsuarioController extends Controller
 {
+    // Definicion de middleware en cuales metodos usarlo
+    // public function __construct(){
+    //     $this->middleware('crearHistoria', ['only' => ['create', 'store']]);
+    // }
+    
     /**
      * Display a listing of the resource.
      *

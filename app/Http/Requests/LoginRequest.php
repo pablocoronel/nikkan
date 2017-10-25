@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsuarioRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,11 +13,7 @@ class UsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Auth::check()) {
-            return true;
-        }else{
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -29,10 +25,8 @@ class UsuarioRequest extends FormRequest
     {
         return [
             //
-            'nombre' => 'required',
             'usuario' => 'required',
-            'clave' => 'required',
-            'nivel' => 'required',
+            'clave' => 'required'
         ];
     }
 }

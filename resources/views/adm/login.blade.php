@@ -1,4 +1,4 @@
-@extends('layouts.basico')
+@extends('layouts.principal')
 @section('titulo', '- Administrador')
 
 {{-- CSS --}}
@@ -8,7 +8,7 @@
 
 
 {{-- contenido --}}
-@section('contenido')
+@section('contenidoPadre')
 	<div class="row">
             <div class="col-md-4 col-md-offset-4 logoEnLogin">
                 <img src="" alt="" class="img img-responsive center-block">
@@ -21,7 +21,10 @@
                         <h3 class="panel-title">Panel de Administraci&oacute;n</h3>
                     </div>
                     <div class="panel-body">
-                        <form role="form" method="post" action="{{URL::to('adm/procesarLogin')}}">
+                        {!!Form::open(['route' => 'login.iniciar', 'method'=>'POST'])!!}
+                        {{-- {!!Form::open(['action' => ['Controller@method']])!!} --}}
+
+                        {{csrf_field()}}
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Usuario" name="usuario" autofocus>
@@ -31,7 +34,7 @@
                                 </div>
                                 <input type="submit" value="Ingresar" class="btn btn-lg btn-success btn-block">
                             </fieldset>
-                        </form>
+                        {!!Form::close()!!}
                     </div>
                 </div>
             </div>

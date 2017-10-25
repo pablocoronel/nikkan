@@ -16,21 +16,29 @@ Route::get('/', function () {
     return view('index');
 });
 
-// ADministrador
 
+// Procesar login
+Route::resource('login', 'LoginController');
+// Route::post('login', 'LoginController');
+// Desloguearse
+// Route::get('logout', 'LoginController@logout');
+
+// Administrador
 Route::group(['prefix' => 'adm'], function() {
-    //Login
-	Route::get('/', function(){
-		// return view('adm.usuarios.login');
-		return view('adm.index');
+    
+    Route::get('login', function () {
+	    return view('adm.login');
 	});
 
-	Route::post('procesarLogin', function() {
-	    //
-	});
+    // Con sesion iniciada
+    Route::middleware(['loginAdm'])->group(function(){
+	    //Incio
+		Route::get('/', function(){
+			return view('adm.index');
+		});
 
-	// CRUD usuarios de administracion
-	Route::resource('usuario', 'UsuarioController');
-
+		// CRUD usuarios de administracion
+		Route::resource('usuario', 'UsuarioController');
+    });
 });
 
