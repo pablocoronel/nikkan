@@ -2,4 +2,6 @@
 
 @section('nombreDeAccion', 'Crear usuario')
 
-@extends('adm.usuarios.formulario')
+@section('contenido')
+    @include('adm.usuarios.formulario')
+@endsection

@@ -21,7 +21,8 @@ Route::get('/', function () {
 Route::group(['prefix' => 'adm'], function() {
     //Login
 	Route::get('/', function(){
-		return view('adm.usuarios.login');
+		// return view('adm.usuarios.login');
+		return view('adm.index');
 	});
 
 	Route::post('procesarLogin', function() {
