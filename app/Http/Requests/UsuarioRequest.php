@@ -13,11 +13,12 @@ class UsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Auth::check()) {
-            return true;
-        }else{
-            return false;
-        }
+        // if (Auth::check()) {
+        //     return true;
+        // }else{
+        //     return false;
+        // }
+        return true;
     }
 
     /**

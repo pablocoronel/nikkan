@@ -46,10 +46,10 @@ return [
             'provider' => 'users',
         ],
 
-        'usuarioLogin' => [
-            'driver' => 'session',
-            'provider' => 'providerLogin',
-        ],
+        // 'usuarioLogin' => [
+        //     'driver' => 'session',
+        //     'provider' => 'providerLogin',
+        // ],
     ],
 
     /*
@@ -75,10 +75,10 @@ return [
             'model' => App\User::class,
         ],
 
-        'providerLogin' => [
-            'driver' => 'eloquent',
-            'model' => App\Usuario::class,
-        ],
+        // 'providerLogin' => [
+        //     'driver' => 'eloquent',
+        //     'model' => App\Usuario::class,
+        // ],
 
         // 'users' => [
         //     'driver' => 'database',

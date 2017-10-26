@@ -20,7 +20,7 @@ Route::get('/', function () {
 
 // Administrador
 Route::group(['prefix' => 'adm'], function() {
-    // ver login
+    // ver formulario de login
     Route::get('login', function () {
 	    return view('adm.login');
 	});
@@ -36,7 +36,7 @@ Route::group(['prefix' => 'adm'], function() {
     Route::middleware(['loginAdm'])->group(function(){
 		// Desloguearse
 		Route::get('logout', 'LoginController@cerrar');
-		
+
 	    //Incio
 		Route::get('/', function(){
 			return view('adm.index');

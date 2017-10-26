@@ -26,6 +26,10 @@ class UsuarioController extends Controller
     public function index()
     {
         //
+        $usuarios= Usuario::all()->toArray();
+
+
+        return view('adm.usuarios.listar', ['listaDeUsuarios' => $usuarios]);
     }
 
     /**
@@ -81,6 +85,10 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         //
+        $usuario= Usuario::find($id);
+        return view('adm.usuarios.editar', ['accion' => 'usuario.update', 'verbo' => 'post', 'usuario' => 'usuario']);
+
+        // , compact('usuario','usuario')
     }
 
     /**

@@ -39,13 +39,19 @@
 			</div>
 
 			{{-- Formulario --}}
-			{!! Form::open(array('route' => $accion, 'method' => $verbo, 'class' => 'form-horizontal')) !!}
+			<?php
+			// echo($accion);
+			// exit();
+
+			?>
+			<form method="{{$verbo}}" action="{{action('UsuarioController@'.$accion)}}">
+			{{-- {!! Form::open(array('route' => $accion, 'method' => $verbo, 'class' => 'form-horizontal')) !!} --}}
 				{{csrf_field()}}
 			    <fieldset>
 			    	<div class="form-group">
 			    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
 			    		<div class="col-sm-7">
-							{!! Form::text('nombre', '',['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
+							{!! Form::text('nombre',['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
 							{{-- @if(!empty(old('nombre'))) {{trim(old('nombre'))}} @else '' @endif, --}}
 			        	</div>
 			        </div>
