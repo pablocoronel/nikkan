@@ -17,7 +17,7 @@
             <?php /*echo($_SESSION["usuario"])*/ ?> <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu dropdown-user">
-            <li><a href="{{URL::asset('login.loguot')}}"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
+            <li><a href="{{URL::asset('adm/logout')}}"><i class="fa fa-sign-out fa-fw"></i> Salir</a>
             </li>
         </ul>
         <!-- /.dropdown-user -->

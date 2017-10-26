@@ -15,19 +15,13 @@ use Redirect;
 
 class LoginController extends Controller
 {
-	protected function guard()
-	{
-	    return Auth::guard('usuarioLogin');
-	}
-
     //
     public function index(){
 
 	}
     
     public function iniciar(LoginRequest $request){
-        if($this->guard()->attempt(['usuario' => $request['usuario'], 'password' => $request['clave']])){
-        // if(Auth::attempt(['usuario' => $request['usuario'], 'password' => $request['clave']])){
+        if(Auth::attempt(['usuario' => $request['usuario'], 'password' => $request['clave']])){
             // Session::flash('mensajeOk', 'correcto');
             // return back();
             return redirect('adm');

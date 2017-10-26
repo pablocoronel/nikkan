@@ -28,14 +28,15 @@ Route::group(['prefix' => 'adm'], function() {
     // procesar el login
 	Route::post('login', 'LoginController@iniciar');
 
-	// Desloguearse
-	// Route::get('logout', 'LoginController@logout');
 
 
 	
 	// ********************
     // Con sesion iniciada
     Route::middleware(['loginAdm'])->group(function(){
+		// Desloguearse
+		Route::get('logout', 'LoginController@cerrar');
+		
 	    //Incio
 		Route::get('/', function(){
 			return view('adm.index');
