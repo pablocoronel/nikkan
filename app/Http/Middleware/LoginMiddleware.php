@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Auth;
 
 class LoginMiddleware
 {
@@ -16,7 +17,10 @@ class LoginMiddleware
     public function handle($request, Closure $next)
     {
         // Si no esta logueado
-        if (\Auth::guest()) {
+        // if (\Auth::guest()) {
+        //     return redirect('adm/login');
+        // }
+        if (Auth::guard()->check()) {
             return redirect('adm/login');
         }
 

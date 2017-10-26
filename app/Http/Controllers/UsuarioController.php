@@ -51,7 +51,7 @@ class UsuarioController extends Controller
             'nivel' => $request->get('nivel'),
             'nombre' => $request->get('nombre'),
             'usuario' => $request->get('usuario'),
-            'clave' => $request->get('clave'),
+            'password' => bcrypt($request->get('clave')),
         ]);
 
         $usuario->save();

@@ -27,7 +27,7 @@ class Usuario extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['nivel', 'nombre', 'usuario', 'clave'];
+    protected $fillable = ['nivel', 'nombre', 'usuario', 'password'];
 
      /**
      * The attributes that should be mutated to dates.
@@ -35,4 +35,8 @@ class Usuario extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // public function getAuthPassword() { 
+    //     return $this->clave; 
+    // }
 }

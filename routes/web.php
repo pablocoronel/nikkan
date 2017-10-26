@@ -17,19 +17,23 @@ Route::get('/', function () {
 });
 
 
-// Procesar login
-Route::resource('login', 'LoginController');
-// Route::post('login', 'LoginController');
-// Desloguearse
-// Route::get('logout', 'LoginController@logout');
 
 // Administrador
 Route::group(['prefix' => 'adm'], function() {
-    
+    // ver login
     Route::get('login', function () {
 	    return view('adm.login');
 	});
+	
+    // procesar el login
+	Route::post('login', 'LoginController@iniciar');
 
+	// Desloguearse
+	// Route::get('logout', 'LoginController@logout');
+
+
+	
+	// ********************
     // Con sesion iniciada
     Route::middleware(['loginAdm'])->group(function(){
 	    //Incio

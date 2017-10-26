@@ -15,20 +15,26 @@ use Redirect;
 
 class LoginController extends Controller
 {
+	protected function guard()
+	{
+	    return Auth::guard('usuarioLogin');
+	}
+
     //
     public function index(){
 
 	}
     
     public function iniciar(LoginRequest $request){
-        // $recuerdame= $request['recuerdame'];
-        
-        // if(Auth::attempt(['usuario' => $request['usuario'], 'clave' => $request['clave']])){
-        //     return back();
-        // }else{
-        //     Session::flash('mensaje', 'Los datos son incorrectos');
-        //     return back();
-        // }
+        if($this->guard()->attempt(['usuario' => $request['usuario'], 'password' => $request['clave']])){
+        // if(Auth::attempt(['usuario' => $request['usuario'], 'password' => $request['clave']])){
+            // Session::flash('mensajeOk', 'correcto');
+            // return back();
+            return redirect('adm');
+        }else{
+            Session::flash('mensajeError', 'Los datos son incorrectos');
+            return back();
+        }
     }
 
     public function cerrar(){

@@ -20,9 +20,39 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">Panel de Administraci&oacute;n</h3>
                     </div>
+
+                    {{-- Mensajes --}}
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                            {{-- De error --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            {{-- De error --}}
+                            @if(Session::has('mensajeError'))
+                                <div class="alert alert-danger" role="alert">
+                                    {{Session::get('mensajeError', '')}}
+                                </div>
+                            @endif
+                            
+                            {{-- De exito --}}
+                            @if(Session::has('mensajeOk'))
+                                <div class="alert alert-success" role="alert">
+                                    {{Session::get('mensajeOk', '')}}
+                                </div>
+                            @endif
+                        </div>  
+                    </div>
+
                     <div class="panel-body">
-                        {!!Form::open(['route' => 'login.iniciar', 'method'=>'POST'])!!}
-                        {{-- {!!Form::open(['action' => ['Controller@method']])!!} --}}
+                        {!!Form::open(['action' => ['LoginController@iniciar', 'method'=>'POST']])!!}
 
                         {{csrf_field()}}
                             <fieldset>
