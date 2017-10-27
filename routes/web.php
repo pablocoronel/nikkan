@@ -47,6 +47,12 @@ Route::group(['prefix' => 'adm'], function() {
 
 		// CRUD metadatos
 		Route::resource('metadato', 'MetadatoController');
+
+		// CRUD datos de empresa
+		Route::resource('dato-empresa', 'DatoEmpresaController');
+
+		// CRUD redes sociales
+		Route::resource('redes-sociales', 'RedesSocialesController');
     });
 });
 
