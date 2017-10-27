@@ -42,37 +42,30 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['UsuarioController@'.$accion, $usuario->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
+				{{ Form::open(['action' => ['MetadatoController@'.$accion, $metadato->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
 
 				    	<div class="form-group">
-				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
+				    		{!! Form::label('seccion', 'Seccion', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('nombre', $usuario->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
+								{!! Form::text('seccion', $metadato->seccion, ['class' => 'form-control', 'placeholder' => 'Seccion']) !!}
 							</div>
 				        </div>
 
 				        <div class="form-group">
-				        	{!! Form::label('usuario', 'Usuario', ['class' => 'col-sm-3 control-label']) !!}
+				        	{!! Form::label('keyword', 'Keyword', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('usuario', $usuario->usuario, ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
+				            	{!! Form::text('keyword', $metadato->keyword, ['class' => 'form-control', 'placeholder' => 'Keyword']) !!}
 					        </div>
 				        </div>
 
-{{-- 				        <div class="form-group">
-				        	{!! Form::label('clave', 'Clave', ['class' => 'col-sm-3 control-label']) !!}
-					        <div class="col-sm-7">
-					        	{!! Form::password('clave', ['class' => 'form-control', 'placeholder' => 'Clave']) !!}
-					        </div>
-				        </div> --}}
-
 				        <div class="form-group">
-				        	{!! Form::label('nivel', 'Nivel', ['class' => 'col-sm-3 control-label']) !!}
-							<div class="col-sm-7">
-								{!! Form::select('nivel', [$usuario->nivel => $usuario->nivel, 'administrador' => 'Administrador', 'usuario_normal' => 'Usuario normal']) !!}
-				        	</div>
+				    		{!! Form::label('descripcion', 'Descripcion', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('descripcion', $metadato->descripcion, ['class' => 'form-control', 'placeholder' => 'Descripcion']) !!}
+							</div>
 				        </div>
 
 				        <div class="col-sm-4 col-sm-offset-4">

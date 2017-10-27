@@ -35,8 +35,4 @@ class Usuario extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $dates = ['deleted_at'];
-
-    // public function getAuthPassword() { 
-    //     return $this->clave; 
-    // }
 }

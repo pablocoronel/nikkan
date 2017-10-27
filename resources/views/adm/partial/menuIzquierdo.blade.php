@@ -4,7 +4,22 @@
             <li>
                 <!-- <p>Secciones del sitio</p> -->
             </li>
+        
+        {{-- metadatos --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-user"></i> Metadatos<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    {{-- <li>
+                        <a href="{{URL::asset('adm/metadato/crear')}}">Crear metadato</a>
+                    </li> --}}
+                    <li>
+                        <a href="{{URL::asset('adm/metadato/')}}">Ver metadatos</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
 
+        {{-- usuarios --}}
         @if(Auth::check())
             <li>
                 <a href="#"><i class="glyphicon glyphicon-user"></i> Usuarios<span class="fa arrow"></span></a>

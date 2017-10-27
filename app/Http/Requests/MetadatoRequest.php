@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
-class UsuarioEditarRequest extends FormRequest
+class MetadatoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,11 @@ class UsuarioEditarRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        if (Auth::check()) {
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -25,6 +30,9 @@ class UsuarioEditarRequest extends FormRequest
     {
         return [
             //
+            'seccion' => 'required',
+            'keyword' => 'required',
+            'descripcion' => 'required',
         ];
     }
 }

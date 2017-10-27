@@ -5,7 +5,7 @@
 	<div class="row">
 	    <div class="col-lg-12">
 	        <h1 class="page-header">
-				Crear usuario
+				{{$nombreDeAccion}}
 	        </h1>
 	    </div>
 	    <!-- /.col-lg-12 -->
@@ -16,7 +16,7 @@
 	    <div class="col-xs-12 col-md-8 col-md-offset-2">
 	        <div class="panel panel-default">
 	        	<div class="panel-heading">
-	                <h3 class="panel-title">Crear usuario</h3>
+	                <h3 class="panel-title">{{$nombreDeAccion}}</h3>
 	            </div>
 	            {{-- Mensajes --}}
 				<div class="row">

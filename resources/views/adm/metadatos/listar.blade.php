@@ -22,26 +22,15 @@
 				{{-- Tabla --}}
 				<table class="table table-striped table-bordered table-responsive">
 					<thead>
-						<td>Usuario</td>
-						{{-- <td>Clave</td> --}}
-						<td>Nombre</td>
+						<td>Seccion</td>
 						<td>Editar</td>
-						<td>Eliminar</td>
 					</thead>
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
-							<td>{{ $key["usuario"] }}</td>
-							{{-- <td>{{ $key["password"] }}</td> --}}
-							<td>{{ $key["nombre"] }}</td>
-							<td><a href="{{action('UsuarioController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
-							<td>
-								<form action="{{action('UsuarioController@destroy', $key['id'])}}" method="post">
-						           {{csrf_field()}}
-						           <input name="_method" type="hidden" value="DELETE">
-						           <button class="btn btn-danger" type="submit">Borrar</button>
-						        </form>
-							</td>
+							<td>{{ $key["seccion"] }}</td>
+							<td><a href="{{action('MetadatoController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
+							
 						</tr>
 						@endforeach
 					</tbody>

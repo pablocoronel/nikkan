@@ -44,6 +44,9 @@ Route::group(['prefix' => 'adm'], function() {
 
 		// CRUD usuarios de administracion
 		Route::resource('usuario', 'UsuarioController');
+
+		// CRUD metadatos
+		Route::resource('metadato', 'MetadatoController');
     });
 });
 

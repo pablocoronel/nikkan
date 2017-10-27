@@ -19,7 +19,6 @@ class UsuarioRequest extends FormRequest
         }else{
             return false;
         }
-        return true;
     }
 
     /**

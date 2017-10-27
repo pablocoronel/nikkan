@@ -24,7 +24,7 @@ class UsuarioController extends Controller
         $usuarios= Usuario::all()->toArray();
 
 
-        return view('adm.usuarios.listar', ['listaDeUsuarios' => $usuarios]);
+        return view('adm.usuarios.listar', ['variable' => $usuarios, 'nombreDeAccion' => 'Lista de usuarios']);
     }
 
     /**
@@ -35,7 +35,7 @@ class UsuarioController extends Controller
     public function create()
     {
         //
-        return view('adm.usuarios.crear', ['accion' => 'store', 'verbo' => 'post']);
+        return view('adm.usuarios.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear usuario']);
     }
 
     /**
@@ -81,7 +81,7 @@ class UsuarioController extends Controller
     {
         //
         $usuario= Usuario::find($id);
-        return view('adm.usuarios.editar', ['accion' => 'update', 'verbo' => 'post'], compact('usuario'));
+        return view('adm.usuarios.editar', compact('usuario'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar usuario']);
     }
 
     /**
