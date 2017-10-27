@@ -22,6 +22,7 @@
 @endsection
 
 @section('contenidoPadre')
+@yield('nombreDeAccion')
 <div id="wrapper">
         <!-- Barra superior -->
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">

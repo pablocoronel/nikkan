@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Auth;
 
 class UsuarioRequest extends FormRequest
 {
@@ -13,11 +14,11 @@ class UsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        // if (Auth::check()) {
-        //     return true;
-        // }else{
-        //     return false;
-        // }
+        if (Auth::check()) {
+            return true;
+        }else{
+            return false;
+        }
         return true;
     }
 
@@ -28,12 +29,29 @@ class UsuarioRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-            'nombre' => 'required',
-            'usuario' => 'required',
-            'clave' => 'required',
-            'nivel' => 'required',
-        ];
+        switch ($this->method()) {
+            case 'POST':
+                return [
+                    //
+                    'nombre' => 'required',
+                    'usuario' => 'required',
+                    'clave' => 'required',
+                    'nivel' => 'required',
+                ];
+                break;
+            
+            case 'PATCH':
+                return [
+                    //
+                    'nombre' => 'required',
+                    'usuario' => 'required',
+                    'nivel' => 'required',
+                ];
+                break;
+
+            default:
+                # code...
+                break;
+        }
     }
 }

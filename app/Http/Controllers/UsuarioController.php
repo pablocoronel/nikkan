@@ -12,12 +12,7 @@ use App\Usuario;
 use Session;
 
 class UsuarioController extends Controller
-{
-    // Definicion de middleware en cuales metodos usarlo
-    // public function __construct(){
-    //     $this->middleware('crearHistoria', ['only' => ['create', 'store']]);
-    // }
-    
+{    
     /**
      * Display a listing of the resource.
      *
@@ -40,7 +35,7 @@ class UsuarioController extends Controller
     public function create()
     {
         //
-        return view('adm.usuarios.crear', ['accion' => 'usuario.store', 'verbo' => 'post']);
+        return view('adm.usuarios.crear', ['accion' => 'store', 'verbo' => 'post']);
     }
 
     /**
@@ -86,9 +81,7 @@ class UsuarioController extends Controller
     {
         //
         $usuario= Usuario::find($id);
-        return view('adm.usuarios.editar', ['accion' => 'usuario.update', 'verbo' => 'post', 'usuario' => 'usuario']);
-
-        // , compact('usuario','usuario')
+        return view('adm.usuarios.editar', ['accion' => 'update', 'verbo' => 'post'], compact('usuario'));
     }
 
     /**
@@ -98,9 +91,18 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UsuarioRequest $request, $id)
     {
         //
+        $usuario = Usuario::find($id);
+        $usuario->nombre = $request->get('nombre');
+        $usuario->usuario = $request->get('usuario');
+        $usuario->nivel = $request->get('nivel');
+
+        $usuario->save();
+
+        $request->session()->flash('guardado', 'Usuario actualizado');
+        return back();
     }
 
     /**
@@ -112,5 +114,9 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+        $usuario= Usuario::find($id);
+        $usuario->delete();
+
+        return back();
     }
 }
