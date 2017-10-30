@@ -42,42 +42,17 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['RedesSocialesController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['LogoController@'.$accion, $logo->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
-				    	<div class="form-group">
-				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('nombre', '', ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
-							</div>
-				        </div>
+				    	<input name="_method" type="hidden" value="PATCH">
 
 				        <div class="form-group">
-				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
+				        	{!! Form::label('imagen', 'Imágen (225 x 100px)', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('vinculo', '', ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
-					        </div>
-				        </div>
-
-				        <div class="form-group">
-				        	{!! Form::label('imagen', 'Ícono (32 x 32)', ['class' => 'col-sm-3 control-label']) !!}
-				            <div class="col-sm-7">
+				            	<img src="{{ asset($logo->ruta)}}" alt="" style="max-width: 100px;">
 				        		{!! Form::file('imagen') !!}
 					        </div>
-				        </div>
-
-				        <div class="form-group">
-				        	{!! Form::label('ubicacion', 'Ubicación', ['class' => 'col-sm-3 control-label']) !!}
-							<div class="col-sm-7">
-								{!! Form::select('ubicacion', ['' => 'Elegir ubicación', 'superior' => 'Superior', 'inferior' => 'Inferior']) !!}
-				        	</div>
-				        </div>
-
-				        <div class="form-group">
-				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('orden', '', ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
-							</div>
 				        </div>
 
 				        <div class="col-sm-4 col-sm-offset-4">
@@ -88,4 +63,5 @@
 			</div>
 	    </div>
 	</div>
+
 @endsection

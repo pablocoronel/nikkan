@@ -34,14 +34,16 @@ Route::group(['prefix' => 'adm'], function() {
 	// ********************
     // Con sesion iniciada
     Route::middleware(['loginAdm'])->group(function(){
-		// Desloguearse
-		Route::get('logout', 'LoginController@cerrar');
-
 	    //Incio
 		Route::get('/', function(){
 			return view('adm.index');
 		});
 
+		// Desloguearse
+		Route::get('logout', 'LoginController@cerrar');
+
+
+		// *********************
 		// CRUD usuarios de administracion
 		Route::resource('usuario', 'UsuarioController');
 
@@ -53,6 +55,9 @@ Route::group(['prefix' => 'adm'], function() {
 
 		// CRUD redes sociales
 		Route::resource('redes-sociales', 'RedesSocialesController');
+
+		// CRUD logos
+		Route::resource('logo', 'LogoController');
     });
 });
 

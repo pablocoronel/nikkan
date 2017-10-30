@@ -5,9 +5,31 @@
                 <!-- <p>Secciones del sitio</p> -->
             </li>
         
+        {{-- logos --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Logos<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/logo/')}}">Ver logos</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- datos de empresa --}}
             <li>
-                <a href="#"><i class="glyphicon glyphicon-user"></i> Redes sociales<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-list"></i> Datos de la empresa<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/dato-empresa/')}}">Ver datos</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+        {{-- redes sociales --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-globe"></i> Redes sociales<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="{{URL::asset('adm/redes-sociales/crear')}}">Crear red social</a>
@@ -19,20 +41,9 @@
                 <!-- /.nav-second-level -->
             </li>
 
-        {{-- datos de empresa --}}
-            <li>
-                <a href="#"><i class="glyphicon glyphicon-user"></i> Datos de la empresa<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="{{URL::asset('adm/dato-empresa/')}}">Ver datos</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-
         {{-- metadatos --}}
             <li>
-                <a href="#"><i class="glyphicon glyphicon-user"></i> Metadatos<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-list-alt"></i> Metadatos<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="{{URL::asset('adm/metadato/')}}">Ver metadatos</a>
