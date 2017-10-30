@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['UsuarioController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal']) }}
+				{{ Form::open(['action' => ['RedesSocialesController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<div class="form-group">
@@ -53,24 +53,31 @@
 				        </div>
 
 				        <div class="form-group">
-				        	{!! Form::label('usuario', 'Usuario', ['class' => 'col-sm-3 control-label']) !!}
+				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('usuario', '', ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
+				            	{!! Form::text('vinculo', '', ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
 					        </div>
 				        </div>
 
 				        <div class="form-group">
-				        	{!! Form::label('clave', 'Clave', ['class' => 'col-sm-3 control-label']) !!}
-					        <div class="col-sm-7">
-					        	{!! Form::password('clave', ['class' => 'form-control', 'placeholder' => 'Clave']) !!}
+				        	{!! Form::label('icono', 'Ícono (32 x 32)', ['class' => 'col-sm-3 control-label']) !!}
+				            <div class="col-sm-7">
+				        		{!! Form::file('imagen') !!}
 					        </div>
 				        </div>
 
 				        <div class="form-group">
-				        	{!! Form::label('nivel', 'Nivel', ['class' => 'col-sm-3 control-label']) !!}
+				        	{!! Form::label('ubicacion', 'Ubicación', ['class' => 'col-sm-3 control-label']) !!}
 							<div class="col-sm-7">
-								{!! Form::select('nivel', ['' => 'Elegir nivel', 'administrador' => 'Administrador', 'usuario_normal' => 'Usuario normal']) !!}
+								{!! Form::select('ubicacion', ['' => 'Elegir ubicación', 'superior' => 'Superior', 'inferior' => 'Inferior']) !!}
 				        	</div>
+				        </div>
+
+				        <div class="form-group">
+				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('orden', '', ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
+							</div>
 				        </div>
 
 				        <div class="col-sm-4 col-sm-offset-4">

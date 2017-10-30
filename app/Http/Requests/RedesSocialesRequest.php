@@ -28,8 +28,33 @@ class RedesSocialesRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        switch ($this->method()) {
+            //crear
+            case 'POST':
+                return [
+                    //
+                    'nombre' => 'required',
+                    'vinculo' => 'required',
+                    'imagen' => 'required',
+                    'ubicacion' => 'required',
+                    'orden' => 'required',
+                ];
+                break;
+
+            //editar
+            case 'PATCH':
+                return [
+                    //
+                    'nombre' => 'required',
+                    'vinculo' => 'required',
+                    'ubicacion' => 'required',
+                    'orden' => 'required',
+                ];
+                break;
+            
+            default:
+                # code...
+                break;
+        }
     }
 }

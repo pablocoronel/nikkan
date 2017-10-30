@@ -10,6 +10,8 @@ use App\RedesSociales;
 
 // 
 use Session;
+use Storage;
+use File;
 
 class RedesSocialesController extends Controller
 {
@@ -45,21 +47,35 @@ class RedesSocialesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(UsuarioRequest $request)
-    // {
-    //     $usuario= new Usuario([
-    //         'nivel' => $request->get('nivel'),
-    //         'nombre' => $request->get('nombre'),
-    //         'usuario' => $request->get('usuario'),
-    //         'password' => bcrypt($request->get('clave')),
-    //     ]);
+    public function store(RedesSocialesRequest $request)
+    {
+    	//ruta de imagen
+    	$rutaDeCarpeta= 'images/redes_sociales/';
+        $nombreArchivo= $request->get('nombre');
+    	$extension= $request->imagen->extension();
 
-    //     $usuario->save();
+        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
 
-    //     // para mostrar msj de exito
-    //     Session::flash('guardado', 'Usuario guardado correctamente');
-    //     return back();
-    // }
+        // Subir imagen:
+    	$archivo= $request->file('imagen');
+        Storage::put($rutaConArchivo, File::get($archivo));
+
+        if ($request->file('imagen')->isValid()) {
+		    $red= new RedesSociales([
+	            'nombre' => $request->get('nombre'),
+	            'ubicacion' => $request->get('ubicacion'),
+	            'vinculo' => $request->get('vinculo'),
+	            'ruta' => $rutaConArchivo,
+	            'orden' => $request->get('orden'),
+	        ]);
+		}
+
+        $red->save();
+
+        // para mostrar msj de exito
+        Session::flash('guardado', 'Red social creada correctamente');
+        return back();
+    }
 
     /**
      * Display the specified resource.
@@ -78,12 +94,12 @@ class RedesSocialesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function edit($id)
-    // {
-    //     //
-    //     $usuario= Usuario::find($id);
-    //     return view('adm.usuarios.editar', compact('usuario'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar usuario']);
-    // }
+    public function edit($id)
+    {
+        //
+        $red= RedesSociales::find($id);
+        return view('adm.redes_sociales.editar', compact('red'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar red social']);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -92,19 +108,37 @@ class RedesSocialesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(UsuarioRequest $request, $id)
-    // {
-    //     //
-    //     $usuario = Usuario::find($id);
-    //     $usuario->nombre = $request->get('nombre');
-    //     $usuario->usuario = $request->get('usuario');
-    //     $usuario->nivel = $request->get('nivel');
+    public function update(RedesSocialesRequest $request, $id)
+    {
+        //
+        $red = RedesSociales::find($id);
+        $red->nombre = $request->get('nombre');
+        $red->ubicacion = $request->get('ubicacion');
+        $red->vinculo = $request->get('vinculo');
+        $red->orden = $request->get('orden');
 
-    //     $usuario->save();
+        if ($request->hasFile('imagen')) {
+        	//ruta de imagen
+	    	$rutaDeCarpeta= 'images/redes_sociales/';
+	        $nombreArchivo= $request->get('nombre');
+	    	$extension= $request->imagen->extension();
 
-    //     $request->session()->flash('guardado', 'Usuario actualizado');
-    //     return back();
-    // }
+	        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
+
+	        // Subir imagen:
+	    	$archivo= $request->file('imagen');
+	        Storage::put($rutaConArchivo, File::get($archivo));
+
+	        if ($request->file('imagen')->isValid()) {
+	        	$red->ruta = $rutaConArchivo;
+	    	}
+        }
+
+        $red->save();
+
+        $request->session()->flash('guardado', 'red social actualizada');
+        return back();
+    }
 
     /**
      * Remove the specified resource from storage.
@@ -112,12 +146,14 @@ class RedesSocialesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     //
-    //     $usuario= Usuario::find($id);
-    //     $usuario->delete();
+    public function destroy($id)
+    {
+        //
+        $red= RedesSociales::find($id);
+        $red->delete();
 
-    //     return back();
-    // }
+        Storage::delete($red->ruta);
+
+        return back();
+    }
 }

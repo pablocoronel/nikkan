@@ -29,6 +29,7 @@ class UsuarioRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            //crear
             case 'POST':
                 return [
                     //
@@ -39,6 +40,7 @@ class UsuarioRequest extends FormRequest
                 ];
                 break;
             
+            //editar
             case 'PATCH':
                 return [
                     //
