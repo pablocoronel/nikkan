@@ -52,9 +52,10 @@ class RedesSocialesController extends Controller
     	//ruta de imagen
     	$rutaDeCarpeta= 'images/redes_sociales/';
         $nombreArchivo= $request->get('nombre');
+        $ubicacion= $request->get('ubicacion');
     	$extension= $request->imagen->extension();
 
-        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
+        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.$ubicacion.'.'.$extension;
 
         // Subir imagen:
     	$archivo= $request->file('imagen');
@@ -121,9 +122,10 @@ class RedesSocialesController extends Controller
         	//ruta de imagen
 	    	$rutaDeCarpeta= 'images/redes_sociales/';
 	        $nombreArchivo= $request->get('nombre');
+            $ubicacion= $request->get('ubicacion');
 	    	$extension= $request->imagen->extension();
 
-	        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
+	        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.$ubicacion.'.'.$extension;
 
 	        // Subir imagen:
 	    	$archivo= $request->file('imagen');

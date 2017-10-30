@@ -96,7 +96,7 @@ class LogoController extends Controller
                     $nombreArchivo= 'logo_footer';
                     break;
 
-                case 1:
+                case 3:
                     $nombreArchivo= 'logo_favicon';
                     break;
                 

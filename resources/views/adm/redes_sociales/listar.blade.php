@@ -33,7 +33,7 @@
 						<tr>
 							<td>{{ $key["nombre"] }}</td>
 							<td>{{ $key["ubicacion"] }}</td>
-							<td><img src="{{ $key["ruta"] }}" alt=""></td>
+							<td><img src="{{ asset($key["ruta"]) }}" alt="" style="max-width: 100px;"></td>
 							<td><a href="{{action('RedesSocialesController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
 							<td>
 								<form action="{{action('RedesSocialesController@destroy', $key['id'])}}" method="post">
