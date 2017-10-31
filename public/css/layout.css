@@ -1,0 +1,125 @@
+/* Note: Try to remove the following lines to see the effect of CSS positioning */
+
+
+/* cabecera*/
+#cabecera{
+  background-color: blue;
+  color:#fff;
+  height:50px;
+  border-bottom-color: 1px solid #CCCCCC; 
+}
+
+#cabecera #datosEmpresa{
+  background-color: blue;
+  height: 30px;
+  width: 500px;
+  display: inline-block !important;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+#cabecera #datosEmpresa #telefono{
+  background-color: blue;
+  height: 30px;
+  width: 200px;
+  display: inline-block !important;
+}
+
+
+#cabecera #datosEmpresa #correo{
+  background-color: blue;
+  height: 30px;
+  width: 250px;
+  display: inline-block !important;
+}
+
+#cabecera #redesSocialesSuperior{
+  background-color: blue;
+  height: 30px;
+  min-width: 100px;
+  display: inline-block !important;
+  margin-top: 10px;
+}
+
+#cabecera #redesSocialesSuperior #cadaRed{
+  background-color: blue;
+  height: 20px;
+  width: 20px;
+  display: inline-block !important;
+}
+
+/*menu principal*/
+#contendorMenuPrincipal{
+  background-color: blue;
+  height: 80px;
+}
+
+#listaSecciones{
+  /*margin-left: 100px;*/
+  /*text-align: center;*/
+}
+
+#menuPrincipal .nav>li>a{
+  background-color: blue !important;
+  color: #FFFFFF;
+  position: relative;
+  top: 20px;
+}
+
+#menuPrincipal .nav>li>a:hover{
+  background-color: blue !important;
+  color: #FFFFFF;
+}
+
+#contendorMenuPrincipal #logoMenuPrincipal{
+  position: relative;
+  top: -10px;
+  margin-left: 20px;
+}
+
+#imagenBolsa{
+  margin-top: -10px;
+}
+
+
+
+/*fin menu principal
+
+/*ocultar cabecera y cambio de color del menu*/
+.affix {
+      top: 0;
+      width: 100%;
+      -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      background-color: #f4bfd9;
+  }
+  .affix #contendorMenuPrincipal{
+      -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      background-color: #f4bfd9;
+      height: 60px;
+  }
+
+  .affix #logoMenuPrincipal{
+      position: relative;
+      margin-top: 10px;
+      margin-left: 20px;
+      -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+      height: 30px;
+  }
+
+  .affix #menuPrincipal .nav>li>a{
+    position: relative;
+      margin-top: -15px;
+      -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+    background-color: #f4bfd9 !important;
+    color: #FFFFFF;
+  }
+
+  .affix #menuPrincipal .nav>li>a:hover{
+      -webkit-transition: all .5s ease-in-out;
+      transition: all .5s ease-in-out;
+    background-color: #f4bfd9 !important;
+    color: #FFFFFF;
+  }
