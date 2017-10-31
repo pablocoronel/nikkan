@@ -25,6 +25,24 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
+
+        {{-- empresa --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Empresa<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/empresa/portada/')}}">Ver portada</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/empresa/slider/crear')}}">Crear slider</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/empresa/slider/')}}">Ver slider</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- logos --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Logos<span class="fa arrow"></span></a>

@@ -64,6 +64,12 @@ Route::group(['prefix' => 'adm'], function() {
 			Route::resource('slider', 'SeccionHomeSliderController');
 			Route::resource('destacado', 'SeccionHomeDestacadoController');
 		});
+
+		// CRUD empresa
+		Route::group(['prefix' => 'empresa'], function() {
+			Route::resource('portada', 'SeccionEmpresaPortadaController');
+			Route::resource('slider', 'SeccionEmpresaSliderController');
+		});
     });
 });
 
