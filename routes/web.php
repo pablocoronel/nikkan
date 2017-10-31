@@ -58,6 +58,11 @@ Route::group(['prefix' => 'adm'], function() {
 
 		// CRUD logos
 		Route::resource('logo', 'LogoController');
+
+		// CRUD home
+		Route::group(['prefix' => 'home'], function() {
+			Route::resource('slider', 'SeccionHomeSliderController');
+		});
     });
 });
 

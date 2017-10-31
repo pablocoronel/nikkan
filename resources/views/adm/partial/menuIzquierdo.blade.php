@@ -5,6 +5,19 @@
                 <!-- <p>Secciones del sitio</p> -->
             </li>
         
+        {{-- home --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Home<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/home/slider/crear')}}">Crear slider</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/home/slider/')}}">Ver slider</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
         {{-- logos --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Logos<span class="fa arrow"></span></a>
