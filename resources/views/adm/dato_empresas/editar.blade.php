@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['DatoEmpresaController@'.$accion, $dato_empresa->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
+				{{ Form::open(['action' => ['DatoEmpresaController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
@@ -50,7 +50,7 @@
 				    	<div class="form-group">
 				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('texto', $dato_empresa->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
+								{!! Form::text('texto', $objeto->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
 							</div>
 				        </div>
 

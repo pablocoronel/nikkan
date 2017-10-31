@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['LogoController@'.$accion, $logo->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['LogoController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
@@ -50,7 +50,7 @@
 				        <div class="form-group">
 				        	{!! Form::label('imagen', 'Imágen (225 x 100px)', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	<img src="{{ asset($logo->ruta)}}" alt="" style="max-width: 100px;">
+				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;">
 				        		{!! Form::file('imagen') !!}
 					        </div>
 				        </div>

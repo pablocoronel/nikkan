@@ -16,10 +16,10 @@ class DatoEmpresaController extends Controller
     public function index()
     {
         //
-        $dato_empresa= DatoEmpresa::all()->toArray();
+        $objeto= DatoEmpresa::all()->toArray();
 
 
-        return view('adm.dato_empresas.listar', ['variable' => $dato_empresa, 'nombreDeAccion' => 'Lista de datos']);
+        return view('adm.dato_empresas.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de datos']);
     }
 
     /**
@@ -63,8 +63,8 @@ class DatoEmpresaController extends Controller
     public function edit($id)
     {
         //
-        $dato_empresa= DatoEmpresa::find($id);
-        return view('adm.dato_empresas.editar', compact('dato_empresa'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar datos de empresa']);
+        $objeto= DatoEmpresa::find($id);
+        return view('adm.dato_empresas.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar datos de empresa']);
     }
 
     /**
@@ -77,10 +77,10 @@ class DatoEmpresaController extends Controller
     public function update(DatoEmpresaRequest $request, $id)
     {
         //
-        $datoempresa = DatoEmpresa::find($id);
-        $datoempresa->texto = $request->get('texto');
+        $objeto = DatoEmpresa::find($id);
+        $objeto->texto = $request->get('texto');
         
-        $datoempresa->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();

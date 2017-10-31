@@ -20,10 +20,10 @@ class LogoController extends Controller
     public function index()
     {
         //
-        $logos= Logo::all()->toArray();
+        $objeto= Logo::all()->toArray();
 
 
-        return view('adm.logos.listar', ['variable' => $logos, 'nombreDeAccion' => 'Lista de logos']);
+        return view('adm.logos.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de logos']);
     }
 
     /**
@@ -50,7 +50,7 @@ class LogoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Logo  $logo
+     * @param  \App\Logo  $objeto
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -61,33 +61,33 @@ class LogoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Logo  $logo
+     * @param  \App\Logo  $objeto
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //
-        $logo= Logo::find($id);
-        return view('adm.logos.editar', compact('logo'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar logo']);
+        $objeto= Logo::find($id);
+        return view('adm.logos.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar logo']);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Logo  $logo
+     * @param  \App\Logo  $objeto
      * @return \Illuminate\Http\Response
      */
     public function update(LogoRequest $request, $id)
     {
         //
-        $logo = Logo::find($id);
+        $objeto = Logo::find($id);
         
         if ($request->hasFile('imagen')) {
             //ruta de imagen
             $rutaDeCarpeta= 'images/logos/';
             
-            switch ($logo->id) {
+            switch ($objeto->id) {
                 case 1:
                     $nombreArchivo= 'logo_principal';
                     break;
@@ -114,11 +114,11 @@ class LogoController extends Controller
             Storage::put($rutaConArchivo, File::get($archivo));
 
             if ($request->file('imagen')->isValid()) {
-                $logo->ruta = $rutaConArchivo;
+                $objeto->ruta = $rutaConArchivo;
             }
         }
 
-        $logo->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();
@@ -127,7 +127,7 @@ class LogoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Logo  $logo
+     * @param  \App\Logo  $objeto
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

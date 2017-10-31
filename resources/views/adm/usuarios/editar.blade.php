@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['UsuarioController@'.$accion, $usuario->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
+				{{ Form::open(['action' => ['UsuarioController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
@@ -50,14 +50,14 @@
 				    	<div class="form-group">
 				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('nombre', $usuario->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
+								{!! Form::text('nombre', $objeto->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
 							</div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('usuario', 'Usuario', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('usuario', $usuario->usuario, ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
+				            	{!! Form::text('usuario', $objeto->usuario, ['class' => 'form-control', 'placeholder' => 'Usuario']) !!}
 					        </div>
 				        </div>
 
@@ -71,7 +71,7 @@
 				        <div class="form-group">
 				        	{!! Form::label('nivel', 'Nivel', ['class' => 'col-sm-3 control-label']) !!}
 							<div class="col-sm-7">
-								{!! Form::select('nivel', [$usuario->nivel => $usuario->nivel, 'administrador' => 'Administrador', 'usuario_normal' => 'Usuario normal']) !!}
+								{!! Form::select('nivel', [$objeto->nivel => $objeto->nivel, 'administrador' => 'Administrador', 'usuario_normal' => 'Usuario normal']) !!}
 				        	</div>
 				        </div>
 

@@ -24,10 +24,10 @@ class RedesSocialesController extends Controller
     public function index()
     {
         //
-        $redes= RedesSociales::all()->toArray();
+        $objeto= RedesSociales::all()->toArray();
 
 
-        return view('adm.redes_sociales.listar', ['variable' => $redes, 'nombreDeAccion' => 'Lista de redes sociales']);
+        return view('adm.redes_sociales.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de redes sociales']);
     }
 
     /**
@@ -62,7 +62,7 @@ class RedesSocialesController extends Controller
         Storage::put($rutaConArchivo, File::get($archivo));
 
         if ($request->file('imagen')->isValid()) {
-		    $red= new RedesSociales([
+		    $objeto= new RedesSociales([
 	            'nombre' => $request->get('nombre'),
 	            'ubicacion' => $request->get('ubicacion'),
 	            'vinculo' => $request->get('vinculo'),
@@ -71,7 +71,7 @@ class RedesSocialesController extends Controller
 	        ]);
 		}
 
-        $red->save();
+        $objeto->save();
 
         // para mostrar msj de exito
         Session::flash('guardado', 'creado correctamente');
@@ -98,8 +98,8 @@ class RedesSocialesController extends Controller
     public function edit($id)
     {
         //
-        $red= RedesSociales::find($id);
-        return view('adm.redes_sociales.editar', compact('red'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar red social']);
+        $objeto= RedesSociales::find($id);
+        return view('adm.redes_sociales.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar red social']);
     }
 
     /**
@@ -112,11 +112,11 @@ class RedesSocialesController extends Controller
     public function update(RedesSocialesRequest $request, $id)
     {
         //
-        $red = RedesSociales::find($id);
-        $red->nombre = $request->get('nombre');
-        $red->ubicacion = $request->get('ubicacion');
-        $red->vinculo = $request->get('vinculo');
-        $red->orden = $request->get('orden');
+        $objeto = RedesSociales::find($id);
+        $objeto->nombre = $request->get('nombre');
+        $objeto->ubicacion = $request->get('ubicacion');
+        $objeto->vinculo = $request->get('vinculo');
+        $objeto->orden = $request->get('orden');
 
         if ($request->hasFile('imagen')) {
         	//ruta de imagen
@@ -132,11 +132,11 @@ class RedesSocialesController extends Controller
 	        Storage::put($rutaConArchivo, File::get($archivo));
 
 	        if ($request->file('imagen')->isValid()) {
-	        	$red->ruta = $rutaConArchivo;
+	        	$objeto->ruta = $rutaConArchivo;
 	    	}
         }
 
-        $red->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();
@@ -151,10 +151,10 @@ class RedesSocialesController extends Controller
     public function destroy($id)
     {
         //
-        $red= RedesSociales::find($id);
-        $red->delete();
+        $objeto= RedesSociales::find($id);
+        $objeto->delete();
 
-        Storage::delete($red->ruta);
+        Storage::delete($objeto->ruta);
 
         return back();
     }

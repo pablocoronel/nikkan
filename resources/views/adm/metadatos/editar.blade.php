@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['MetadatoController@'.$accion, $metadato->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
+				{{ Form::open(['action' => ['MetadatoController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal']) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
@@ -50,21 +50,21 @@
 				    	<div class="form-group">
 				    		{!! Form::label('seccion', 'Seccion', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('seccion', $metadato->seccion, ['class' => 'form-control', 'placeholder' => 'Seccion']) !!}
+								{!! Form::text('seccion', $objeto->seccion, ['class' => 'form-control', 'placeholder' => 'Seccion']) !!}
 							</div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('keyword', 'Keyword', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('keyword', $metadato->keyword, ['class' => 'form-control', 'placeholder' => 'Keyword']) !!}
+				            	{!! Form::text('keyword', $objeto->keyword, ['class' => 'form-control', 'placeholder' => 'Keyword']) !!}
 					        </div>
 				        </div>
 
 				        <div class="form-group">
 				    		{!! Form::label('descripcion', 'Descripcion', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('descripcion', $metadato->descripcion, ['class' => 'form-control', 'placeholder' => 'Descripcion']) !!}
+								{!! Form::text('descripcion', $objeto->descripcion, ['class' => 'form-control', 'placeholder' => 'Descripcion']) !!}
 							</div>
 				        </div>
 

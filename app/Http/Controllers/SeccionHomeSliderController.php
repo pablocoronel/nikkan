@@ -26,10 +26,10 @@ class SeccionHomeSliderController extends Controller
     public function index()
     {
         //
-        $slider= SeccionHomeSlider::all()->toArray();
+        $objeto= SeccionHomeSlider::all()->toArray();
 
 
-        return view('adm.seccion_home_sliders.listar', ['variable' => $slider, 'nombreDeAccion' => 'Lista de sliders']);
+        return view('adm.seccion_home_sliders.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de sliders']);
     }
 
     /**
@@ -52,14 +52,14 @@ class SeccionHomeSliderController extends Controller
     public function store(SeccionHomeSliderRequest $request)
     {
     	// guardar sin imagen
-	    $slider= new SeccionHomeSlider([
+	    $objeto= new SeccionHomeSlider([
             'texto' => $request->get('texto'),
             'vinculo' => $request->get('vinculo'),
             'ruta' => '',
             'orden' => $request->get('orden'),
         ]);
 
-        $slider->save();
+        $objeto->save();
 
     	//ruta de imagen
     	$rutaDeCarpeta= 'images/seccion_home_sliders/';
@@ -74,8 +74,8 @@ class SeccionHomeSliderController extends Controller
         Storage::put($rutaConArchivo, File::get($archivo));
 
         // guardar ruta
-        $slider->ruta = $rutaConArchivo;
-        $slider->save();
+        $objeto->ruta = $rutaConArchivo;
+        $objeto->save();
 
         // para mostrar msj de exito
         Session::flash('guardado', 'creado correctamente');
@@ -102,8 +102,8 @@ class SeccionHomeSliderController extends Controller
     public function edit($id)
     {
         //
-        $slider= SeccionHomeSlider::find($id);
-        return view('adm.seccion_home_sliders.editar', compact('slider'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
+        $objeto= SeccionHomeSlider::find($id);
+        return view('adm.seccion_home_sliders.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
     }
 
     /**
@@ -116,10 +116,10 @@ class SeccionHomeSliderController extends Controller
     public function update(SeccionHomeSliderRequest $request, $id)
     {
         //
-        $slider = SeccionHomeSlider::find($id);
-        $slider->texto = $request->get('texto');
-        $slider->vinculo = $request->get('vinculo');
-        $slider->orden = $request->get('orden');
+        $objeto = SeccionHomeSlider::find($id);
+        $objeto->texto = $request->get('texto');
+        $objeto->vinculo = $request->get('vinculo');
+        $objeto->orden = $request->get('orden');
 
         if ($request->hasFile('imagen')) {
         	//ruta de imagen
@@ -137,11 +137,11 @@ class SeccionHomeSliderController extends Controller
 	        Storage::put($rutaConArchivo, File::get($archivo));
 
 	        if ($request->file('imagen')->isValid()) {
-	        	$slider->ruta = $rutaConArchivo;
+	        	$objeto->ruta = $rutaConArchivo;
 	    	}
         }
 
-        $slider->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();
@@ -156,10 +156,10 @@ class SeccionHomeSliderController extends Controller
     public function destroy($id)
     {
         //
-        $slider= SeccionHomeSlider::find($id);
-        $slider->delete();
+        $objeto= SeccionHomeSlider::find($id);
+        $objeto->delete();
 
-        Storage::delete($slider->ruta);
+        Storage::delete($objeto->ruta);
 
         return back();
     }

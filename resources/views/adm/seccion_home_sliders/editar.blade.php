@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['SeccionHomeSliderController@'.$accion, $slider->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['SeccionHomeSliderController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
@@ -50,21 +50,21 @@
 				    	<div class="form-group">
 				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('texto', $slider->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
+								{!! Form::text('texto', $objeto->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
 							</div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('vinculo', $slider->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
+				            	{!! Form::text('vinculo', $objeto->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
 					        </div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('imagen', 'Imagen (1900x750px)', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	<img src="{{ asset($slider->ruta)}}" alt="" style="max-width: 100px;">
+				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;">
 				        		{!! Form::file('imagen') !!}
 					        </div>
 				        </div>
@@ -72,7 +72,7 @@
 				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('orden', $slider->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
+								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
 							</div>
 				        </div>
 

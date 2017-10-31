@@ -21,10 +21,10 @@ class UsuarioController extends Controller
     public function index()
     {
         //
-        $usuarios= Usuario::all()->toArray();
+        $objeto= Usuario::all()->toArray();
 
 
-        return view('adm.usuarios.listar', ['variable' => $usuarios, 'nombreDeAccion' => 'Lista de usuarios']);
+        return view('adm.usuarios.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de usuarios']);
     }
 
     /**
@@ -46,14 +46,14 @@ class UsuarioController extends Controller
      */
     public function store(UsuarioRequest $request)
     {
-        $usuario= new Usuario([
+        $objeto= new Usuario([
             'nivel' => $request->get('nivel'),
             'nombre' => $request->get('nombre'),
             'usuario' => $request->get('usuario'),
             'password' => bcrypt($request->get('clave')),
         ]);
 
-        $usuario->save();
+        $objeto->save();
 
         // para mostrar msj de exito
         Session::flash('guardado', 'creado correctamente');
@@ -80,8 +80,8 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         //
-        $usuario= Usuario::find($id);
-        return view('adm.usuarios.editar', compact('usuario'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar usuario']);
+        $objeto= Usuario::find($id);
+        return view('adm.usuarios.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar usuario']);
     }
 
     /**
@@ -94,12 +94,12 @@ class UsuarioController extends Controller
     public function update(UsuarioRequest $request, $id)
     {
         //
-        $usuario = Usuario::find($id);
-        $usuario->nombre = $request->get('nombre');
-        $usuario->usuario = $request->get('usuario');
-        $usuario->nivel = $request->get('nivel');
+        $objeto = Usuario::find($id);
+        $objeto->nombre = $request->get('nombre');
+        $objeto->usuario = $request->get('usuario');
+        $objeto->nivel = $request->get('nivel');
 
-        $usuario->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();
@@ -114,8 +114,8 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
-        $usuario= Usuario::find($id);
-        $usuario->delete();
+        $objeto= Usuario::find($id);
+        $objeto->delete();
 
         return back();
     }

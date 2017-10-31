@@ -17,8 +17,8 @@ class MetadatoController extends Controller
     public function index()
     {
         //
-        $metadatos= Metadato::all()->toArray();
-        return view('adm.metadatos.listar', ['variable' => $metadatos, 'nombreDeAccion' => 'Lista de metadatos']);
+        $objeto= Metadato::all()->toArray();
+        return view('adm.metadatos.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de metadatos']);
     }
 
     /**
@@ -62,8 +62,8 @@ class MetadatoController extends Controller
     public function edit($id)
     {
         //
-        $metadato= Metadato::find($id);
-        return view('adm.metadatos.editar', compact('metadato'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar metadato']);
+        $objeto= Metadato::find($id);
+        return view('adm.metadatos.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar metadato']);
     }
 
     /**
@@ -76,13 +76,13 @@ class MetadatoController extends Controller
     public function update(MetadatoRequest $request, $id)
     {
         //
-        $metadato= Metadato::find($id);
+        $objeto= Metadato::find($id);
 
-        $metadato->seccion= $request->get('seccion');
-        $metadato->keyword= $request->get('keyword');
-        $metadato->descripcion= $request->get('descripcion');
+        $objeto->seccion= $request->get('seccion');
+        $objeto->keyword= $request->get('keyword');
+        $objeto->descripcion= $request->get('descripcion');
 
-        $metadato->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
 

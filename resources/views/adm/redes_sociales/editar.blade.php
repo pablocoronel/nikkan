@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['RedesSocialesController@'.$accion, $red->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['RedesSocialesController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
@@ -50,21 +50,21 @@
 				    	<div class="form-group">
 				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('nombre', $red->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
+								{!! Form::text('nombre', $objeto->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
 							</div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('vinculo', $red->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
+				            	{!! Form::text('vinculo', $objeto->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
 					        </div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('imagen', 'Ícono (32 x 32)', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	<img src="{{ asset($red->ruta)}}" alt="" style="max-width: 100px;">
+				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;">
 				        		{!! Form::file('imagen') !!}
 					        </div>
 				        </div>
@@ -72,14 +72,14 @@
 				        <div class="form-group">
 				        	{!! Form::label('ubicacion', 'Ubicación', ['class' => 'col-sm-3 control-label']) !!}
 							<div class="col-sm-7">
-								{!! Form::select('ubicacion', [$red->ubicacion => $red->ubicacion, 'superior' => 'Superior', 'inferior' => 'Inferior']) !!}
+								{!! Form::select('ubicacion', [$objeto->ubicacion => $objeto->ubicacion, 'superior' => 'Superior', 'inferior' => 'Inferior']) !!}
 				        	</div>
 				        </div>
 
 				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('orden', $red->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
+								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
 							</div>
 				        </div>
 
