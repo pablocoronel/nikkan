@@ -62,6 +62,7 @@ Route::group(['prefix' => 'adm'], function() {
 		// CRUD home
 		Route::group(['prefix' => 'home'], function() {
 			Route::resource('slider', 'SeccionHomeSliderController');
+			Route::resource('destacado', 'SeccionHomeDestacadoController');
 		});
     });
 });

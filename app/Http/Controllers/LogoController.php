@@ -120,7 +120,7 @@ class LogoController extends Controller
 
         $logo->save();
 
-        $request->session()->flash('guardado', 'logo actualizado');
+        $request->session()->flash('guardado', 'cambios guardados');
         return back();
     }
 

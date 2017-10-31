@@ -56,7 +56,7 @@ class UsuarioController extends Controller
         $usuario->save();
 
         // para mostrar msj de exito
-        Session::flash('guardado', 'Usuario guardado correctamente');
+        Session::flash('guardado', 'creado correctamente');
         return back();
     }
 
@@ -101,7 +101,7 @@ class UsuarioController extends Controller
 
         $usuario->save();
 
-        $request->session()->flash('guardado', 'Usuario actualizado');
+        $request->session()->flash('guardado', 'cambios guardados');
         return back();
     }
 

@@ -29,7 +29,7 @@ class SeccionHomeSliderController extends Controller
         $slider= SeccionHomeSlider::all()->toArray();
 
 
-        return view('adm.seccion_home_slider.listar', ['variable' => $slider, 'nombreDeAccion' => 'Lista de sliders']);
+        return view('adm.seccion_home_sliders.listar', ['variable' => $slider, 'nombreDeAccion' => 'Lista de sliders']);
     }
 
     /**
@@ -40,7 +40,7 @@ class SeccionHomeSliderController extends Controller
     public function create()
     {
         //
-        return view('adm.seccion_home_slider.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear slider']);
+        return view('adm.seccion_home_sliders.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear slider']);
     }
 
     /**
@@ -62,7 +62,7 @@ class SeccionHomeSliderController extends Controller
         $slider->save();
 
     	//ruta de imagen
-    	$rutaDeCarpeta= 'images/seccion_home_slider/';
+    	$rutaDeCarpeta= 'images/seccion_home_sliders/';
     	$idArchivo= SeccionHomeSlider::max('id');
     	$nombreArchivo= "slider_".$idArchivo;
     	$extension= $request->imagen->extension();
@@ -78,7 +78,7 @@ class SeccionHomeSliderController extends Controller
         $slider->save();
 
         // para mostrar msj de exito
-        Session::flash('guardado', 'Slider creado correctamente');
+        Session::flash('guardado', 'creado correctamente');
         return back();
     }
 
@@ -103,7 +103,7 @@ class SeccionHomeSliderController extends Controller
     {
         //
         $slider= SeccionHomeSlider::find($id);
-        return view('adm.seccion_home_slider.editar', compact('slider'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
+        return view('adm.seccion_home_sliders.editar', compact('slider'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
     }
 
     /**
@@ -123,7 +123,7 @@ class SeccionHomeSliderController extends Controller
 
         if ($request->hasFile('imagen')) {
         	//ruta de imagen
-	    	$rutaDeCarpeta= 'images/seccion_home_slider/';
+	    	$rutaDeCarpeta= 'images/seccion_home_sliders/';
 
 	        $idArchivo= $id;
 
@@ -143,7 +143,7 @@ class SeccionHomeSliderController extends Controller
 
         $slider->save();
 
-        $request->session()->flash('guardado', 'slider actualizada');
+        $request->session()->flash('guardado', 'cambios guardados');
         return back();
     }
 

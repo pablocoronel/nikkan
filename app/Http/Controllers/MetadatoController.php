@@ -84,7 +84,7 @@ class MetadatoController extends Controller
 
         $metadato->save();
 
-        $request->session()->flash('guardado', 'Metadato actualizado');
+        $request->session()->flash('guardado', 'cambios guardados');
 
         return back();
     }

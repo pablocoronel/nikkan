@@ -82,7 +82,7 @@ class DatoEmpresaController extends Controller
         
         $datoempresa->save();
 
-        $request->session()->flash('guardado', 'Dato actualizado');
+        $request->session()->flash('guardado', 'cambios guardados');
         return back();
     }
 

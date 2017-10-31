@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\RedesSocialesRequest;
+use App\Http\Requests\SeccionHomeDestacadoRequest;
 
 // Modelo de usuario
-use App\RedesSociales;
+use App\SeccionHomeDestacado;
 
 // 
 use Session;
 use Storage;
 use File;
 
-class RedesSocialesController extends Controller
+class SeccionHomeDestacadoController extends Controller
 {
+    //
     //
     /**
      * Display a listing of the resource.
@@ -24,10 +25,10 @@ class RedesSocialesController extends Controller
     public function index()
     {
         //
-        $redes= RedesSociales::all()->toArray();
+        $objeto= SeccionHomeDestacado::all()->toArray();
 
 
-        return view('adm.redes_sociales.listar', ['variable' => $redes, 'nombreDeAccion' => 'Lista de redes sociales']);
+        return view('adm.seccion_home_destacados.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de destacados']);
     }
 
     /**
@@ -38,7 +39,7 @@ class RedesSocialesController extends Controller
     public function create()
     {
         //
-        return view('adm.redes_sociales.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear red social']);
+        return view('adm.seccion_home_destacados.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear destacado']);
     }
 
     /**
@@ -47,31 +48,33 @@ class RedesSocialesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(RedesSocialesRequest $request)
+    public function store(SeccionHomeDestacadoRequest $request)
     {
+    	// guardar sin imagen
+	    $objeto= new SeccionHomeDestacado([
+            'texto' => $request->get('texto'),
+            'vinculo' => $request->get('vinculo'),
+            'ruta' => '',
+            'orden' => $request->get('orden'),
+        ]);
+
+        $objeto->save();
+
     	//ruta de imagen
-    	$rutaDeCarpeta= 'images/redes_sociales/';
-        $nombreArchivo= $request->get('nombre');
-        $ubicacion= $request->get('ubicacion');
+    	$rutaDeCarpeta= 'images/seccion_home_destacados/';
+    	$idArchivo= SeccionHomeDestacado::max('id');
+    	$nombreArchivo= "destacado_".$idArchivo;
     	$extension= $request->imagen->extension();
 
-        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.$ubicacion.'.'.$extension;
+        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
 
         // Subir imagen:
     	$archivo= $request->file('imagen');
         Storage::put($rutaConArchivo, File::get($archivo));
 
-        if ($request->file('imagen')->isValid()) {
-		    $red= new RedesSociales([
-	            'nombre' => $request->get('nombre'),
-	            'ubicacion' => $request->get('ubicacion'),
-	            'vinculo' => $request->get('vinculo'),
-	            'ruta' => $rutaConArchivo,
-	            'orden' => $request->get('orden'),
-	        ]);
-		}
-
-        $red->save();
+        // guardar ruta
+        $objeto->ruta = $rutaConArchivo;
+        $objeto->save();
 
         // para mostrar msj de exito
         Session::flash('guardado', 'creado correctamente');
@@ -98,8 +101,8 @@ class RedesSocialesController extends Controller
     public function edit($id)
     {
         //
-        $red= RedesSociales::find($id);
-        return view('adm.redes_sociales.editar', compact('red'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar red social']);
+        $objeto= SeccionHomeDestacado::find($id);
+        return view('adm.seccion_home_destacados.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar destacado']);
     }
 
     /**
@@ -109,34 +112,35 @@ class RedesSocialesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(RedesSocialesRequest $request, $id)
+    public function update(SeccionHomeDestacadoRequest $request, $id)
     {
         //
-        $red = RedesSociales::find($id);
-        $red->nombre = $request->get('nombre');
-        $red->ubicacion = $request->get('ubicacion');
-        $red->vinculo = $request->get('vinculo');
-        $red->orden = $request->get('orden');
+        $objeto = SeccionHomeDestacado::find($id);
+        $objeto->texto = $request->get('texto');
+        $objeto->vinculo = $request->get('vinculo');
+        $objeto->orden = $request->get('orden');
 
         if ($request->hasFile('imagen')) {
         	//ruta de imagen
-	    	$rutaDeCarpeta= 'images/redes_sociales/';
-	        $nombreArchivo= $request->get('nombre');
-            $ubicacion= $request->get('ubicacion');
+	    	$rutaDeCarpeta= 'images/seccion_home_destacados/';
+
+	        $idArchivo= $id;
+
+	    	$nombreArchivo= "destacado_".$idArchivo;
 	    	$extension= $request->imagen->extension();
 
-	        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.$ubicacion.'.'.$extension;
+	        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
 
 	        // Subir imagen:
 	    	$archivo= $request->file('imagen');
 	        Storage::put($rutaConArchivo, File::get($archivo));
 
 	        if ($request->file('imagen')->isValid()) {
-	        	$red->ruta = $rutaConArchivo;
+	        	$objeto->ruta = $rutaConArchivo;
 	    	}
         }
 
-        $red->save();
+        $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();
@@ -151,10 +155,10 @@ class RedesSocialesController extends Controller
     public function destroy($id)
     {
         //
-        $red= RedesSociales::find($id);
-        $red->delete();
+        $objeto= SeccionHomeDestacado::find($id);
+        $objeto->delete();
 
-        Storage::delete($red->ruta);
+        Storage::delete($objeto->ruta);
 
         return back();
     }

@@ -15,6 +15,13 @@
                     <li>
                         <a href="{{URL::asset('adm/home/slider/')}}">Ver slider</a>
                     </li>
+
+                    <li>
+                        <a href="{{URL::asset('adm/home/destacado/crear')}}">Crear destacado</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/home/destacado/')}}">Ver destacado</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
