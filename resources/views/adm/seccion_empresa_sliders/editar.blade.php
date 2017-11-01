@@ -42,12 +42,12 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['SeccionHomeSliderController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['SeccionEmpresaSliderController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
 
-				    	<div class="form-group">
+				    	{{-- <div class="form-group">
 				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('texto', $objeto->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
@@ -59,7 +59,7 @@
 				            <div class="col-sm-7">
 				            	{!! Form::text('vinculo', $objeto->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
 					        </div>
-				        </div>
+				        </div> --}}
 
 				        <div class="form-group">
 				        	{!! Form::label('imagen', 'Imagen (1900x750px)', ['class' => 'col-sm-3 control-label']) !!}

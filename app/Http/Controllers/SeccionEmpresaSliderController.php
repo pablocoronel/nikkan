@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests\SeccionEmpresaSliderRequest;
 
 // Modelo de usuario
@@ -13,10 +12,8 @@ use App\SeccionEmpresaSlider;
 use Session;
 use Storage;
 use File;
-
 class SeccionEmpresaSliderController extends Controller
 {
-    //
     //
     /**
      * Display a listing of the resource.
@@ -29,7 +26,7 @@ class SeccionEmpresaSliderController extends Controller
         $objeto= SeccionEmpresaSlider::all()->toArray();
 
 
-        return view('adm.seccion_home_sliders.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de sliders']);
+        return view('adm.seccion_empresa_sliders.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de sliders']);
     }
 
     /**
@@ -40,7 +37,7 @@ class SeccionEmpresaSliderController extends Controller
     public function create()
     {
         //
-        return view('adm.seccion_home_sliders.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear slider']);
+        return view('adm.seccion_empresa_sliders.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear slider']);
     }
 
     /**
@@ -53,8 +50,8 @@ class SeccionEmpresaSliderController extends Controller
     {
     	// guardar sin imagen
 	    $objeto= new SeccionEmpresaSlider([
-            'texto' => $request->get('texto'),
-            'vinculo' => $request->get('vinculo'),
+            'texto' => '',
+            'vinculo' => '',
             'ruta' => '',
             'orden' => $request->get('orden'),
         ]);
@@ -62,7 +59,7 @@ class SeccionEmpresaSliderController extends Controller
         $objeto->save();
 
     	//ruta de imagen
-    	$rutaDeCarpeta= 'images/seccion_home_sliders/';
+    	$rutaDeCarpeta= 'images/seccion_empresa_sliders/';
     	$idArchivo= SeccionEmpresaSlider::max('id');
     	$nombreArchivo= "slider_".$idArchivo;
     	$extension= $request->imagen->extension();
@@ -103,7 +100,7 @@ class SeccionEmpresaSliderController extends Controller
     {
         //
         $objeto= SeccionEmpresaSlider::find($id);
-        return view('adm.seccion_home_sliders.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
+        return view('adm.seccion_empresa_sliders.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
     }
 
     /**
@@ -117,13 +114,13 @@ class SeccionEmpresaSliderController extends Controller
     {
         //
         $objeto = SeccionEmpresaSlider::find($id);
-        $objeto->texto = $request->get('texto');
-        $objeto->vinculo = $request->get('vinculo');
+        $objeto->texto = '';
+        $objeto->vinculo = '';
         $objeto->orden = $request->get('orden');
 
         if ($request->hasFile('imagen')) {
         	//ruta de imagen
-	    	$rutaDeCarpeta= 'images/seccion_home_sliders/';
+	    	$rutaDeCarpeta= 'images/seccion_empresa_sliders/';
 
 	        $idArchivo= $id;
 

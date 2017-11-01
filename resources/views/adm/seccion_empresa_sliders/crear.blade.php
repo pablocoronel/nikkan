@@ -42,7 +42,7 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['SeccionHomeSliderController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['SeccionEmpresaSliderController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				        <div class="form-group">
@@ -52,7 +52,7 @@
 					        </div>
 				        </div>
 
-				        <div class="form-group">
+				        {{-- <div class="form-group">
 				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
 				            	{!! Form::text('vinculo', '', ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
@@ -64,7 +64,7 @@
 				    		<div class="col-sm-7">
 								{!! Form::text('texto', '', ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
 							</div>
-				        </div>
+				        </div> --}}
 
 				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
