@@ -76,6 +76,22 @@ Route::group(['prefix' => 'adm'], function() {
 			Route::resource('portada', 'SeccionShowroomPortadaController');
 			Route::resource('slider', 'SeccionShowroomSliderController');
 		});
+
+		// CRUD contacto
+		Route::group(['prefix' => 'contacto'], function() {
+			Route::resource('portada', 'SeccionContactoPortadaController');
+			Route::resource('mapa', 'SeccionContactoMapaController');
+		});
+
+		// CRUD campaña
+		Route::group(['prefix' => 'campania'], function() {
+			Route::resource('slider', 'SeccionCampaniaSliderController');
+		});
+
+		// CRUD pdf afip
+		Route::group(['prefix' => 'documento'], function() {
+			Route::resource('pdf', 'SeccionDocumentoPdfController');
+		});
     });
 });
 

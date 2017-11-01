@@ -43,6 +43,20 @@
                 <!-- /.nav-second-level -->
             </li>
 
+        {{-- campania --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Campaña<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/campania/slider/crear')}}">Crear slider</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/campania/slider/')}}">Ver slider</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- showroom --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Showroom<span class="fa arrow"></span></a>
@@ -55,6 +69,20 @@
                     </li>
                     <li>
                         <a href="{{URL::asset('adm/showroom/slider/')}}">Ver slider</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+        {{-- contacto --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Contacto<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/contacto/portada/')}}">Ver portada</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/contacto/mapa/')}}">Ver mapa</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -77,6 +105,17 @@
                 <ul class="nav nav-second-level">
                     <li>
                         <a href="{{URL::asset('adm/dato-empresa/')}}">Ver datos</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+        {{-- pdf --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Constancia Afip<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/documento/pdf/')}}">Ver documento</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
