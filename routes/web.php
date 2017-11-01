@@ -70,6 +70,12 @@ Route::group(['prefix' => 'adm'], function() {
 			Route::resource('portada', 'SeccionEmpresaPortadaController');
 			Route::resource('slider', 'SeccionEmpresaSliderController');
 		});
+
+		// CRUD showroom
+		Route::group(['prefix' => 'showroom'], function() {
+			Route::resource('portada', 'SeccionShowroomPortadaController');
+			Route::resource('slider', 'SeccionShowroomSliderController');
+		});
     });
 });
 

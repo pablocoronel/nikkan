@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\SeccionEmpresaSliderRequest;
 
-// Modelo de usuario
+// Modelo 
 use App\SeccionEmpresaSlider;
 
 // 

@@ -4,14 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SeccionEmpresaPortada extends Model
+class SeccionShowroomPortada extends Model
 {
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'seccion_empresa_portadas';
+    protected $table = 'seccion_showroom_portadas';
 
     /**
      * The attributes that are mass assignable.

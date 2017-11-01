@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RedesSocialesRequest;
 
-// Modelo de usuario
+// Modelo 
 use App\RedesSociales;
 
 // 

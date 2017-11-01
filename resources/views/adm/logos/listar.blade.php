@@ -29,7 +29,7 @@
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
-							<td><img src="{{ asset($key["ruta"]) }}" alt=""></td>
+							<td><img src="{{ asset($key["ruta"]) }}" alt="" style="max-width: 100px;" class="img img-responsive"></td>
 							<td>{{ $key["tipo"] }}</td>
 							<td><a href="{{action('LogoController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
 						</tr>

@@ -42,34 +42,37 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['SeccionHomeSliderController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['SeccionShowroomSliderController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
-				        <div class="form-group">
-				        	{!! Form::label('imagen', 'Imagen (1900x750px)', ['class' => 'col-sm-3 control-label']) !!}
-				            <div class="col-sm-7">
-				        		{!! Form::file('imagen') !!}
-					        </div>
+				    	<input name="_method" type="hidden" value="PATCH">
+
+				    	{{-- <div class="form-group">
+				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('texto', $objeto->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
+							</div>
 				        </div>
 
 				        <div class="form-group">
 				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	{!! Form::text('vinculo', '', ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
+				            	{!! Form::text('vinculo', $objeto->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
 					        </div>
-				        </div>
+				        </div> --}}
 
-				    	<div class="form-group">
-				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('texto', '', ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
-							</div>
+				        <div class="form-group">
+				        	{!! Form::label('imagen', 'Imagen (1900x750px)', ['class' => 'col-sm-3 control-label']) !!}
+				            <div class="col-sm-7">
+				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;" class="img img-responsive">
+				        		{!! Form::file('imagen') !!}
+					        </div>
 				        </div>
 
 				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('orden', '', ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
+								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
 							</div>
 				        </div>
 
@@ -81,4 +84,5 @@
 			</div>
 	    </div>
 	</div>
+
 @endsection

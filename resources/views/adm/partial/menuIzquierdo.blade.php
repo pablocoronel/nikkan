@@ -43,6 +43,23 @@
                 <!-- /.nav-second-level -->
             </li>
 
+        {{-- showroom --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Showroom<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/showroom/portada/')}}">Ver portada</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/showroom/slider/crear')}}">Crear slider</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/showroom/slider/')}}">Ver slider</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- logos --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Logos<span class="fa arrow"></span></a>

@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\UsuarioRequest;
+use App\Http\Requests\SeccionShowroomPortadaRequest;
 
 // Modelo 
-use App\Usuario;
+use App\SeccionShowroomPortada;
 
 // 
 use Session;
+use Storage;
+use File;
 
-class UsuarioController extends Controller
-{    
+class SeccionShowroomPortadaController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
@@ -21,10 +23,10 @@ class UsuarioController extends Controller
     public function index()
     {
         //
-        $objeto= Usuario::all()->toArray();
+        $objeto= SeccionShowroomPortada::all()->toArray();
 
 
-        return view('adm.usuarios.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de usuarios']);
+        return view('adm.seccion_showroom_portadas.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de portada']);
     }
 
     /**
@@ -35,7 +37,6 @@ class UsuarioController extends Controller
     public function create()
     {
         //
-        return view('adm.usuarios.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear usuario']);
     }
 
     /**
@@ -44,20 +45,9 @@ class UsuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UsuarioRequest $request)
+    public function store(Request $request)
     {
-        $objeto= new Usuario([
-            'nivel' => $request->get('nivel'),
-            'nombre' => $request->get('nombre'),
-            'usuario' => $request->get('usuario'),
-            'password' => bcrypt($request->get('clave')),
-        ]);
-
-        $objeto->save();
-
-        // para mostrar msj de exito
-        Session::flash('guardado', 'creado correctamente');
-        return back();
+        //
     }
 
     /**
@@ -80,8 +70,8 @@ class UsuarioController extends Controller
     public function edit($id)
     {
         //
-        $objeto= Usuario::find($id);
-        return view('adm.usuarios.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar usuario']);
+        $objeto= SeccionShowroomPortada::find($id);
+        return view('adm.seccion_showroom_portadas.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar portada']);
     }
 
     /**
@@ -91,13 +81,32 @@ class UsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UsuarioRequest $request, $id)
+    public function update(SeccionShowroomPortadaRequest $request, $id)
     {
         //
-        $objeto = Usuario::find($id);
-        $objeto->nombre = $request->get('nombre');
-        $objeto->usuario = $request->get('usuario');
-        $objeto->nivel = $request->get('nivel');
+        $objeto = SeccionShowroomPortada::find($id);
+        $objeto->texto = $request->get('texto');
+        $objeto->titulo = $request->get('titulo');
+
+        if ($request->hasFile('imagen')) {
+            //ruta de imagen
+            $rutaDeCarpeta= 'images/seccion_showroom_portadas/';
+
+            $idArchivo= $id;
+
+            $nombreArchivo= "portada_".$idArchivo;
+            $extension= $request->imagen->extension();
+
+            $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
+
+            // Subir imagen:
+            $archivo= $request->file('imagen');
+            Storage::put($rutaConArchivo, File::get($archivo));
+
+            if ($request->file('imagen')->isValid()) {
+                $objeto->ruta = $rutaConArchivo;
+            }
+        }
 
         $objeto->save();
 
@@ -114,9 +123,5 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
-        $objeto= Usuario::find($id);
-        $objeto->delete();
-
-        return back();
     }
 }

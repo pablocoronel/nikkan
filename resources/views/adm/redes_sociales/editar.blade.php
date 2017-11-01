@@ -64,7 +64,7 @@
 				        <div class="form-group">
 				        	{!! Form::label('imagen', 'Ícono (32 x 32)', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
-				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;">
+				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;" class="img img-responsive">
 				        		{!! Form::file('imagen') !!}
 					        </div>
 				        </div>

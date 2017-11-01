@@ -24,20 +24,20 @@
 					<thead>
 						<td>Imagen</td>
 						<td>Editar</td>
-						<td>Eliminar</td>
+						{{-- <td>Eliminar</td> --}}
 					</thead>
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
 							<td><img src="{{ asset($key["ruta"]) }}" class="img img-responsive" alt="" style="max-width: 100px;"></td>
-							<td><a href="{{action('SeccionEmpresaSliderController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
-							<td>
-								<form action="{{action('SeccionEmpresaSliderController@destroy', $key['id'])}}" method="post">
+							<td><a href="{{action('SeccionShowroomPortadaController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
+							{{-- <td>
+								<form action="{{action('SeccionEmpresaPortadaController@destroy', $key['id'])}}" method="post">
 						           {{csrf_field()}}
 						           <input name="_method" type="hidden" value="DELETE">
 						           <button class="btn btn-danger" type="submit">Borrar</button>
 						        </form>
-							</td>
+							</td> --}}
 						</tr>
 						@endforeach
 					</tbody>

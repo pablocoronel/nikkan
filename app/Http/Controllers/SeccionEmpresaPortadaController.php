@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\SeccionEmpresaPortadaRequest;
 
-// Modelo de usuario
+// Modelo 
 use App\SeccionEmpresaPortada;
 
 // 
 use Session;
 use Storage;
 use File;
+
 class SeccionEmpresaPortadaController extends Controller
 {
     //
@@ -34,11 +35,10 @@ class SeccionEmpresaPortadaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function create()
-    // {
-    //     //
-    //     return view('adm.seccion_empresa_portadas.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear portada']);
-    // }
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -46,37 +46,10 @@ class SeccionEmpresaPortadaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(SeccionEmpresaPortadaRequest $request)
-    // {
-    // 	// guardar sin imagen
-	   //  $objeto= new SeccionEmpresaPortada([
-    //         'titulo' => $request->get('titulo'),
-    //         'texto' => $request->get('texto'),
-    //         'ruta' => '',
-    //     ]);
-
-    //     $objeto->save();
-
-    // 	//ruta de imagen
-    // 	$rutaDeCarpeta= 'images/seccion_empresa_portadas/';
-    // 	$idArchivo= SeccionEmpresaPortada::max('id');
-    // 	$nombreArchivo= "slider_".$idArchivo;
-    // 	$extension= $request->imagen->extension();
-
-    //     $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
-
-    //     // Subir imagen:
-    // 	$archivo= $request->file('imagen');
-    //     Storage::put($rutaConArchivo, File::get($archivo));
-
-    //     // guardar ruta
-    //     $objeto->ruta = $rutaConArchivo;
-    //     $objeto->save();
-
-    //     // para mostrar msj de exito
-    //     Session::flash('guardado', 'creado correctamente');
-    //     return back();
-    // }
+    public function store(SeccionEmpresaPortadaRequest $request)
+    {
+    	// 
+    }
 
     /**
      * Display the specified resource.
@@ -148,14 +121,8 @@ class SeccionEmpresaPortadaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function destroy($id)
-    // {
-    //     //
-    //     $objeto= SeccionEmpresaPortada::find($id);
-    //     $objeto->delete();
-
-    //     Storage::delete($objeto->ruta);
-
-    //     return back();
-    // }
+    public function destroy($id)
+    {
+        //
+    }
 }
