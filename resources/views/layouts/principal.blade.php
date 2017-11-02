@@ -10,8 +10,11 @@
     
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
 
-    {{-- Archivo particulares de cada pagina --}}
+    {{-- archivos para cada layout hijo --}}
     @yield('scriptsSuperior')
+
+    {{-- Archivo particulares de cada pagina --}}
+    @yield('scriptsParticulares')
 
 	<title>NIKKA-N @yield('titulo')</title>
 </head>

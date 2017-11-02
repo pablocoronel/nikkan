@@ -14,10 +14,8 @@
 // Secciondes del sitio:
 /******************************************/
 // Inicio
-Route::get('/', function () {
-    return view('index');
-});
-// Route::get('/', '');
+Route::get('/', 'PaginaHomeController@index');
+// http://metal.webserverns.com/~nikkan/
 
 // Administrador:
 /******************************************/

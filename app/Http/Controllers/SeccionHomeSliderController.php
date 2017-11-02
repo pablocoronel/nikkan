@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\SeccionEmpresaSliderRequest;
+use App\Http\Requests\SeccionHomeSliderRequest;
 
 // Modelo 
-use App\SeccionEmpresaSlider;
+use App\SeccionHomeSlider;
 
 // 
 use Session;
 use Storage;
 use File;
 
-class SeccionEmpresaSliderController extends Controller
+class SeccionHomeSliderController extends Controller
 {
     //
     //
@@ -26,7 +26,7 @@ class SeccionEmpresaSliderController extends Controller
     public function index()
     {
         //
-        $objeto= SeccionEmpresaSlider::all()->toArray();
+        $objeto= SeccionHomeSlider::all()->toArray();
 
 
         return view('adm.seccion_home_sliders.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de sliders']);
@@ -49,10 +49,10 @@ class SeccionEmpresaSliderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(SeccionEmpresaSliderRequest $request)
+    public function store(SeccionHomeSliderRequest $request)
     {
     	// guardar sin imagen
-	    $objeto= new SeccionEmpresaSlider([
+	    $objeto= new SeccionHomeSlider([
             'texto' => $request->get('texto'),
             'vinculo' => $request->get('vinculo'),
             'ruta' => '',
@@ -63,7 +63,7 @@ class SeccionEmpresaSliderController extends Controller
 
     	//ruta de imagen
     	$rutaDeCarpeta= 'images/seccion_home_sliders/';
-    	$idArchivo= SeccionEmpresaSlider::max('id');
+    	$idArchivo= SeccionHomeSlider::max('id');
     	$nombreArchivo= "slider_".$idArchivo;
     	$extension= $request->imagen->extension();
 
@@ -102,7 +102,7 @@ class SeccionEmpresaSliderController extends Controller
     public function edit($id)
     {
         //
-        $objeto= SeccionEmpresaSlider::find($id);
+        $objeto= SeccionHomeSlider::find($id);
         return view('adm.seccion_home_sliders.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar slider']);
     }
 
@@ -113,10 +113,10 @@ class SeccionEmpresaSliderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(SeccionEmpresaSliderRequest $request, $id)
+    public function update(SeccionHomeSliderRequest $request, $id)
     {
         //
-        $objeto = SeccionEmpresaSlider::find($id);
+        $objeto = SeccionHomeSlider::find($id);
         $objeto->texto = $request->get('texto');
         $objeto->vinculo = $request->get('vinculo');
         $objeto->orden = $request->get('orden');
@@ -156,7 +156,7 @@ class SeccionEmpresaSliderController extends Controller
     public function destroy($id)
     {
         //
-        $objeto= SeccionEmpresaSlider::find($id);
+        $objeto= SeccionHomeSlider::find($id);
         $objeto->delete();
 
         Storage::delete($objeto->ruta);

@@ -3,15 +3,15 @@
 
 @section('scriptsSuperior')
 	<!-- MetisMenu CSS -->
-	<link href="{{asset('templateAdm/vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
+	<link href="{{asset('/plugins/templateAdm/vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
 	<!-- Custom CSS -->
-	<link href="{{asset('templateAdm/dist/css/sb-admin-2.css')}}" rel="stylesheet">
+	<link href="{{asset('/plugins/templateAdm/dist/css/sb-admin-2.css')}}" rel="stylesheet">
 
 	<!-- Morris Charts CSS -->
-	<link href="{{asset('templateAdm/vendor/morrisjs/morris.css')}}" rel="stylesheet">
+	<link href="{{asset('/plugins/templateAdm/vendor/morrisjs/morris.css')}}" rel="stylesheet">
 
 	<!-- Custom Fonts -->
-	<link href="{{asset('templateAdm/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+	<link href="{{asset('/plugins/templateAdm/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -44,19 +44,19 @@
 
 @section('scriptsInferior')
 	<!-- jQuery -->
-	<script src="{{asset('templateAdm/vendor/jquery/jquery.min.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/vendor/jquery/jquery.min.js')}}"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="{{asset('templateAdm/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-	<script src="{{asset('templateAdm/vendor/metisMenu/metisMenu.min.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/vendor/metisMenu/metisMenu.min.js')}}"></script>
 
 	<!-- Morris Charts JavaScript -->
-	<script src="{{asset('templateAdm/vendor/raphael/raphael.min.js')}}"></script>
-	<script src="{{asset('templateAdm/vendor/morrisjs/morris.min.js')}}"></script>
-	<script src="{{asset('templateAdm/data/morris-data.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/vendor/raphael/raphael.min.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/vendor/morrisjs/morris.min.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/data/morris-data.js')}}"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="{{asset('templateAdm/dist/js/sb-admin-2.js')}}"></script>
+	<script src="{{asset('/plugins/templateAdm/dist/js/sb-admin-2.js')}}"></script>
 @endsection
