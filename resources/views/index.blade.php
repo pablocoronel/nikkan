@@ -79,4 +79,6 @@
         </div>
         @endforeach
     </div>
+
+@include('sitio.partial.footer')
 @endsection

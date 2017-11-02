@@ -53,6 +53,8 @@
   display: inline-block !important;
 }
 
+/* fin cabecera */
+
 /*menu principal*/
 #contenedorMenuPrincipal{
   background-color: transparent;
@@ -82,9 +84,6 @@
   margin-top: -10px;
 }
 
-
-
-/*fin menu principal
 
 /*ocultar cabecera y cambio de color del menu*/
 .affix {
@@ -126,6 +125,7 @@
     color: #FFFFFF;
   }
 
+/*fin menu principal*/
 
 @media screen and (max-width: 768px) {
   #contendorCabeceraMenu{
@@ -159,4 +159,12 @@
     color: #000000;
   }
 
+}
+
+/* footer */
+footer{
+  position: relative;
+  background-color: #f4bfd9;
+  height: 300px;
+  width: 100%;
 }
