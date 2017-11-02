@@ -11,14 +11,16 @@
 |
 */
 
+// Secciondes del sitio:
+/******************************************/
 // Inicio
 Route::get('/', function () {
     return view('index');
 });
+// Route::get('/', '');
 
-
-
-// Administrador
+// Administrador:
+/******************************************/
 Route::group(['prefix' => 'adm'], function() {
     // ver formulario de login
     Route::get('login', function () {

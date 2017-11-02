@@ -55,7 +55,7 @@
           
         <!-- lado derecho -->
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="{{URL::asset('historias')}}"><img src="{{asset('images/varios/shopping-bag.png')}}" alt="" id="imagenBolsa"></a></li>
+          <li><a href="{{URL::asset('carrito')}}"><img src="{{asset('images/varios/shopping-bag.png')}}" alt="" id="imagenBolsa"></a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
