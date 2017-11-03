@@ -47,18 +47,18 @@
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
 
-				    	<div class="form-group">
-				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('texto', $objeto->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
-							</div>
-				        </div>
-
 				        <div class="form-group">
 				        	{!! Form::label('titulo', 'Titulo', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
 				            	{!! Form::text('titulo', $objeto->titulo, ['class' => 'form-control', 'placeholder' => 'Titulo']) !!}
 					        </div>
+				        </div>
+
+				    	<div class="form-group">
+				    		{!! Form::label('texto', 'Texto', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::textarea('texto', $objeto->texto, ['class' => 'form-control', 'placeholder' => 'Texto']) !!}
+							</div>
 				        </div>
 
 				        <div class="form-group">
@@ -77,5 +77,12 @@
 			</div>
 	    </div>
 	</div>
+
+	<script>
+	  	CKEDITOR.replace('texto');
+	  
+		CKEDITOR.config.width = 500;
+		CKEDITOR.config.width = '99%';
+	</script>
 
 @endsection

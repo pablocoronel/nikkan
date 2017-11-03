@@ -1,0 +1,9 @@
+#contenedorDescripcion{
+	padding-top: 150px;
+}
+
+@media (max-width: 768px) {
+	#contenedorDescripcion{
+		padding-top: 50px;
+	}
+}

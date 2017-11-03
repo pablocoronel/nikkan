@@ -18,7 +18,7 @@ class CrearTablaDatosempresa extends Migration
         Schema::create('dato_empresas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('tipo');
-            $table->string('texto');
+            $table->text('texto');
             $table->timestamps();
         });
     }

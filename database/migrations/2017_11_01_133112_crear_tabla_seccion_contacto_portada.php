@@ -18,7 +18,7 @@ class CrearTablaSeccionContactoPortada extends Migration
             $table->increments('id');
             $table->string('ruta');
             $table->string('titulo');
-            $table->string('texto');
+            $table->text('texto');
             $table->timestamps();
         });
     }

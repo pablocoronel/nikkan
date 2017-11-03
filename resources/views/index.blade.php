@@ -25,7 +25,7 @@
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
     {{-- slider --}}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: -10;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: -1;">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         @foreach($slider as $key => $value)
@@ -76,6 +76,7 @@
           <a href="{{$cadaDestacado->vinculo}}" target="_blank">
             <img data-lazy="{{$cadaDestacado->ruta}}" class="img img-responsive"/>
           </a>
+          <p>{{$cadaDestacado->texto}}</p>
         </div>
         @endforeach
     </div>

@@ -16,7 +16,7 @@ class CrearTablaSeccionContactoMapa extends Migration
         //
         Schema::create('seccion_contacto_mapas', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('ruta');
+            $table->text('codigo');
             $table->timestamps();
         });
     }

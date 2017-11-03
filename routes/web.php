@@ -15,6 +15,13 @@
 /******************************************/
 // Inicio
 Route::get('/', 'PaginaHomeController@index');
+Route::get('empresa', 'PaginaEmpresaController@index');
+Route::get('campania', 'PaginaCampaniaController@index');
+Route::get('showroom', 'PaginaShowroomController@index');
+Route::group(['prefix' => 'contacto'], function() {
+	Route::get('/', 'PaginaContactoController@index');
+    Route::post('enviarEmail', 'PaginaContactoController@enviarEmail');
+});
 // http://metal.webserverns.com/~nikkan/
 
 // Administrador:

@@ -18,7 +18,7 @@ class CrearTablaSeccionEmpresaSlider extends Migration
             $table->increments('id');
             $table->string('ruta');
             $table->string('vinculo');
-            $table->string('texto');
+            $table->text('texto');
             $table->string('orden');
             $table->timestamps();
         });

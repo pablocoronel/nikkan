@@ -2,7 +2,7 @@
 @media (min-width: 992px) {
   #contendorCabeceraMenu{
     position: absolute;
-    z-index: 5;
+    z-index: 1;
     width: 100%;
   }
 }
@@ -165,6 +165,35 @@
 footer{
   position: relative;
   background-color: #f4bfd9;
-  height: 300px;
+  min-height: 300px;
+  max-height: 300px;
   width: 100%;
+}
+
+#contenedorFooter{
+  padding-top: 40px;
+}
+
+footer ul{
+  list-style: none;
+}
+
+footer #redes ul li{
+  display: inline-block;
+}
+
+footer #contenedorDatos ul li span, footer #contenedorDatos ul li p{
+  display: inline-block;
+}
+
+footer #contenedorDatos ul li:first-child p{
+  /*color: red;*/
+  /*margin-top: 50px;*/
+}
+
+@media (max-width: 768px) {
+  footer{
+    min-height: 300px;
+    max-height: 700px;
+  }
 }

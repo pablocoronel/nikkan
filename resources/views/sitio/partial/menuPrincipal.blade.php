@@ -48,7 +48,7 @@
           <ul class="nav navbar-nav" id="listaSecciones">
             <li><a href="{{URL::asset('empresa')}}">NIKKA</a></li>
             <li><a href="{{URL::asset('coleccion')}}">COLECCIÓN</a></li>
-            <li><a href="{{URL::asset('campaña')}}">CAMPAÑA</a></li>
+            <li><a href="{{URL::asset('campania')}}">CAMPAÑA</a></li>
             <li><a href="{{URL::asset('discontinuos')}}">DISCONTINUOS</a></li>
             <li><a href="{{URL::asset('showroom')}}">SHOWROOM</a></li>
             <li><a href="{{URL::asset('contacto')}}">CONTACTO</a></li>

@@ -35,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
         $logoPrincipal= Logo::find(1);
         view()->share('logoPrincipal', $logoPrincipal);
 
+        //Logo footer
+        $logoFooter= Logo::find(2);
+        view()->share('logoFooter', $logoFooter);
+
         // direcionEmpresa
         $direcionEmpresa = DatoEmpresa::find(1);
         view()->share('direcionEmpresa', $direcionEmpresa);
@@ -50,6 +54,13 @@ class AppServiceProvider extends ServiceProvider
         // listdo de redes para menu principal
         $redesSuperior = RedesSociales::where('ubicacion', 'superior')->get();
         view()->share('redesSuperior', $redesSuperior);
+
+        // listdo de redes para footer
+        $redesInferior = RedesSociales::where('ubicacion', 'inferior')->get();
+        view()->share('redesInferior', $redesInferior);
+
+        // Footer
+
     }
 
     /**

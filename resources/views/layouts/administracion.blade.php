@@ -19,6 +19,9 @@
 		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
+
+	{{-- Editor rico --}}
+	<script src="//cdn.ckeditor.com/4.5.10/full/ckeditor.js"></script>
 @endsection
 
 @section('contenidoPadre')
@@ -44,10 +47,10 @@
 
 @section('scriptsInferior')
 	<!-- jQuery -->
-	<script src="{{asset('/plugins/templateAdm/vendor/jquery/jquery.min.js')}}"></script>
+	{{-- <script src="{{asset('/plugins/templateAdm/vendor/jquery/jquery.min.js')}}"></script> --}}
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="{{asset('/plugins/templateAdm/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+	{{-- <script src="{{asset('/plugins/templateAdm/vendor/bootstrap/js/bootstrap.min.js')}}"></script> --}}
 
 	<!-- Metis Menu Plugin JavaScript -->
 	<script src="{{asset('/plugins/templateAdm/vendor/metisMenu/metisMenu.min.js')}}"></script>
@@ -59,4 +62,6 @@
 
 	<!-- Custom Theme JavaScript -->
 	<script src="{{asset('/plugins/templateAdm/dist/js/sb-admin-2.js')}}"></script>
+
+	<!-- Editor de texto -->
 @endsection
