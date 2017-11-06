@@ -1,3 +1,24 @@
+/* fuentes */
+@font-face {
+    font-family: "texgyreadventor-bold";
+    src: url("../fonts/texgyreadventor-bold.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreadventor-bolditalic";
+    src: url("../fonts/texgyreadventor-bolditalic.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreadventor-italic";
+    src: url("../fonts/texgyreadventor-italic.otf") format("opentype");
+}
+
+@font-face {
+    font-family: "texgyreadventor-regular";
+    src: url("../fonts/texgyreadventor-regular.otf") format("opentype");
+}
+
 /* Note: Try to remove the following lines to see the effect of CSS positioning */
 @media (min-width: 992px) {
   #contendorCabeceraMenu{
@@ -21,7 +42,7 @@
   width: 500px;
   display: inline-block !important;
   margin-top: 10px;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 #cabecera #datosEmpresa #telefono{
   background-color: transparent;
@@ -41,7 +62,7 @@
 #cabecera #redesSocialesSuperior{
   background-color: transparent;
   height: 30px;
-  min-width: 100px;
+  /*min-width: 100px;*/
   display: inline-block !important;
   margin-top: 10px;
 }
@@ -77,7 +98,6 @@
 #contenedorMenuPrincipal #logoMenuPrincipal{
   position: relative;
   top: -10px;
-  margin-left: 20px;
 }
 
 #imagenBolsa{
@@ -103,7 +123,6 @@
   .affix #logoMenuPrincipal{
       position: relative;
       margin-top: 10px;
-      margin-left: 20px;
       -webkit-transition: all .5s ease-in-out;
       transition: all .5s ease-in-out;
       height: 30px;
@@ -170,20 +189,33 @@ footer{
   width: 100%;
 }
 
+footer h4{
+  font-family: "texgyreadventor-regular";
+  color: #000000;
+}
+
 #contenedorFooter{
   padding-top: 40px;
 }
 
 footer ul{
   list-style: none;
+  padding-left: 0px;
 }
 
 footer #redes ul li{
   display: inline-block;
 }
 
-footer #contenedorDatos ul li span, footer #contenedorDatos ul li p{
+footer #contenedorDatos ul li span{
   display: inline-block;
+}
+
+footer #contenedorDatos ul li p, footer #contenedorDatos ul li a{
+  display: inline-block;
+  font-family: "texgyreadventor-regular";
+  color: #000000;
+  text-decoration: none;
 }
 
 footer #contenedorDatos ul li:first-child p{
@@ -191,9 +223,43 @@ footer #contenedorDatos ul li:first-child p{
   /*margin-top: 50px;*/
 }
 
+footer #sitemap{
+  text-align: center;
+}
+
+footer #sitemap ul li a{
+  font-family: "texgyreadventor-regular";
+  color: #000000;
+}
+
+footer #sitemap ul li a:hover{
+  text-decoration: none;
+}
+
+footer #sitemap img{
+  display: initial;
+  margin-bottom: 15px;
+}
+
+footer #redes{
+  text-align: right;
+}
+
+footer #redes ul li a img{
+  height: 25px;
+}
+
 @media (max-width: 768px) {
   footer{
     min-height: 300px;
     max-height: 700px;
+  }
+
+  footer #sitemap{
+    text-align: left;
+  }
+
+  footer #redes{
+    text-align: left;
   }
 }

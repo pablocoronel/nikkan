@@ -21,7 +21,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col-xs-12 col-md-4">
+		<div class="col-xs-12 col-md-4" id="sitemap">
 			<img src="{{$logoFooter->ruta}}" class="img img-responsive" alt="">
 			<ul>
 				<li><a href="{{asset('/')}}">HOME</a></li>

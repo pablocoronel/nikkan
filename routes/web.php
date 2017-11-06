@@ -73,6 +73,13 @@ Route::group(['prefix' => 'adm'], function() {
 		});
 
 		// CRUD empresa
+		Route::group(['prefix' => 'tienda'], function() {
+			Route::resource('familia', 'SeccionTiendaFamiliaController');
+			Route::resource('categoria', 'SeccionTiendaCategoriaController');
+			Route::resource('producto', 'SeccionTiendaProductoController');
+		});
+
+		// CRUD empresa
 		Route::group(['prefix' => 'empresa'], function() {
 			Route::resource('portada', 'SeccionEmpresaPortadaController');
 			Route::resource('slider', 'SeccionEmpresaSliderController');

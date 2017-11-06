@@ -43,6 +43,34 @@
                 <!-- /.nav-second-level -->
             </li>
 
+        {{-- productos --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Productos<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/familia/crear')}}">Crear familia</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/familia/')}}">Ver familia</a>
+                    </li>
+
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/categoria/crear')}}">Crear categoria</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/categoria/')}}">Ver categoria</a>
+                    </li>
+
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/producto/crear')}}">Crear producto</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/producto/')}}">Ver producto</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- campania --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Campaña<span class="fa arrow"></span></a>

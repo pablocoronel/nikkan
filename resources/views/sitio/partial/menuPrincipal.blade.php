@@ -1,6 +1,6 @@
 {{-- cabecera --}}
 <div id="contendorCabeceraMenu">
-  <div class="container-fluid hidden-xs" id="cabecera">
+  <div class="container hidden-xs" id="cabecera">
     <div id="datosEmpresa">
       <div id="telefono">
         <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
@@ -28,7 +28,7 @@
 
   {{-- menu --}}
   <nav class="navbar" data-spy="affix" data-offset-top="47">
-     <div class="container-fluid" id="contenedorMenuPrincipal">
+     <div class="container" id="contenedorMenuPrincipal">
         <!-- Brand and toggle get grouped for better mobile display -->
         <!-- Logo y boton hamburguesa -->
         <div class="navbar-header">
