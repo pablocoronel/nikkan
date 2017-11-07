@@ -67,6 +67,20 @@
                     <li>
                         <a href="{{URL::asset('adm/tienda/producto/')}}">Ver producto</a>
                     </li>
+
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/color/crear')}}">Crear color</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/color/')}}">Ver color</a>
+                    </li>
+
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/talle/crear')}}">Crear talle</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/talle/')}}">Ver talle</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

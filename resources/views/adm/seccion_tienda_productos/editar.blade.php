@@ -77,11 +77,25 @@
 				        </div> 
 
 				        <div class="form-group">
-				    		{!! Form::label('precio', 'Precio', ['class' => 'col-sm-3 control-label']) !!}
+				    		{!! Form::label('precio_original', 'Precio original', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('precio', $objeto->precio, ['class' => 'form-control', 'placeholder' => 'Precio']) !!}
+								{!! Form::text('precio_original', $objeto->precio_original, ['class' => 'form-control', 'placeholder' => 'Precio original']) !!}
 							</div>
 				        </div> 
+
+				        <div class="form-group">
+				    		{!! Form::label('descuento', 'Descuento (0% por defecto)', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('descuento', $objeto->descuento, ['class' => 'form-control', 'placeholder' => '0']) !!}
+							</div>
+				        </div> 
+
+				        <div class="form-group">
+				        	{!! Form::label('coleccion', 'Colección', ['class' => 'col-sm-3 control-label']) !!}
+							<div class="col-sm-7">
+								{!! Form::select('coleccion', ['coleccion' => 'Colección', 'discontinuo' => 'Discontinuo'], $objeto->coleccion) !!}
+				        	</div>
+				        </div>
 
 				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}

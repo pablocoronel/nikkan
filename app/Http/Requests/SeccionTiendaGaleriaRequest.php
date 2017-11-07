@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Auth;
 
-class SeccionTiendaProductoRequest extends FormRequest
+class SeccionTiendaGaleriaRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,13 +33,8 @@ class SeccionTiendaProductoRequest extends FormRequest
             case 'POST':
                 return [
                     //
-                    'fk_categoria' => 'required',
-                    'nombre' => 'required',
+                    // 'fk_producto' => 'required',
                     'imagen' => 'required',
-                    'descripcion' => 'required',
-                    'precio_original' => 'required',
-                    'descuento' => 'required',
-                    'coleccion' => 'required',
                     'orden' => 'required',
                 ];
                 break;
@@ -48,12 +43,7 @@ class SeccionTiendaProductoRequest extends FormRequest
             case 'PATCH':
                 return [
                     //
-                    'fk_categoria' => 'required',
-                    'nombre' => 'required',
-                    'descripcion' => 'required',
-                    'precio_original' => 'required',
-                    'descuento' => 'required',
-                    'coleccion' => 'required',
+                    // 'fk_producto' => 'required',
                     'orden' => 'required',
                 ];
                 break;

@@ -57,12 +57,25 @@ class SeccionTiendaProductoController extends Controller
      */
     public function store(SeccionTiendaProductoRequest $request)
     {
+        $precio_original= $request->get('precio_original');
+        $descuento= $request->get('descuento');
+
+        if ($descuento > 0) {
+            $cantidad_a_descontar= ($precio_original * $descuento) / 100;
+            $precio_con_descuento= $precio_original - $cantidad_a_descontar;
+        }else{
+            $precio_con_descuento= $request->get('precio_original');
+        }
+
         $objeto= new SeccionTiendaProducto([
             'fk_categoria' => $request->get('fk_categoria'),
             'nombre' => $request->get('nombre'),
             'ruta' => '',
             'descripcion' => $request->get('descripcion'),
-            'precio' => $request->get('precio'),
+            'precio_original' => $request->get('precio_original'),
+            'precio_con_descuento' => $precio_con_descuento,
+            'descuento' => $request->get('descuento'),
+            'coleccion' => $request->get('coleccion'),
             'orden' => $request->get('orden'),
         ]);
 
@@ -131,12 +144,24 @@ class SeccionTiendaProductoController extends Controller
      */
     public function update(SeccionTiendaProductoRequest $request, $id)
     {
+        $precio_original= $request->get('precio_original');
+        $descuento= $request->get('descuento');
+
+        if ($descuento > 0) {
+            $cantidad_a_descontar= ($precio_original * $descuento) / 100;
+            $precio_con_descuento= $precio_original - $cantidad_a_descontar;
+        }else{
+            $precio_con_descuento= $request->get('precio_original');
+        }
         //
         $objeto = SeccionTiendaProducto::find($id);
         $objeto->fk_categoria = $request->get('fk_categoria');
         $objeto->nombre = $request->get('nombre');
         $objeto->descripcion = $request->get('descripcion');
-        $objeto->precio = $request->get('precio');
+        $objeto->precio_original = $request->get('precio_original');
+        $objeto->precio_con_descuento = $precio_con_descuento;
+        $objeto->descuento = $request->get('descuento');
+        $objeto->coleccion = $request->get('coleccion');
         $objeto->orden = $request->get('orden');
 
         if ($request->hasFile('imagen')) {

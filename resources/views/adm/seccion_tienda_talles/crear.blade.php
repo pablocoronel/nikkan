@@ -42,57 +42,15 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['SeccionTiendaProductoController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{ Form::open(['action' => ['SeccionTiendaTalleController@'.$accion], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
+				        
 				    	<div class="form-group">
 				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('nombre', '', ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
 							</div>
-				        </div> 
-
-				        
-				        <div class="form-group">
-				        	{!! Form::label('fk_categoria', 'Categoría', ['class' => 'col-sm-3 control-label']) !!}
-							<div class="col-sm-7">
-								{!! Form::select('fk_categoria', $arrayListado) !!}
-				        	</div>
-				        </div>
-
-				        <div class="form-group">
-				        	{!! Form::label('imagen', 'Imagen (400x400px)', ['class' => 'col-sm-3 control-label']) !!}
-				            <div class="col-sm-7">
-				        		{!! Form::file('imagen') !!}
-					        </div>
-				        </div>
-
-				        <div class="form-group">
-				    		{!! Form::label('descripcion', 'Descripción', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('descripcion', '', ['class' => 'form-control', 'placeholder' => 'Descripción']) !!}
-							</div>
-				        </div> 
-
-				        <div class="form-group">
-				    		{!! Form::label('precio_original', 'Precio original', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('precio_original', '', ['class' => 'form-control', 'placeholder' => 'Precio original']) !!}
-							</div>
-				        </div> 
-
-				        <div class="form-group">
-				    		{!! Form::label('descuento', 'Descuento (0% por defecto)', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('descuento', '0', ['class' => 'form-control', 'placeholder' => '0']) !!}
-							</div>
-				        </div> 
-
-				        <div class="form-group">
-				        	{!! Form::label('coleccion', 'Colección', ['class' => 'col-sm-3 control-label']) !!}
-							<div class="col-sm-7">
-								{!! Form::select('coleccion', ['coleccion' => 'Colección', 'discontinuo' => 'Discontinuo']) !!}
-				        	</div>
 				        </div>
 
 				        <div class="form-group">

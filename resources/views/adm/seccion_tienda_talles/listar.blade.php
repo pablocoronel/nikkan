@@ -25,23 +25,19 @@
 						<td>Nombre</td>
 						<td>Editar</td>
 						<td>Eliminar</td>
-						<td>Galería</td>
-						<td>Versiones</td>
 					</thead>
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
-							<td>{{ $key["nombre"] }}</td>
-							<td><a href="{{action('SeccionTiendaProductoController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
+							<td>{{$key["nombre"]}}</td>
+							<td><a href="{{action('SeccionTiendaTalleController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
 							<td>
-								<form action="{{action('SeccionTiendaProductoController@destroy', $key['id'])}}" method="post">
+								<form action="{{action('SeccionTiendaTalleController@destroy', $key['id'])}}" method="post">
 						           {{csrf_field()}}
 						           <input name="_method" type="hidden" value="DELETE">
 						           <button class="btn btn-danger" type="submit">Borrar</button>
 						        </form>
 							</td>
-							<td><a href="{{action('SeccionTiendaGaleriaController@index', $key['id'])}}" class="btn btn-info">Galería</a></td>
-							<td><a href="{{action('SeccionTiendaVersionController@index', $key['id'])}}" class="btn btn-info">Versiones</a></td>
 						</tr>
 						@endforeach
 					</tbody>

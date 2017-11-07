@@ -72,11 +72,26 @@ Route::group(['prefix' => 'adm'], function() {
 			Route::resource('destacado', 'SeccionHomeDestacadoController');
 		});
 
-		// CRUD empresa
+		// CRUD tienda
 		Route::group(['prefix' => 'tienda'], function() {
 			Route::resource('familia', 'SeccionTiendaFamiliaController');
 			Route::resource('categoria', 'SeccionTiendaCategoriaController');
 			Route::resource('producto', 'SeccionTiendaProductoController');
+			Route::resource('color', 'SeccionTiendaColorController');
+			Route::resource('talle', 'SeccionTiendaTalleController');
+
+			// galeria de cada producto
+			Route::resource('producto/{idProducto}/galeria', 'SeccionTiendaGaleriaController');
+			// galeria de cada producto
+			// Route::get('producto/{idProducto}/galeria/', 'SeccionTiendaGaleriaController@index');
+			// Route::get('producto/{idProducto}/galeria/crear', 'SeccionTiendaGaleriaController@create');
+			// Route::post('producto/{idProducto}/galeria/', 'SeccionTiendaGaleriaController@store');
+			// Route::get('producto/{idProducto}/galeria/{idGaleria}/editar', 'SeccionTiendaGaleriaController@edit');
+			// Route::patch('producto/{idProducto}/galeria/{idGaleria}/', 'SeccionTiendaGaleriaController@update');
+			// Route::delete('producto/{idProducto}/galeria/{idGaleria}/', 'SeccionTiendaGaleriaController@destroy');
+
+		    // version de cada producto
+			Route::resource('producto/{idProducto}/version', 'SeccionTiendaVersionController');
 		});
 
 		// CRUD empresa

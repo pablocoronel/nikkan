@@ -16,32 +16,31 @@
 	    <div class="col-xs-12 col-md-8 col-md-offset-2">
 	        <div class="panel panel-default">
 	        	<div class="panel-heading">
-	                <h3 class="panel-title">{{$nombreDeAccion}}</h3>
+	                <h3 class="panel-title">
+	                	{{$nombreDeAccion}} - Producto: {{$producto->nombre}}
+						<a href="{{action('SeccionTiendaVersionController@create', $producto->id)}}" class="btn btn-info">Agregar version</a>
+	                </h3>
 	            </div>
 	            
 				{{-- Tabla --}}
 				<table class="table table-striped table-bordered table-responsive">
 					<thead>
-						<td>Nombre</td>
+						<td>Versión</td>
 						<td>Editar</td>
 						<td>Eliminar</td>
-						<td>Galería</td>
-						<td>Versiones</td>
 					</thead>
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
-							<td>{{ $key["nombre"] }}</td>
-							<td><a href="{{action('SeccionTiendaProductoController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
+							<td>{{$key["nombreColor"]}} - {{$key["nombreTalle"]}}</td>
+							<td><a href="{{action('SeccionTiendaVersionController@edit', ['idProducto' => $key['fk_producto'], 'idGaleria' => $key['id']])}}" class="btn btn-primary">Editar</a></td>
 							<td>
-								<form action="{{action('SeccionTiendaProductoController@destroy', $key['id'])}}" method="post">
+								<form action="{{action('SeccionTiendaVersionController@destroy', ['idProducto' => $key['fk_producto'], 'idGaleria' => $key['id']])}}" method="post">
 						           {{csrf_field()}}
 						           <input name="_method" type="hidden" value="DELETE">
 						           <button class="btn btn-danger" type="submit">Borrar</button>
 						        </form>
 							</td>
-							<td><a href="{{action('SeccionTiendaGaleriaController@index', $key['id'])}}" class="btn btn-info">Galería</a></td>
-							<td><a href="{{action('SeccionTiendaVersionController@index', $key['id'])}}" class="btn btn-info">Versiones</a></td>
 						</tr>
 						@endforeach
 					</tbody>
