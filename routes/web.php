@@ -16,6 +16,20 @@
 // Inicio
 Route::get('/', 'PaginaHomeController@index');
 Route::get('empresa', 'PaginaEmpresaController@index');
+
+Route::group(['prefix' => 'coleccion'], function() {
+	Route::get('/', 'PaginaTiendaController@coleccionListadoDeFamilias');
+    Route::get('familia/{idFamilia}', 'PaginaTiendaController@coleccionListadoDeProductos');
+
+// cambiar aca
+    Route::post('users/{id}', 'PaginaTiendaControllercoleccionFiltrarPorCategoria');
+
+});
+Route::group(['prefix' => 'discontinuos'], function() {
+	Route::get('/', 'PaginaTiendaController@discontinuosListadoDeFamilias');
+    Route::get('familia/{idFamilia}', 'PaginaTiendaController@discontinuosListadoDeProductos');
+});
+
 Route::get('campania', 'PaginaCampaniaController@index');
 Route::get('showroom', 'PaginaShowroomController@index');
 Route::group(['prefix' => 'contacto'], function() {
@@ -120,6 +134,16 @@ Route::group(['prefix' => 'adm'], function() {
 		// CRUD pdf afip
 		Route::group(['prefix' => 'documento'], function() {
 			Route::resource('pdf', 'SeccionDocumentoPdfController');
+		});
+
+		// CRUD coleccion
+		Route::group(['prefix' => 'coleccion'], function() {
+			Route::resource('portada', 'SeccionColeccionPortadaController');
+		});
+
+		// CRUD discontinuo
+		Route::group(['prefix' => 'discontinuo'], function() {
+			Route::resource('portada', 'SeccionDiscontinuoPortadaController');
 		});
     });
 });

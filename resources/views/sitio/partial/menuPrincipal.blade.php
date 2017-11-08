@@ -19,7 +19,7 @@
       @foreach($redesSuperior as $cadaRed)
         <div id="cadaRed">
           <a href="{{ $cadaRed->vinculo}}">
-            <img src="{{ $cadaRed->ruta}}" alt="" class="img img-responsive">
+            <img src="{{ asset($cadaRed->ruta)}}" alt="" class="img img-responsive">
           </a>        
         </div>
       @endforeach
@@ -38,7 +38,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="{{URL::asset('/')}}"><img src="{{$logoPrincipal->ruta}}" id="logoMenuPrincipal" class="img img-responsive" alt="Logo"></a>
+          <a class="navbar-brand" href="{{URL::asset('/')}}"><img src="{{asset($logoPrincipal->ruta)}}" id="logoMenuPrincipal" class="img img-responsive" alt="Logo"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

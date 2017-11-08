@@ -22,7 +22,7 @@
 			</ul>
 		</div>
 		<div class="col-xs-12 col-md-4" id="sitemap">
-			<img src="{{$logoFooter->ruta}}" class="img img-responsive" alt="">
+			<img src="{{asset($logoFooter->ruta)}}" class="img img-responsive" alt="">
 			<ul>
 				<li><a href="{{asset('/')}}">HOME</a></li>
 				<li><a href="{{asset('empresa')}}">NIKKA</a></li>
@@ -38,7 +38,7 @@
 				@foreach($redesInferior as $cadaRed)
 					<li>
 						<a href="{{$cadaRed->vinculo}}">
-							<img src="{{$cadaRed->ruta}}" class="img img-responsive" alt="">
+							<img src="{{asset($cadaRed->ruta)}}" class="img img-responsive" alt="">
 						</a>
 					</li>
 				@endforeach

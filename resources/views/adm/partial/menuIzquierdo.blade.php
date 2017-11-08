@@ -43,6 +43,17 @@
                 <!-- /.nav-second-level -->
             </li>
 
+        {{-- coleccion --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Colección<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/coleccion/portada/')}}">Ver portada</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- productos --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Productos<span class="fa arrow"></span></a>
@@ -94,6 +105,17 @@
                     </li>
                     <li>
                         <a href="{{URL::asset('adm/campania/slider/')}}">Ver slider</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
+        {{-- discontinuo --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Discontinuo<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/discontinuo/portada/')}}">Ver portada</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
