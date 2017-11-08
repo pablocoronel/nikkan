@@ -76,6 +76,7 @@ class SeccionTiendaProductoController extends Controller
             'precio_con_descuento' => $precio_con_descuento,
             'descuento' => $request->get('descuento'),
             'coleccion' => $request->get('coleccion'),
+            'guia_de_talle' => '',
             'orden' => $request->get('orden'),
         ]);
 
@@ -84,18 +85,39 @@ class SeccionTiendaProductoController extends Controller
         //ruta de imagen
         $rutaDeCarpeta= 'images/seccion_tienda_productos/';
         $idArchivo= SeccionTiendaProducto::max('id');
-        $nombreArchivo= "producto_".$idArchivo;
-        $extension= $request->imagen->extension();
 
-        $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
+        // imagen de producto
+        if ($request->hasFile('guia_de_talle')) {
+            $nombreArchivo= "producto_".$idArchivo;
+            $extension= $request->imagen->extension();
+            $rutaConArchivo= $rutaDeCarpeta.$nombreArchivo.'.'.$extension;
 
-        // Subir imagen:
-        $archivo= $request->file('imagen');
-        Storage::put($rutaConArchivo, File::get($archivo));
+            // Subir imagen:
+            $archivo= $request->file('imagen');
+            Storage::put($rutaConArchivo, File::get($archivo));
 
-        // guardar ruta
-        $objeto->ruta = $rutaConArchivo;
-        $objeto->save();
+            // guardar ruta
+            if ($request->file('imagen')->isValid()) {
+                $objeto->ruta = $rutaConArchivo;
+                $objeto->save();
+            }
+        }
+
+        // Guia de talles
+        if ($request->hasFile('guia_de_talle')) {
+            $nombreArchivoTalle= "guia_talle_".$idArchivo;
+            $extensionTalle= $request->guia_de_talle->extension();
+            $rutaConArchivoTalle= $rutaDeCarpeta.$nombreArchivoTalle.'.'.$extensionTalle;
+
+            // Subir imagen:
+            $archivoTalle= $request->file('guia_de_talle');
+            Storage::put($rutaConArchivoTalle, File::get($archivoTalle));
+
+            if ($request->file('guia_de_talle')->isValid()) {
+                $objeto->guia_de_talle = $rutaConArchivoTalle;
+                $objeto->save();
+            }
+        }
 
         // para mostrar msj de exito
         Session::flash('guardado', 'creado correctamente');
@@ -164,12 +186,12 @@ class SeccionTiendaProductoController extends Controller
         $objeto->coleccion = $request->get('coleccion');
         $objeto->orden = $request->get('orden');
 
+        //ruta de imagen
+        $rutaDeCarpeta= 'images/seccion_tienda_productos/';
+        $idArchivo= $id;
+
+        // imagen de producto
         if ($request->hasFile('imagen')) {
-            //ruta de imagen
-            $rutaDeCarpeta= 'images/seccion_tienda_productos/';
-
-            $idArchivo= $id;
-
             $nombreArchivo= "producto_".$idArchivo;
             $extension= $request->imagen->extension();
 
@@ -181,6 +203,22 @@ class SeccionTiendaProductoController extends Controller
 
             if ($request->file('imagen')->isValid()) {
                 $objeto->ruta = $rutaConArchivo;
+            }
+        }
+
+        // guia de talles
+        if ($request->hasFile('guia_de_talle')) {
+            $nombreArchivoTalle= "guia_talle_".$idArchivo;
+            $extensionTalle= $request->guia_de_talle->extension();
+
+            $rutaConArchivoTalle= $rutaDeCarpeta.$nombreArchivoTalle.'.'.$extensionTalle;
+
+            // Subir imagen:
+            $archivoTalle= $request->file('guia_de_talle');
+            Storage::put($rutaConArchivoTalle, File::get($archivoTalle));
+
+            if ($request->file('guia_de_talle')->isValid()) {
+                $objeto->guia_de_talle = $rutaConArchivoTalle;
             }
         }
 
@@ -203,6 +241,7 @@ class SeccionTiendaProductoController extends Controller
         $objeto->delete();
 
         Storage::delete($objeto->ruta);
+        Storage::delete($objeto->guia_de_talle);
 
         return back();
     }

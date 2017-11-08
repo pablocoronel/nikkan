@@ -98,6 +98,14 @@
 				        </div>
 
 				        <div class="form-group">
+				        	{!! Form::label('guia_de_talle', 'Guia de talles (400x400px)', ['class' => 'col-sm-3 control-label']) !!}
+				            <div class="col-sm-7">
+				            	<img src="{{ asset($objeto->guia_de_talle)}}" alt="" style="max-width: 100px;" class="img img-responsive">
+				        		{!! Form::file('guia_de_talle') !!}
+					        </div>
+				        </div>
+
+				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}

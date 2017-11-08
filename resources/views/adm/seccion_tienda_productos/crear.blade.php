@@ -96,6 +96,13 @@
 				        </div>
 
 				        <div class="form-group">
+				        	{!! Form::label('guia_de_talle', 'Guia de talles (400x400px)', ['class' => 'col-sm-3 control-label']) !!}
+				            <div class="col-sm-7">
+				        		{!! Form::file('guia_de_talle') !!}
+					        </div>
+				        </div>
+
+				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('orden', '', ['class' => 'form-control', 'placeholder' => 'Orden']) !!}

@@ -18,5 +18,5 @@ class SeccionTiendaProducto extends Model
      *
      * @var array
      */
-    protected $fillable = ['fk_categoria', 'nombre', 'ruta', 'descripcion', 'precio_original', 'precio_con_descuento', 'descuento','coleccion', 'orden'];
+    protected $fillable = ['fk_categoria', 'nombre', 'ruta', 'descripcion', 'precio_original', 'precio_con_descuento', 'descuento','coleccion', 'guia_de_talle', 'orden'];
 }
