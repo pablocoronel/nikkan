@@ -1,6 +1,6 @@
 @extends('layouts.sitio')
 
-@section('titulo', $nombreDeSeccion)
+@section('titulo', $tipoDeColeccion)
 
 @section('scriptsParticulares')
   <link rel="stylesheet" href="{{asset('css/seccionTienda.css')}}">
@@ -14,7 +14,7 @@
 		<div class="row">
 			@foreach($familias as $cadaFamilia)
 				<div class="col-xs-12 col-sm-3" id="cajaFamilia">
-					<a href="{{$nombreDeSeccion}}/familia/{{$cadaFamilia->id}}">
+					<a href="{{$tipoDeColeccion}}/familia/{{$cadaFamilia->id}}">
 						<img src="{{asset($cadaFamilia->ruta)}}" class="img img-responsive" alt="">
 						<div id="contenedorNombreFamilia">
 							<p>{{$cadaFamilia->nombre}}</p>

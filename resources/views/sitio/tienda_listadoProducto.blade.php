@@ -1,6 +1,6 @@
 @extends('layouts.sitio')
 
-@section('titulo', $nombreDeSeccion)
+@section('titulo', $tipoDeColeccion)
 
 @section('scriptsParticulares')
   <link rel="stylesheet" href="{{asset('css/seccionTienda.css')}}">
@@ -13,15 +13,16 @@
 	<div class="container" id="contenedorFamilia">
 		<div class="row">
 			{{-- seguir aca --}}
-			{{ Form::open(['action' => ['PaginaTiendaController@'], 'method' => 'get'])}}
-			<p>Filtrar por: </p>
-			{{ Form::select('elegirCategoria', $listadoCategorias) }}
+			{{ Form::open(['action' => ['PaginaTiendaController@filtrarPorCategoria', $tipoDeColeccion, $idFamilia], 'method' => 'post'])}}
+				{{csrf_field()}}
+				<p>Filtrar por: </p>
+				{{ Form::select('idCategoria', $listadoCategorias, null, ['onchange' => 'this.form.submit()', 'placeholder' => 'Categorías']) }}
+			{!! Form::close() !!}
 		</div>
 		<div class="row">
 			@foreach($productos as $cadaProducto)
 				<div class="col-xs-12 col-sm-3" id="cajaFamilia">
-					{{-- <a href="{{url($nombreDeSeccion.'/familia/'.$cadaProducto->fk_familia.'/categoria/'.$cadaProducto->fk_categoria.'/producto/'.$cadaProducto->id)}}"> --}}
-					<a href="{{url($nombreDeSeccion.'/producto/'.$cadaProducto->id)}}">
+					<a href="{{url('tienda/'.$tipoDeColeccion.'/producto/'.$cadaProducto->id)}}">
 						<img src="{{asset($cadaProducto->ruta)}}" class="img img-responsive" alt="">
 						<div id="contenedorNombreProducto">
 							<p>{{$cadaProducto->nombre}}</p>

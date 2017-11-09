@@ -1,0 +1,43 @@
+#contenedorProducto{
+	margin-top: 25px;
+	margin-bottom: 25px;
+}
+
+#precioTachado{
+    font-weight: 100;
+    text-decoration: line-through;
+}
+
+/*galeria*/
+#contenedorGaleriaProductoDetalle{
+    margin-bottom: 25px;
+}
+#contenedorGaleriaProductoDetalle #contenedorImagenGrande{
+    text-align: center;
+    border: 1px solid #EEEEEE;
+}
+
+#contenedorGaleriaProductoDetalle #contenedorImagenChica{
+    text-align: center;
+    border: 1px solid #EEEEEE;
+    margin-top: 25px;
+}
+
+.col-sm-2_personalizado{
+    width: 20%;
+}
+
+@media (max-width: 768px) {
+    #contenedorGaleriaProductoDetalle #contenedorImagenGrande{
+        margin-top: 15px;
+    }
+
+    #contenedorGaleriaProductoDetalle #contenedorImagenChica{
+     }
+
+     .col-sm-2_personalizado{
+        width: 33.33333%;
+    }
+}
+
+ /*fin galeria*/

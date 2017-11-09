@@ -17,17 +17,13 @@
 Route::get('/', 'PaginaHomeController@index');
 Route::get('empresa', 'PaginaEmpresaController@index');
 
-Route::group(['prefix' => 'coleccion'], function() {
-	Route::get('/', 'PaginaTiendaController@coleccionListadoDeFamilias');
-    Route::get('familia/{idFamilia}', 'PaginaTiendaController@coleccionListadoDeProductos');
+Route::group(['prefix' => 'tienda/{tipoDeColeccion}'], function() {
+	Route::get('/', 'PaginaTiendaController@listadoDeFamilias');
+    Route::get('familia/{idFamilia}', 'PaginaTiendaController@listadoDeProductos');
+    Route::post('familia/{idFamilia}', 'PaginaTiendaController@filtrarPorCategoria');
+    Route::get('producto/{idProducto}', 'PaginaTiendaController@verProducto');
 
-// cambiar aca
-    Route::post('users/{id}', 'PaginaTiendaControllercoleccionFiltrarPorCategoria');
-
-});
-Route::group(['prefix' => 'discontinuos'], function() {
-	Route::get('/', 'PaginaTiendaController@discontinuosListadoDeFamilias');
-    Route::get('familia/{idFamilia}', 'PaginaTiendaController@discontinuosListadoDeProductos');
+    Route::post('producto/{idProducto}', 'PaginaTiendaController@agregarAlCarrito');
 });
 
 Route::get('campania', 'PaginaCampaniaController@index');
