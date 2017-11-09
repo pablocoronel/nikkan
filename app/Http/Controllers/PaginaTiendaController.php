@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RequestAgregarAlCarrito;
+use Illuminate\Http\AgregarAlCarritoRequest;
 
 use App\SeccionTiendaFamilia;
 use App\SeccionTiendaCategoria;
@@ -131,7 +131,7 @@ class PaginaTiendaController extends Controller
     }
 
 
-    public function agregarAlCarrito(RequestAgregarAlCarrito $request, $tipoDeColeccion, $idProducto){
+    public function agregarAlCarrito(AgregarAlCarritoRequest $request, $tipoDeColeccion, $idProducto){
 
     }
 }
