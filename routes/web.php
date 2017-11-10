@@ -22,8 +22,11 @@ Route::group(['prefix' => 'tienda/{tipoDeColeccion}'], function() {
     Route::get('familia/{idFamilia}', 'PaginaTiendaController@listadoDeProductos');
     Route::post('familia/{idFamilia}', 'PaginaTiendaController@filtrarPorCategoria');
     Route::get('producto/{idProducto}', 'PaginaTiendaController@verProducto');
+});
 
-    Route::post('producto/{idProducto}', 'PaginaTiendaController@agregarAlCarrito');
+Route::group(['prefix' => 'carrito'], function() {
+	Route::get('/', 'PaginaCarritoController@listarCarrito');
+	Route::post('agregar/{$idProducto}', 'PaginaCarritoController@agregarAlCarrito');
 });
 
 Route::get('campania', 'PaginaCampaniaController@index');

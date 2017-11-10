@@ -26,12 +26,10 @@ class SeccionTiendaVersionController extends Controller
     {
 
     	$producto= SeccionTiendaProducto::find($idProducto);
-    	// galeria
-        // $objeto= SeccionTiendaVersion::where('fk_producto', $idProducto)->get();
         $objeto= SeccionTiendaVersion::join('seccion_tienda_colores', 'seccion_tienda_versiones.fk_color', '=', 'seccion_tienda_colores.id')
             ->join('seccion_tienda_talles', 'seccion_tienda_versiones.fk_talle', '=', 'seccion_tienda_talles.id')
-            // ->select('seccion_tienda_versiones.*', 'seccion_tienda_colores.nombre', 'seccion_tienda_talles.nombre')
             ->select(DB::raw('seccion_tienda_versiones.*, seccion_tienda_colores.nombre as nombreColor, seccion_tienda_talles.nombre as nombreTalle'))
+            ->where('fk_producto', '=', $idProducto)
             ->get();
 
         return view('adm.seccion_tienda_versiones.listar', ['variable' => $objeto, 'producto' => $producto, 'nombreDeAccion' => 'Lista de versiones']);
@@ -74,11 +72,23 @@ class SeccionTiendaVersionController extends Controller
      */
     public function store(SeccionTiendaVersionRequest $request, $idProducto)
     {
+        $producto= SeccionTiendaProducto::find($idProducto);
+        $color= SeccionTiendaColor::find($request->get('fk_color'));
+        $talle= SeccionTiendaTalle::find($request->get('fk_talle'));
+
+        $razon_social= 'ON';
+        $nombre_producto= substr(strtoupper($producto->nombre), 0, 3);
+        $nombre_color= substr(strtoupper($color->nombre), 0, 3);
+        $nombre_talle= $talle->nombre;
+
+        $codigo_producto= $razon_social.$nombre_producto.$nombre_color.$nombre_talle;
+
         $objeto= new SeccionTiendaVersion([
             'fk_producto' => $idProducto,
             'fk_color' => $request->get('fk_color'),
             'fk_talle' => $request->get('fk_talle'),
             'stock' => $request->get('stock'),
+            'codigo_producto' => $codigo_producto
         ]);
 
         $objeto->save();
@@ -141,12 +151,25 @@ class SeccionTiendaVersionController extends Controller
     public function update(SeccionTiendaVersionRequest $request, $idProducto, $id)
     {
         //
+        $producto= SeccionTiendaProducto::find($idProducto);
+        $color= SeccionTiendaColor::find($request->get('fk_color'));
+        $talle= SeccionTiendaTalle::find($request->get('fk_talle'));
+
+        $razon_social= 'ON';
+        $nombre_producto= substr(strtoupper($producto->nombre), 0, 3);
+        $nombre_color= substr(strtoupper($color->nombre), 0, 3);
+        $nombre_talle= $talle->nombre;
+
+        $codigo_producto= $razon_social.$nombre_producto.$nombre_color.$nombre_talle;
+
+        // version
         $objeto = SeccionTiendaVersion::find($id);
 
         $objeto->fk_producto = $idProducto;
         $objeto->fk_color = $request->get('fk_color');
         $objeto->fk_talle = $request->get('fk_talle');
         $objeto->stock = $request->get('stock');
+        $objeto->codigo_producto = $codigo_producto;
 
         $objeto->save();
 

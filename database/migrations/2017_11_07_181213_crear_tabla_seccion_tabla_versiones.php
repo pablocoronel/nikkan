@@ -20,6 +20,7 @@ class CrearTablaSeccionTablaVersiones extends Migration
             $table->integer('fk_color');
             $table->integer('fk_talle');
             $table->integer('stock');
+            $table->string('codigo_producto');
             $table->timestamps();
         });
     }

@@ -14,11 +14,7 @@ class AgregarAlCarritoRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Auth::check()) {
-            return true;
-        }else{
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -30,6 +26,9 @@ class AgregarAlCarritoRequest extends FormRequest
     {
         return [
             //
+            'talle' => 'required',
+            'color' => 'required',
+            'cantidadElegidos' => 'required'
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\AgregarAlCarritoRequest;
+use App\Http\Requests\AgregarAlCarritoRequest;
 
 use App\SeccionTiendaFamilia;
 use App\SeccionTiendaCategoria;
@@ -16,6 +16,8 @@ use App\SeccionDiscontinuoPortada;
 use App\SeccionTiendaGaleria;
 
 use DB;
+
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class PaginaTiendaController extends Controller
 {
@@ -128,10 +130,5 @@ class PaginaTiendaController extends Controller
 		}
 
     	return view('sitio.tienda_verProducto', compact('tipoDeColeccion', 'portada', 'galeria', 'producto', 'listadoTalles', 'listadoColores'));
-    }
-
-
-    public function agregarAlCarrito(AgregarAlCarritoRequest $request, $tipoDeColeccion, $idProducto){
-
     }
 }

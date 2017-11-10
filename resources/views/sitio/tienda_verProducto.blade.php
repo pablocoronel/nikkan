@@ -48,7 +48,12 @@
 			</div>
 
 			<div class="col-xs-12 col-sm-6">
-   			{{ Form::open(['action' => ['PaginaTiendaController@agregarAlCarrito', $tipoDeColeccion, $producto->id], 'method' => 'post', 'class' => 'form-horizontal']) }}
+				@if(Session::has('noExisteVersion'))
+					<div class="alert alert-error">
+						<p>{{Session::get('noExisteVersion')}}</p>
+					</div>
+				@endif
+   			{{ Form::open(['action' => ['PaginaCarritoController@agregarAlCarrito', $producto->id], 'method' => 'post', 'class' => 'form-horizontal']) }}
         		{{csrf_field()}}
 
         		<h3>Talles</h3>
@@ -57,7 +62,7 @@
         		<h3>Colores</h3>
         		{{ Form::select('color', $listadoColores) }}
 
-        		{{ Form::number('cantidadElegidos', null, ['min' => '0']) }}
+        		{{ Form::number('cantidadElegidos', 1, ['min' => '1']) }}
 
         		{{ Form::submit('Añadir al carrito') }}
 
@@ -77,6 +82,5 @@
             
             imagenGrande.setAttribute("src", imagenChica);
         }
-
     </script>
 @endsection
