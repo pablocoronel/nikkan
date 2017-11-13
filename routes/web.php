@@ -26,7 +26,8 @@ Route::group(['prefix' => 'tienda/{tipoDeColeccion}'], function() {
 
 Route::group(['prefix' => 'carrito'], function() {
 	Route::get('/', 'PaginaCarritoController@listarCarrito');
-	Route::post('agregar/{$idProducto}', 'PaginaCarritoController@agregarAlCarrito');
+	Route::post('agregar', 'PaginaCarritoController@agregarAlCarrito');
+	Route::get('vaciar', 'PaginaCarritoController@vaciarCarrito');
 });
 
 Route::get('campania', 'PaginaCampaniaController@index');

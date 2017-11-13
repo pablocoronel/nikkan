@@ -52,12 +52,18 @@
 					<div class="alert alert-error">
 						<p>{{Session::get('noExisteVersion')}}</p>
 					</div>
+        @elseif(Session::has('stockNoDisponible'))
+          <div class="alert alert-warning">
+            <p>{{Session::get('stockNoDisponible')}}</p>
+          </div>
 				@endif
-   			{{ Form::open(['action' => ['PaginaCarritoController@agregarAlCarrito', $producto->id], 'method' => 'post', 'class' => 'form-horizontal']) }}
+
+   			{{ Form::open(['action' => ['PaginaCarritoController@agregarAlCarrito'], 'method' => 'post', 'class' => 'form-horizontal']) }}
         		{{csrf_field()}}
 
+            {{ Form::hidden('idProducto', $producto->id) }}
         		<h3>Talles</h3>
-				{{ Form::select('talle', $listadoTalles) }}
+				    {{ Form::select('talle', $listadoTalles) }}
 				
         		<h3>Colores</h3>
         		{{ Form::select('color', $listadoColores) }}
