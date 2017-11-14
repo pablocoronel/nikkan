@@ -49,8 +49,12 @@ class UsuarioController extends Controller
         $objeto= new Usuario([
             'nivel' => $request->get('nivel'),
             'nombre' => $request->get('nombre'),
+            'apellido' => $request->get('apellido'),
+            'email' => $request->get('email'),
             'usuario' => $request->get('usuario'),
             'password' => bcrypt($request->get('clave')),
+            'tratamiento' => $request->get('tratamiento'),
+            'fecha_nacimiento' => $request->get('fecha_nacimiento'),
         ]);
 
         $objeto->save();
@@ -95,9 +99,13 @@ class UsuarioController extends Controller
     {
         //
         $objeto = Usuario::find($id);
-        $objeto->nombre = $request->get('nombre');
-        $objeto->usuario = $request->get('usuario');
         $objeto->nivel = $request->get('nivel');
+        $objeto->nombre = $request->get('nombre');
+        $objeto->apellido = $request->get('apellido');
+        $objeto->email = $request->get('email');
+        $objeto->usuario = $request->get('usuario');
+        $objeto->tratamiento = $request->get('tratamiento');
+        $objeto->fecha_nacimiento = $request->get('fecha_nacimiento');
 
         $objeto->save();
 

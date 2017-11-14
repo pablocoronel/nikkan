@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="panel-body">
-                        {!!Form::open(['action' => ['LoginController@iniciar', 'method'=>'POST']])!!}
+                        {!!Form::open(['action' => ['LoginController@iniciarAdmin', 'method'=>'POST']])!!}
 
                         {{csrf_field()}}
                             <fieldset>

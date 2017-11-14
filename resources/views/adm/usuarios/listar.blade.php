@@ -22,8 +22,8 @@
 				{{-- Tabla --}}
 				<table class="table table-striped table-bordered table-responsive">
 					<thead>
+						<td>Nivel</td>
 						<td>Usuario</td>
-						{{-- <td>Clave</td> --}}
 						<td>Nombre</td>
 						<td>Editar</td>
 						<td>Eliminar</td>
@@ -31,6 +31,7 @@
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
+							<td>{{ $key["nivel"] }}</td>
 							<td>{{ $key["usuario"] }}</td>
 							{{-- <td>{{ $key["password"] }}</td> --}}
 							<td>{{ $key["nombre"] }}</td>

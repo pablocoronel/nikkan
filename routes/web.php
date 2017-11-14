@@ -28,7 +28,18 @@ Route::group(['prefix' => 'carrito'], function() {
 	Route::get('/', 'PaginaCarritoController@listarCarrito');
 	Route::post('agregar', 'PaginaCarritoController@agregarAlCarrito');
 	Route::get('vaciar', 'PaginaCarritoController@vaciarCarrito');
+	Route::delete('quitarItem', 'PaginaCarritoController@eliminarProductoDelCarrito');
+	Route::post('actualizarCantidadItem', 'PaginaCarritoController@actualizarCantidadItem');
 });
+
+Route::get('iniciar-sesion', 'LoginController@entrarCliente');
+Route::post('procesarLoginCliente', 'LoginController@iniciarCliente');
+Route::get('cerrar-sesion', 'LoginController@cerrarCliente');
+Route::post('registrar-cliente', 'LoginController@registrarCliente');
+
+// Route::resource('elegir-direccion', 'SeccionTiendaDireccionController');
+
+
 
 Route::get('campania', 'PaginaCampaniaController@index');
 Route::get('showroom', 'PaginaShowroomController@index');
@@ -47,7 +58,7 @@ Route::group(['prefix' => 'adm'], function() {
 	});
 	
     // procesar el login
-	Route::post('login', 'LoginController@iniciar');
+	Route::post('login', 'LoginController@iniciarAdmin');
 
 
 

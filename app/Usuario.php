@@ -27,7 +27,7 @@ class Usuario extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['nivel', 'nombre', 'usuario', 'password'];
+    protected $fillable = ['nivel', 'nombre', 'apellido', 'email', 'usuario', 'password', 'tratamiento', 'fecha_nacimiento'];
 
      /**
      * The attributes that should be mutated to dates.

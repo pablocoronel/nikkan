@@ -56,6 +56,9 @@
             
           <!-- lado derecho -->
           <ul class="nav navbar-nav navbar-right">
+            @if(Auth::check())
+              <li><a href="{{URL::asset('cerrar-sesion')}}">Salir</a></li>
+            @endif
             <li><a href="{{URL::asset('carrito')}}"><img src="{{asset('images/varios/shopping-bag.png')}}" alt="" id="imagenBolsa"></a></li>
           </ul>
         </div><!-- /.navbar-collapse -->

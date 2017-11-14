@@ -14,11 +14,11 @@ class UsuarioRequest extends FormRequest
      */
     public function authorize()
     {
-        if (Auth::check()) {
+        // if (Auth::check()) {
             return true;
-        }else{
-            return false;
-        }
+        // }else{
+            // return false;
+        // }
     }
 
     /**
@@ -34,9 +34,13 @@ class UsuarioRequest extends FormRequest
                 return [
                     //
                     'nombre' => 'required',
+                    'apellido' => 'required',
                     'usuario' => 'required',
                     'clave' => 'required',
-                    'nivel' => 'required',
+                    'email' => 'required',
+                    'fecha_nacimiento' => 'required',
+                    'tratamiento' => 'required',
+                    // 'nivel' => 'required',
                 ];
                 break;
             
@@ -45,8 +49,12 @@ class UsuarioRequest extends FormRequest
                 return [
                     //
                     'nombre' => 'required',
+                    'apellido' => 'required',
                     'usuario' => 'required',
-                    'nivel' => 'required',
+                    'email' => 'required',
+                    'fecha_nacimiento' => 'required',
+                    'tratamiento' => 'required',
+                    // 'nivel' => 'required',
                 ];
                 break;
 
