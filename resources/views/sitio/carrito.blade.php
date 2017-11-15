@@ -102,7 +102,7 @@
 
       <div class="row">
         @if(Auth::check())
-          {{-- <a href="{{url('elegir-direccion')}}" class="btn btn-primary">Siguiente</a> --}}
+          <a href="{{url('elegir-direccion')}}" class="btn btn-primary">Siguiente</a>
         @else
           <a href="{{url('iniciar-sesion')}}" class="btn btn-primary">Siguiente</a>
         @endif

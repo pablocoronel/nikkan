@@ -37,8 +37,11 @@ Route::post('procesarLoginCliente', 'LoginController@iniciarCliente');
 Route::get('cerrar-sesion', 'LoginController@cerrarCliente');
 Route::post('registrar-cliente', 'LoginController@registrarCliente');
 
-// Route::resource('elegir-direccion', 'SeccionTiendaDireccionController');
+Route::get('elegir-direccion', 'PaginaCarritoController@verFormularioDireccion');
+Route::post('elegir-direccion-entrega', 'PaginaCarritoController@almacenarDireccionDeEntrega');
+Route::post('elegir-direccion-facturacion', 'PaginaCarritoController@almacenarDireccionDeFacturacion');
 
+Route::get('elegir-transporte', 'PaginaCarritoController@verFormularioTransporte');
 
 
 Route::get('campania', 'PaginaCampaniaController@index');

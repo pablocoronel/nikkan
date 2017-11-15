@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AgregarAlCarritoRequest;
+use App\Http\Requests\DireccionRequest;
+
 use Illuminate\Support\Collection;
 
 use App\SeccionTiendaFamilia;
@@ -141,4 +143,96 @@ class PaginaCarritoController extends Controller
         return back();
     }
 
+
+    // almacenar direccion
+    public function verFormularioDireccion(){
+        $portada= SeccionColeccionPortada::find(1);
+
+        // if (!isset($_SESSION['entrega_direccion'])) { $_SESSION['entrega_direccion']= ''; }
+        // if (!isset($_SESSION['entrega_direccion2'])) { $_SESSION['entrega_direccion2']= ''; }
+        // if (!isset($_SESSION['entrega_codigo_postal'])) { $_SESSION['entrega_codigo_postal']= ''; }
+        // if (!isset($_SESSION['entrega_ciudad'])) { $_SESSION['entrega_ciudad']= ''; }
+        // if (!isset($_SESSION['entrega_provincia'])) { $_SESSION['entrega_provincia']= ''; }
+        // if (!isset($_SESSION['entrega_pais'])) { $_SESSION['entrega_pais']= ''; }
+        // if (!isset($_SESSION['entrega_telefono_domicilio'])) { $_SESSION['entrega_telefono_domicilio']= ''; }
+        // if (!isset($_SESSION['entrega_telefono_celular'])) { $_SESSION['entrega_telefono_celular']= ''; }
+        // if (!isset($_SESSION['entrega_comentario'])) { $_SESSION['entrega_comentario']= ''; }
+
+        // $_SESSION['facturacion_direccion']= '';
+        // $_SESSION['facturacion_direccion2']= '';
+        // $_SESSION['facturacion_codigo_postal']= '';
+        // $_SESSION['facturacion_ciudad']= '';
+        // $_SESSION['facturacion_provincia']= '';
+        // $_SESSION['facturacion_pais']= '';
+        // $_SESSION['facturacion_telefono_domicilio']= '';
+        // $_SESSION['facturacion_telefono_celular']= '';
+        // $_SESSION['facturacion_comentario']= '';
+
+        $listadoProvincia = array(
+        'Ciudad de Buenos Aires' => 'Ciudad de Buenos Aires',
+        'Buenos Aires' => 'Buenos Aires', 
+        'Catamarca' => 'Catamarca',
+        'Chaco' => 'Chaco',
+        'Chubut' => 'Chubut',
+        'Córdoba' => 'Córdoba',
+        'Corrientes' => 'Corrientes',
+        'Entre Ríos' => 'Entre Ríos',
+        'Formosa' => 'Formosa',
+        'Jujuy' => 'Jujuy',
+        'La Pampa' => 'La Pampa',
+        'La Rioja' => 'La Rioja',
+        'Mendoza' => 'Mendoza',
+        'Misiones' => 'Misiones',
+        'Neuquén' => 'Neuquén',
+        'Río Negro' => 'Río Negro',
+        'Salta' => 'Salta',
+        'San Juan' => 'San Juan',
+        'San Luis' => 'San Luis',
+        'Santa Cruz' => 'Santa Cruz',
+        'Santa Fe' => 'Santa Fe',
+        'Santiago del Estero' => 'Santiago del Estero',
+        'Tierra del Fuego' => 'Tierra del Fuego',
+        'Tucumán' => 'Tucumán');
+
+        $listadoPais= array('Argentina' => 'Argentina');
+
+        return view('sitio.carrito_direccion', compact('portada', 'listadoProvincia', 'listadoPais'));
+    }
+
+    public function almacenarDireccionDeEntrega(DireccionRequest $request){
+        $_SESSION['entrega_direccion']= $request->get('direccion');
+        $_SESSION['entrega_direccion2']= $request->get('direccion2');
+        $_SESSION['entrega_codigo_postal']= $request->get('codigo_postal');
+        $_SESSION['entrega_ciudad']= $request->get('ciudad');
+        $_SESSION['entrega_provincia']= $request->get('provincia');
+        $_SESSION['entrega_pais']= $request->get('pais');
+        $_SESSION['entrega_telefono_domicilio']= $request->get('telefono_domicilio');
+        $_SESSION['entrega_telefono_celular']= $request->get('telefono_celular');
+        $_SESSION['entrega_comentario']= $request->get('comentario');
+
+        $request->session()->flash('guardadoDireccionEntrega', 'Dirección de entrega guardada');
+        return back();
+    }
+
+    public function almacenarDireccionDeFacturacion(DireccionRequest $request){
+        $_SESSION['facturacion_direccion']= $request->get('direccion');
+        $_SESSION['facturacion_direccion2']= $request->get('direccion2');
+        $_SESSION['facturacion_codigo_postal']= $request->get('codigo_postal');
+        $_SESSION['facturacion_ciudad']= $request->get('ciudad');
+        $_SESSION['facturacion_provincia']= $request->get('provincia');
+        $_SESSION['facturacion_pais']= $request->get('pais');
+        $_SESSION['facturacion_telefono_domicilio']= $request->get('telefono_domicilio');
+        $_SESSION['facturacion_telefono_celular']= $request->get('telefono_celular');
+        $_SESSION['facturacion_comentario']= $request->get('comentario');
+
+        $request->session()->flash('guardadoDireccionFacturacion', 'Dirección de facturación guardada');
+        return back();
+    }
+
+    
+    public function verFormularioTransporte(){
+        $portada= SeccionColeccionPortada::find(1);
+
+        return view('sitio.carrito_transporte', compact('portada'));
+    }
 }
