@@ -61,7 +61,7 @@
                   </div>
 
                   <div class="col-xs-12 col-sm-12">
-                    <p>{{ Form::checkbox('terminos', '') }} He leído y acepto las <a href="">condiciones generales de venta</a></p>
+                    <p>{{ Form::checkbox('terminos', '') }} He leído y acepto las <a href="{{url('elegir-transporte/terminos')}}" target="_blank">condiciones generales de venta</a></p>
                   </div>
                       
                   <div class="col-sm-4 col-sm-offset-4">

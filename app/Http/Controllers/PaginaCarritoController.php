@@ -20,6 +20,7 @@ use App\SeccionCarritoCompra;
 use App\SeccionColeccionPortada;
 use App\SeccionDiscontinuoPortada;
 use App\SeccionTiendaGaleria;
+use App\SeccionTermino;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -234,5 +235,10 @@ class PaginaCarritoController extends Controller
         $portada= SeccionColeccionPortada::find(1);
 
         return view('sitio.carrito_transporte', compact('portada'));
+    }
+
+    public function verTerminos(){
+        $texto= SeccionTermino::find(1);
+        return view('sitio.carrito_terminos', compact('texto'));   
     }
 }

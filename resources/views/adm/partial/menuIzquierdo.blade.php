@@ -176,10 +176,13 @@
 
         {{-- pdf --}}
             <li>
-                <a href="#"><i class="glyphicon glyphicon-picture"></i> Constancia Afip<span class="fa arrow"></span></a>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Documentos <span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="{{URL::asset('adm/documento/pdf/')}}">Ver documento</a>
+                        <a href="{{URL::asset('adm/documento/pdf/')}}">Constancia Afip</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/terminos/texto/')}}">Términos y condiciones</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

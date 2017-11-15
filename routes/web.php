@@ -42,6 +42,7 @@ Route::post('elegir-direccion-entrega', 'PaginaCarritoController@almacenarDirecc
 Route::post('elegir-direccion-facturacion', 'PaginaCarritoController@almacenarDireccionDeFacturacion');
 
 Route::get('elegir-transporte', 'PaginaCarritoController@verFormularioTransporte');
+Route::get('elegir-transporte/terminos', 'PaginaCarritoController@verTerminos');
 
 
 Route::get('campania', 'PaginaCampaniaController@index');
@@ -148,6 +149,11 @@ Route::group(['prefix' => 'adm'], function() {
 		// CRUD pdf afip
 		Route::group(['prefix' => 'documento'], function() {
 			Route::resource('pdf', 'SeccionDocumentoPdfController');
+		});
+
+		// CRUD terminos y condiciones
+		Route::group(['prefix' => 'terminos'], function() {
+			Route::resource('texto', 'SeccionTerminosController');
 		});
 
 		// CRUD coleccion
