@@ -39,6 +39,7 @@ class LoginController extends Controller
 
     public function cerrar(){
         Auth::logout();
+        Cart::destroy();
         return redirect('adm');
     }
 

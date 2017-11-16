@@ -10,6 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// buscar packages
+// https://packalyst.com/
+
+// mercado pago tutorial
+// https://medium.com/@lsfiege/integrando-una-app-en-laravel-5-5-con-mercadopago-22ee24e46760
+
+// wordpress
+// http://metal.webserverns.com/~nikkan/
 
 // Secciondes del sitio:
 /******************************************/
@@ -43,7 +51,10 @@ Route::post('elegir-direccion-facturacion', 'PaginaCarritoController@almacenarDi
 
 Route::get('elegir-transporte', 'PaginaCarritoController@verFormularioTransporte');
 Route::get('elegir-transporte/terminos', 'PaginaCarritoController@verTerminos');
+Route::post('elegir-transporte/proceso', 'PaginaCarritoController@almacenarTransporte');
 
+Route::get('elegir-pago', 'PaginaCarritoController@verFormularioDePago');
+ 
 
 Route::get('campania', 'PaginaCampaniaController@index');
 Route::get('showroom', 'PaginaShowroomController@index');
@@ -51,7 +62,6 @@ Route::group(['prefix' => 'contacto'], function() {
 	Route::get('/', 'PaginaContactoController@index');
     Route::post('enviarEmail', 'PaginaContactoController@enviarEmail');
 });
-// http://metal.webserverns.com/~nikkan/
 
 // Administrador:
 /******************************************/
@@ -69,7 +79,7 @@ Route::group(['prefix' => 'adm'], function() {
 	
 	// ********************
     // Con sesion iniciada
-    Route::middleware(['loginAdm'])->group(function(){
+    Route::middleware(['loginAdmin'])->group(function(){
 	    //Incio
 		Route::get('/', function(){
 			return view('adm.index');
@@ -165,6 +175,9 @@ Route::group(['prefix' => 'adm'], function() {
 		Route::group(['prefix' => 'discontinuo'], function() {
 			Route::resource('portada', 'SeccionDiscontinuoPortadaController');
 		});
+
+		// CRUD compras
+		Route::resource('compra', 'SeccionCarritoCompraController');
     });
 });
 

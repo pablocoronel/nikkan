@@ -26,9 +26,15 @@
                   </div>
               @endif
 
-              
-              
-              
+              @if(Session::has('completar_entrega'))
+                <div class="alert alert-danger">
+                  {{Session::get('completar_entrega', '')}}
+                </div>
+              @elseif(Session::has('completar_facturacion'))
+                <div class="alert alert-danger">
+                  {{Session::get('completar_facturacion', '')}}
+                </div>
+              @endif
           </div>  
       </div>
 
@@ -43,7 +49,7 @@
                   </div>
               @endif            
           </div>
-          <div class="col-x-12 col-sm-6">
+          <div class="col-xs-12 col-sm-6">
             {{-- facturacion --}}
             @if(Session::has('guardadoDireccionFacturacion'))
                 <div class="alert alert-success" role="alert">
@@ -53,7 +59,7 @@
           </div>
         </div>
 
-        <div class="col-x-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6">
           <h2>Dirección de entrega</h2>
 
           {{ Form::open(['action' => ['PaginaCarritoController@almacenarDireccionDeEntrega'], 'method' => 'post', 'class' => 'form-horizontal']) }}

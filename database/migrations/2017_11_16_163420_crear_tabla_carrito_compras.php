@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaSeccionCarritoCompras extends Migration
+class CrearTablaCarritoCompras extends Migration
 {
     /**
      * Run the migrations.
@@ -16,9 +16,14 @@ class CrearTablaSeccionCarritoCompras extends Migration
         //
         Schema::create('seccion_carrito_compras', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('fk_version');
-            $table->integer('stock_reservado');
-            $table->string('estado_pago');
+            $table->string('codigo_compra');
+            $table->integer('fk_usuario');
+            $table->float('precio_total', 8, 2);
+            $table->float('precio_envio', 8, 2);
+            $table->string('estado_compra');
+            $table->integer('fk_direccion_entrega');
+            $table->integer('fk_direccion_facturacion');
+
             $table->timestamps();
         });
     }

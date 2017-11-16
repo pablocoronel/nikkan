@@ -35,9 +35,9 @@ class UsuarioRequest extends FormRequest
                     //
                     'nombre' => 'required',
                     'apellido' => 'required',
-                    'usuario' => 'required',
+                    'usuario' => 'required|unique:users,usuario',
                     'clave' => 'required',
-                    'email' => 'required',
+                    'email' => 'required|unique:users,email',
                     'fecha_nacimiento' => 'required',
                     'tratamiento' => 'required',
                     // 'nivel' => 'required',
@@ -50,8 +50,8 @@ class UsuarioRequest extends FormRequest
                     //
                     'nombre' => 'required',
                     'apellido' => 'required',
-                    'usuario' => 'required',
-                    'email' => 'required',
+                    'usuario' => 'required|unique:users,usuario',
+                    'email' => 'required|unique:users,email',
                     'fecha_nacimiento' => 'required',
                     'tratamiento' => 'required',
                     // 'nivel' => 'required',

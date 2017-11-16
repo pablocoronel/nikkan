@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AgregarAlCarritoRequest;
-use App\Http\Requests\DireccionRequest;
+use App\Http\Requests\CarritoDireccionRequest;
+use App\Http\Requests\CarritoTransporteRequest;
 
 use Illuminate\Support\Collection;
 
@@ -25,6 +26,8 @@ use App\SeccionTermino;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 use DB;
+use Session;
+use MP;
 
 class PaginaCarritoController extends Controller
 {
@@ -149,26 +152,6 @@ class PaginaCarritoController extends Controller
     public function verFormularioDireccion(){
         $portada= SeccionColeccionPortada::find(1);
 
-        // if (!isset($_SESSION['entrega_direccion'])) { $_SESSION['entrega_direccion']= ''; }
-        // if (!isset($_SESSION['entrega_direccion2'])) { $_SESSION['entrega_direccion2']= ''; }
-        // if (!isset($_SESSION['entrega_codigo_postal'])) { $_SESSION['entrega_codigo_postal']= ''; }
-        // if (!isset($_SESSION['entrega_ciudad'])) { $_SESSION['entrega_ciudad']= ''; }
-        // if (!isset($_SESSION['entrega_provincia'])) { $_SESSION['entrega_provincia']= ''; }
-        // if (!isset($_SESSION['entrega_pais'])) { $_SESSION['entrega_pais']= ''; }
-        // if (!isset($_SESSION['entrega_telefono_domicilio'])) { $_SESSION['entrega_telefono_domicilio']= ''; }
-        // if (!isset($_SESSION['entrega_telefono_celular'])) { $_SESSION['entrega_telefono_celular']= ''; }
-        // if (!isset($_SESSION['entrega_comentario'])) { $_SESSION['entrega_comentario']= ''; }
-
-        // $_SESSION['facturacion_direccion']= '';
-        // $_SESSION['facturacion_direccion2']= '';
-        // $_SESSION['facturacion_codigo_postal']= '';
-        // $_SESSION['facturacion_ciudad']= '';
-        // $_SESSION['facturacion_provincia']= '';
-        // $_SESSION['facturacion_pais']= '';
-        // $_SESSION['facturacion_telefono_domicilio']= '';
-        // $_SESSION['facturacion_telefono_celular']= '';
-        // $_SESSION['facturacion_comentario']= '';
-
         $listadoProvincia = array(
         'Ciudad de Buenos Aires' => 'Ciudad de Buenos Aires',
         'Buenos Aires' => 'Buenos Aires', 
@@ -200,31 +183,51 @@ class PaginaCarritoController extends Controller
         return view('sitio.carrito_direccion', compact('portada', 'listadoProvincia', 'listadoPais'));
     }
 
-    public function almacenarDireccionDeEntrega(DireccionRequest $request){
-        $_SESSION['entrega_direccion']= $request->get('direccion');
-        $_SESSION['entrega_direccion2']= $request->get('direccion2');
-        $_SESSION['entrega_codigo_postal']= $request->get('codigo_postal');
-        $_SESSION['entrega_ciudad']= $request->get('ciudad');
-        $_SESSION['entrega_provincia']= $request->get('provincia');
-        $_SESSION['entrega_pais']= $request->get('pais');
-        $_SESSION['entrega_telefono_domicilio']= $request->get('telefono_domicilio');
-        $_SESSION['entrega_telefono_celular']= $request->get('telefono_celular');
-        $_SESSION['entrega_comentario']= $request->get('comentario');
+    public function almacenarDireccionDeEntrega(CarritoDireccionRequest $request){
+        $request->session()->push('entrega.direccion', $request->get('direccion'));
+        $request->session()->push('entrega.direccion2', $request->get('direccion2'));
+        $request->session()->push('entrega.codigo_postal', $request->get('codigo_postal'));
+        $request->session()->push('entrega.ciudad', $request->get('ciudad'));
+        $request->session()->push('entrega.provincia', $request->get('provincia'));
+        $request->session()->push('entrega.pais', $request->get('pais'));
+        $request->session()->push('entrega.telefono_domicilio', $request->get('telefono_domicilio'));
+        $request->session()->push('entrega.telefono_celular', $request->get('telefono_celular'));
+        $request->session()->push('entrega.comentario', $request->get('comentario'));
+        
+        // $_SESSION['entrega_direccion']= $request->get('direccion');
+        // $_SESSION['entrega_direccion2']= $request->get('direccion2');
+        // $_SESSION['entrega_codigo_postal']= $request->get('codigo_postal');
+        // $_SESSION['entrega_ciudad']= $request->get('ciudad');
+        // $_SESSION['entrega_provincia']= $request->get('provincia');
+        // $_SESSION['entrega_pais']= $request->get('pais');
+        // $_SESSION['entrega_telefono_domicilio']= $request->get('telefono_domicilio');
+        // $_SESSION['entrega_telefono_celular']= $request->get('telefono_celular');
+        // $_SESSION['entrega_comentario']= $request->get('comentario');
 
         $request->session()->flash('guardadoDireccionEntrega', 'Dirección de entrega guardada');
         return back();
     }
 
-    public function almacenarDireccionDeFacturacion(DireccionRequest $request){
-        $_SESSION['facturacion_direccion']= $request->get('direccion');
-        $_SESSION['facturacion_direccion2']= $request->get('direccion2');
-        $_SESSION['facturacion_codigo_postal']= $request->get('codigo_postal');
-        $_SESSION['facturacion_ciudad']= $request->get('ciudad');
-        $_SESSION['facturacion_provincia']= $request->get('provincia');
-        $_SESSION['facturacion_pais']= $request->get('pais');
-        $_SESSION['facturacion_telefono_domicilio']= $request->get('telefono_domicilio');
-        $_SESSION['facturacion_telefono_celular']= $request->get('telefono_celular');
-        $_SESSION['facturacion_comentario']= $request->get('comentario');
+    public function almacenarDireccionDeFacturacion(CarritoDireccionRequest $request){
+        $request->session()->push('facturacion.direccion', $request->get('direccion'));
+        $request->session()->push('facturacion.direccion2', $request->get('direccion2'));
+        $request->session()->push('facturacion.codigo_postal', $request->get('codigo_postal'));
+        $request->session()->push('facturacion.ciudad', $request->get('ciudad'));
+        $request->session()->push('facturacion.provincia', $request->get('provincia'));
+        $request->session()->push('facturacion.pais', $request->get('pais'));
+        $request->session()->push('facturacion.telefono_domicilio', $request->get('telefono_domicilio'));
+        $request->session()->push('facturacion.telefono_celular', $request->get('telefono_celular'));
+        $request->session()->push('facturacion.comentario', $request->get('comentario'));
+
+        // $_SESSION['facturacion_direccion']= $request->get('direccion');
+        // $_SESSION['facturacion_direccion2']= $request->get('direccion2');
+        // $_SESSION['facturacion_codigo_postal']= $request->get('codigo_postal');
+        // $_SESSION['facturacion_ciudad']= $request->get('ciudad');
+        // $_SESSION['facturacion_provincia']= $request->get('provincia');
+        // $_SESSION['facturacion_pais']= $request->get('pais');
+        // $_SESSION['facturacion_telefono_domicilio']= $request->get('telefono_domicilio');
+        // $_SESSION['facturacion_telefono_celular']= $request->get('telefono_celular');
+        // $_SESSION['facturacion_comentario']= $request->get('comentario');
 
         $request->session()->flash('guardadoDireccionFacturacion', 'Dirección de facturación guardada');
         return back();
@@ -232,6 +235,14 @@ class PaginaCarritoController extends Controller
 
     
     public function verFormularioTransporte(){
+        if (!Session::exists('facturacion')) {
+            Session::flash('completar_facturacion', 'complete la dirección de facturacion');
+            return redirect('elegir-direccion');
+        }elseif (!Session::exists('entrega')) {
+            Session::flash('completar_entrega', 'complete la dirección de entrega');
+            return redirect('elegir-direccion');
+        }
+
         $portada= SeccionColeccionPortada::find(1);
 
         return view('sitio.carrito_transporte', compact('portada'));
@@ -240,5 +251,101 @@ class PaginaCarritoController extends Controller
     public function verTerminos(){
         $texto= SeccionTermino::find(1);
         return view('sitio.carrito_terminos', compact('texto'));   
+    }
+
+    public function almacenarTransporte(CarritoTransporteRequest $request){
+        $request->session()->put('zona_envio', $request->transporte);
+
+        switch ($request->transporte) {
+            case 1:
+                $precio_envio= 738.10;
+                break;
+
+            case 2:
+                $precio_envio= 350.90;
+                break;
+
+            case 3:
+                $precio_envio= 292.82;
+                break;
+
+            case 4:
+                $precio_envio= 260.15;
+                break;
+
+            case 5:
+                $precio_envio= 223.85;
+                break;
+
+            case 6:
+                $precio_envio= 181.50;
+                break;
+
+            case 7:
+                $precio_envio= 0;
+                break;
+            
+            default:
+                $precio_envio= 0;
+                break;
+        }
+
+        $request->session()->put('precio_envio', $precio_envio);
+
+        return redirect('elegir-pago');
+    }
+
+    public function verFormularioDePago(){
+        $portada= SeccionColeccionPortada::find(1);
+        $contenidoCarrito= Cart::content();
+
+        $coleccionVersiones= array();
+        foreach ($contenidoCarrito as $key => $value) {
+        
+        $version= SeccionTiendaVersion::join('seccion_tienda_productos', 'seccion_tienda_productos.id', '=', 'seccion_tienda_versiones.fk_producto')
+        ->join('seccion_tienda_talles', 'seccion_tienda_talles.id', '=', 'seccion_tienda_versiones.fk_talle')
+        ->join('seccion_tienda_colores', 'seccion_tienda_colores.id', '=', 'seccion_tienda_versiones.fk_color')
+        ->select(DB::raw('seccion_tienda_versiones.*, 
+                            seccion_tienda_productos.nombre as nombreProducto,
+                            seccion_tienda_productos.precio_con_descuento as precioConDescuento,
+                            seccion_tienda_productos.ruta as rutaProducto,
+                            seccion_tienda_productos.descripcion as descripcionProducto,
+
+                            seccion_tienda_talles.nombre as nombreTalle,
+                            seccion_tienda_colores.nombre as nombreColor'))
+        ->where('seccion_tienda_versiones.id', '=', $value->id)
+        ->first();
+
+        array_push($coleccionVersiones, $version);
+        }
+
+        $collection = Collection::make($coleccionVersiones);
+        $versionUnica= $collection->unique();
+
+        // precios:
+        $precio_productos= Cart::total();
+        $precio_envio= Session::get('precio_envio');
+        $totalFinal= $precio_productos + $precio_envio;
+
+
+        // Mercado pago
+        // $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
+        // $mp->sandbox_mode(TRUE);
+        // $preference_data = array (
+        //                     "items" => array (
+        //                         array (
+        //                             "title" => "Test",
+        //                             "quantity" => 1,
+        //                             "currency_id" => "USD",
+        //                             "unit_price" => 10.4
+        //                         )
+        //                     )
+        //                 );
+
+        // $preference = $mp->create_preference ($preference_data);
+
+        // print_r ($preference);
+        // exit();
+        return view('sitio.carrito_pagar', compact('portada', 'contenidoCarrito', 'versionUnica', 'precio_envio', 'totalFinal'));
     }
 }

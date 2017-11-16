@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class LoginMiddleware
+class LoginAdminMiddleware
 {
     /**
      * Handle an incoming request.
@@ -19,6 +19,10 @@ class LoginMiddleware
         // Si no esta logueado
         if (\Auth::guest()) {
             return redirect('adm/login');
+        }
+
+        if (Auth::user()->nivel != 'administrador') {
+            return redirect('/');
         }
 
         return $next($request);

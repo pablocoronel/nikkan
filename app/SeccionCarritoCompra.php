@@ -18,5 +18,5 @@ class SeccionCarritoCompra extends Model
      *
      * @var array
      */
-    protected $fillable = ['fk_version', 'stock_reservado', 'estado_pago'];
+    protected $fillable = ['codigo_compra', 'fk_usuario', 'precio_total', 'precio_envio', 'estado_compra', 'fk_direccion_entrega', 'fk_direccion_facturacion'];
 }

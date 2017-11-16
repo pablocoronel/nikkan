@@ -152,6 +152,17 @@
                 <!-- /.nav-second-level -->
             </li>
 
+        {{-- compras --}}
+            <li>
+                <a href="#"><i class="glyphicon glyphicon-picture"></i> Compras<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{URL::asset('adm/compra/')}}">Ver compras</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+
         {{-- logos --}}
             <li>
                 <a href="#"><i class="glyphicon glyphicon-picture"></i> Logos<span class="fa arrow"></span></a>
