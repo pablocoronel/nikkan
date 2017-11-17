@@ -18,6 +18,12 @@
 
 // wordpress
 // http://metal.webserverns.com/~nikkan/
+// 
+// config email
+// http://www.derekbliss.com/post/laravel-streamsocketenablecrypto-ssl-operation-failed-with-code-1
+
+use App\Mail\EmailDeContacto;
+// use Request;
 
 // Secciondes del sitio:
 /******************************************/
@@ -32,35 +38,52 @@ Route::group(['prefix' => 'tienda/{tipoDeColeccion}'], function() {
     Route::get('producto/{idProducto}', 'PaginaTiendaController@verProducto');
 });
 
+Route::group(['prefix' => 'login'], function() {
+	Route::get('iniciar-sesion', 'LoginController@entrarCliente');
+	Route::post('procesarLoginCliente', 'LoginController@iniciarCliente');
+	Route::get('cerrar-sesion', 'LoginController@cerrarCliente');
+	Route::post('registrar-cliente', 'LoginController@registrarCliente');
+});
+
 Route::group(['prefix' => 'carrito'], function() {
 	Route::get('/', 'PaginaCarritoController@listarCarrito');
 	Route::post('agregar', 'PaginaCarritoController@agregarAlCarrito');
 	Route::get('vaciar', 'PaginaCarritoController@vaciarCarrito');
 	Route::delete('quitarItem', 'PaginaCarritoController@eliminarProductoDelCarrito');
 	Route::post('actualizarCantidadItem', 'PaginaCarritoController@actualizarCantidadItem');
+
+
+	Route::group(['prefix' => 'elegir'], function() {
+		Route::get('direccion', 'PaginaCarritoController@verFormularioDireccion');
+		Route::post('direccion-entrega', 'PaginaCarritoController@almacenarDireccionDeEntrega');
+		Route::post('direccion-facturacion', 'PaginaCarritoController@almacenarDireccionDeFacturacion');
+	    //
+		Route::get('transporte', 'PaginaCarritoController@verFormularioTransporte');
+		Route::get('transporte/terminos', 'PaginaCarritoController@verTerminos');
+		Route::post('transporte/proceso', 'PaginaCarritoController@almacenarTransporte');
+		
+		Route::get('pago', 'PaginaCarritoController@verFormularioDePago');
+		Route::get('pago-guardar', 'PaginaCarritoController@guardarCompra');
+	});
 });
 
-Route::get('iniciar-sesion', 'LoginController@entrarCliente');
-Route::post('procesarLoginCliente', 'LoginController@iniciarCliente');
-Route::get('cerrar-sesion', 'LoginController@cerrarCliente');
-Route::post('registrar-cliente', 'LoginController@registrarCliente');
 
-Route::get('elegir-direccion', 'PaginaCarritoController@verFormularioDireccion');
-Route::post('elegir-direccion-entrega', 'PaginaCarritoController@almacenarDireccionDeEntrega');
-Route::post('elegir-direccion-facturacion', 'PaginaCarritoController@almacenarDireccionDeFacturacion');
 
-Route::get('elegir-transporte', 'PaginaCarritoController@verFormularioTransporte');
-Route::get('elegir-transporte/terminos', 'PaginaCarritoController@verTerminos');
-Route::post('elegir-transporte/proceso', 'PaginaCarritoController@almacenarTransporte');
 
-Route::get('elegir-pago', 'PaginaCarritoController@verFormularioDePago');
  
 
 Route::get('campania', 'PaginaCampaniaController@index');
 Route::get('showroom', 'PaginaShowroomController@index');
+
 Route::group(['prefix' => 'contacto'], function() {
 	Route::get('/', 'PaginaContactoController@index');
-    Route::post('enviarEmail', 'PaginaContactoController@enviarEmail');
+
+    Route::post('email', function (Illuminate\Http\Request $request) {
+	    Mail::send(new EmailDeContacto($request));
+
+	    Session::flash('enviado', 'Mensaje enviado correctamente');
+	    return redirect('contacto');
+	});
 });
 
 // Administrador:
@@ -176,7 +199,7 @@ Route::group(['prefix' => 'adm'], function() {
 			Route::resource('portada', 'SeccionDiscontinuoPortadaController');
 		});
 
-		// CRUD compras
+		// CRUD compras (ADM)
 		Route::resource('compra', 'SeccionCarritoCompraController');
     });
 });

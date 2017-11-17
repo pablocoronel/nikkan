@@ -8,7 +8,7 @@
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
-  <img src="{{$portada->ruta}}" alt="" class="img img-responsive">
+  <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
 <div class="container">
   
@@ -132,7 +132,7 @@
               </div>
 
               <div class="row">
-                  <a href="{{url('elegir-transporte')}}" class="btn btn-primary">Atrás</a>
+                  <a href="{{url('carrito/elegir/transporte')}}" class="btn btn-primary">Atrás</a>
               </div>
           </div>
 
@@ -141,7 +141,7 @@
   </div>
   
   <div class="container">
-    {{-- <a href="{{url('elegir-transporte')}}" class="btn btn-primary">Siguiente</a> --}}
+    <a href="{{url('carrito/elegir/pago-guardar')}}" class="btn btn-primary">Simular pago</a>
   </div>
 </div>
 @include('sitio.partial.footer')

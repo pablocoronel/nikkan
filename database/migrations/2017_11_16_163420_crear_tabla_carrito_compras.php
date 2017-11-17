@@ -16,11 +16,12 @@ class CrearTablaCarritoCompras extends Migration
         //
         Schema::create('seccion_carrito_compras', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('codigo_compra');
+            $table->string('codigo_compra')->unique();
             $table->integer('fk_usuario');
             $table->float('precio_total', 8, 2);
             $table->float('precio_envio', 8, 2);
             $table->string('estado_compra');
+            $table->dateTime('fecha_compra');
             $table->integer('fk_direccion_entrega');
             $table->integer('fk_direccion_facturacion');
 

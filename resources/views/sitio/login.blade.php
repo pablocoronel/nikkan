@@ -8,7 +8,7 @@
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
-  <img src="{{$portada->ruta}}" alt="" class="img img-responsive">
+  <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
 	   {{-- Mensajes --}}
       <div class="row">

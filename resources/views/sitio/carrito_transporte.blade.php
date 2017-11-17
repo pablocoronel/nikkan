@@ -8,7 +8,7 @@
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
-  <img src="{{$portada->ruta}}" alt="" class="img img-responsive">
+  <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
 <div class="container">
   
@@ -181,7 +181,7 @@
                   </div>
 
                   <div class="col-xs-12 col-sm-12">
-                    <p>{{ Form::checkbox('terminos') }} He leído y acepto las <a href="{{url('elegir-transporte/terminos')}}" target="_blank">condiciones generales de venta</a></p>
+                    <p>{{ Form::checkbox('terminos') }} He leído y acepto las <a href="{{url('carrito/elegir/transporte/terminos')}}" target="_blank">condiciones generales de venta</a></p>
                   </div>
                       
                   <div class="col-sm-4 col-sm-offset-4">
@@ -194,7 +194,7 @@
   </div>
   
   <div class="container">
-    {{-- <a href="{{url('elegir-transporte')}}" class="btn btn-primary">Siguiente</a> --}}
+    {{-- <a href="{{url('carrito/elegir/transporte')}}" class="btn btn-primary">Siguiente</a> --}}
   </div>
 </div>
 @include('sitio.partial.footer')

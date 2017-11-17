@@ -106,6 +106,13 @@
 				        </div>
 
 				        <div class="form-group">
+				    		{!! Form::label('peso', 'Peso', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('peso', $objeto->peso, ['class' => 'form-control', 'placeholder' => 'Peso']) !!}
+							</div>
+				        </div> 
+
+				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}

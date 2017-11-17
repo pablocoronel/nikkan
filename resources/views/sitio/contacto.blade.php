@@ -8,18 +8,28 @@
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
-  <img src="{{$portada->ruta}}" alt="" class="img img-responsive">
+  <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
   <div class="container">
     <iframe src="{{$mapa->codigo}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
   
+    <div class="row">
+      <div class="col-xs-12">
+        @if(Session::has('enviado'))
+          <div class="alert alert-success">
+            {{ Session::get('enviado', '') }}
+          </div>
+        @endif
+      </div>
+    </div>
+
     <div class="col-xs-12 col-md-6">
       <h1>ENVIANOS UN MENSAJE</h1>
     </div>
 
     <div class="col-xs-12 col-md-6">
       {{-- formulario --}}
-      {{ Form::open(['action' => ['PaginaContactoController@enviarEmail'], 'method' => 'post', 'class' => 'form-horizontal']) }}
+      {{ Form::open(['url' => 'contacto/email', 'method' => 'post', 'class' => 'form-horizontal']) }}
         {{csrf_field()}}
           <fieldset>
             <div class="form-group">

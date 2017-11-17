@@ -40,6 +40,7 @@ class SeccionTiendaProductoRequest extends FormRequest
                     'precio_original' => 'required',
                     'descuento' => 'required',
                     'coleccion' => 'required',
+                    'peso' => 'required',
                     'orden' => 'required',
                 ];
                 break;
@@ -54,6 +55,7 @@ class SeccionTiendaProductoRequest extends FormRequest
                     'precio_original' => 'required',
                     'descuento' => 'required',
                     'coleccion' => 'required',
+                    'peso' => 'required',
                     'orden' => 'required',
                 ];
                 break;

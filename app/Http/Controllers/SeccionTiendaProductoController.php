@@ -77,6 +77,7 @@ class SeccionTiendaProductoController extends Controller
             'descuento' => $request->get('descuento'),
             'coleccion' => $request->get('coleccion'),
             'guia_de_talle' => '',
+            'peso' => $request->get('peso'),
             'orden' => $request->get('orden'),
         ]);
 
@@ -184,6 +185,7 @@ class SeccionTiendaProductoController extends Controller
         $objeto->precio_con_descuento = $precio_con_descuento;
         $objeto->descuento = $request->get('descuento');
         $objeto->coleccion = $request->get('coleccion');
+        $objeto->peso = $request->get('peso');
         $objeto->orden = $request->get('orden');
 
         //ruta de imagen

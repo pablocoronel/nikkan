@@ -16,18 +16,21 @@ use App\SeccionTiendaVersion;
 use App\SeccionTiendaTalle;
 use App\SeccionTiendaColor;
 
-use App\SeccionCarritoCompra;
-
 use App\SeccionColeccionPortada;
 use App\SeccionDiscontinuoPortada;
 use App\SeccionTiendaGaleria;
 use App\SeccionTermino;
+
+use App\SeccionCarritoCompra;
+use App\SeccionCarritoDireccion;
+use App\SeccionCarritoVersionComprada;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 use DB;
 use Session;
 use MP;
+use Auth;
 
 class PaginaCarritoController extends Controller
 {
@@ -292,7 +295,7 @@ class PaginaCarritoController extends Controller
 
         $request->session()->put('precio_envio', $precio_envio);
 
-        return redirect('elegir-pago');
+        return redirect('carrito/elegir/pago');
     }
 
     public function verFormularioDePago(){
@@ -326,6 +329,7 @@ class PaginaCarritoController extends Controller
         $precio_productos= Cart::total();
         $precio_envio= Session::get('precio_envio');
         $totalFinal= $precio_productos + $precio_envio;
+        Session::put('precio_total', $totalFinal);
 
 
         // Mercado pago
@@ -347,5 +351,20 @@ class PaginaCarritoController extends Controller
         // print_r ($preference);
         // exit();
         return view('sitio.carrito_pagar', compact('portada', 'contenidoCarrito', 'versionUnica', 'precio_envio', 'totalFinal'));
+    }
+
+    public function guardarCompra(){
+        $compra= new SeccionCarritoCompra();
+
+        $compra->codigo_compra= uniqid();
+        $compra->fk_usuario= Auth::id();
+        $compra->precio_envio= Session::get('precio_envio');
+        $compra->precio_total= Session::get('precio_total');
+        $compra->estado_compra= 'iniciado';
+        $compra->fecha_compra= now();
+        // $compra->fk_direccion_entrega= 
+        // $compra->fk_direccion_facturacion= 
+        echo($compra->precio_envio);
+        exit();
     }
 }

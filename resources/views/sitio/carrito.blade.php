@@ -8,7 +8,7 @@
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
-  <img src="{{$portada->ruta}}" alt="" class="img img-responsive">
+  <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
 	<a href="{{url('carrito/vaciar')}}" class="btn btn-info">Vaciar carrito</a>
 
@@ -102,9 +102,9 @@
 
       <div class="row">
         @if(Auth::check())
-          <a href="{{url('elegir-direccion')}}" class="btn btn-primary">Siguiente</a>
+          <a href="{{url('carrito/elegir/direccion')}}" class="btn btn-primary">Siguiente</a>
         @else
-          <a href="{{url('iniciar-sesion')}}" class="btn btn-primary">Siguiente</a>
+          <a href="{{url('login/iniciar-sesion')}}" class="btn btn-primary">Siguiente</a>
         @endif
       </div>
   </div>
