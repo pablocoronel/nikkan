@@ -141,7 +141,11 @@
   </div>
   
   <div class="container">
-    <a href="{{url('carrito/elegir/pago-guardar')}}" class="btn btn-primary">Simular pago</a>
+    <a href="{{url('carrito/elegir/pago-guardar')}}" class="btn btn-primary">Simular pago en administrador</a>
+  </div>
+
+  <div class="container">
+    <a href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pay</a>
   </div>
 </div>
 @include('sitio.partial.footer')

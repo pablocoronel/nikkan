@@ -26,6 +26,7 @@ use App\SeccionCarritoDireccion;
 use App\SeccionCarritoVersionComprada;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Carbon\Carbon;
 
 use DB;
 use Session;
@@ -187,15 +188,15 @@ class PaginaCarritoController extends Controller
     }
 
     public function almacenarDireccionDeEntrega(CarritoDireccionRequest $request){
-        $request->session()->push('entrega.direccion', $request->get('direccion'));
-        $request->session()->push('entrega.direccion2', $request->get('direccion2'));
-        $request->session()->push('entrega.codigo_postal', $request->get('codigo_postal'));
-        $request->session()->push('entrega.ciudad', $request->get('ciudad'));
-        $request->session()->push('entrega.provincia', $request->get('provincia'));
-        $request->session()->push('entrega.pais', $request->get('pais'));
-        $request->session()->push('entrega.telefono_domicilio', $request->get('telefono_domicilio'));
-        $request->session()->push('entrega.telefono_celular', $request->get('telefono_celular'));
-        $request->session()->push('entrega.comentario', $request->get('comentario'));
+        $request->session()->put('entrega_direccion', $request->get('direccion'));
+        $request->session()->put('entrega_direccion2', $request->get('direccion2'));
+        $request->session()->put('entrega_codigo_postal', $request->get('codigo_postal'));
+        $request->session()->put('entrega_ciudad', $request->get('ciudad'));
+        $request->session()->put('entrega_provincia', $request->get('provincia'));
+        $request->session()->put('entrega_pais', $request->get('pais'));
+        $request->session()->put('entrega_telefono_domicilio', $request->get('telefono_domicilio'));
+        $request->session()->put('entrega_telefono_celular', $request->get('telefono_celular'));
+        $request->session()->put('entrega_comentario', $request->get('comentario'));
         
         // $_SESSION['entrega_direccion']= $request->get('direccion');
         // $_SESSION['entrega_direccion2']= $request->get('direccion2');
@@ -212,15 +213,15 @@ class PaginaCarritoController extends Controller
     }
 
     public function almacenarDireccionDeFacturacion(CarritoDireccionRequest $request){
-        $request->session()->push('facturacion.direccion', $request->get('direccion'));
-        $request->session()->push('facturacion.direccion2', $request->get('direccion2'));
-        $request->session()->push('facturacion.codigo_postal', $request->get('codigo_postal'));
-        $request->session()->push('facturacion.ciudad', $request->get('ciudad'));
-        $request->session()->push('facturacion.provincia', $request->get('provincia'));
-        $request->session()->push('facturacion.pais', $request->get('pais'));
-        $request->session()->push('facturacion.telefono_domicilio', $request->get('telefono_domicilio'));
-        $request->session()->push('facturacion.telefono_celular', $request->get('telefono_celular'));
-        $request->session()->push('facturacion.comentario', $request->get('comentario'));
+        $request->session()->put('facturacion_direccion', $request->get('direccion'));
+        $request->session()->put('facturacion_direccion2', $request->get('direccion2'));
+        $request->session()->put('facturacion_codigo_postal', $request->get('codigo_postal'));
+        $request->session()->put('facturacion_ciudad', $request->get('ciudad'));
+        $request->session()->put('facturacion_provincia', $request->get('provincia'));
+        $request->session()->put('facturacion_pais', $request->get('pais'));
+        $request->session()->put('facturacion_telefono_domicilio', $request->get('telefono_domicilio'));
+        $request->session()->put('facturacion_telefono_celular', $request->get('telefono_celular'));
+        $request->session()->put('facturacion_comentario', $request->get('comentario'));
 
         // $_SESSION['facturacion_direccion']= $request->get('direccion');
         // $_SESSION['facturacion_direccion2']= $request->get('direccion2');
@@ -333,27 +334,65 @@ class PaginaCarritoController extends Controller
 
 
         // Mercado pago
-        // $mp = new MP ("CLIENT_ID", "CLIENT_SECRET");
-        // $mp->sandbox_mode(TRUE);
-        // $preference_data = array (
-        //                     "items" => array (
-        //                         array (
-        //                             "title" => "Test",
-        //                             "quantity" => 1,
-        //                             "currency_id" => "USD",
-        //                             "unit_price" => 10.4
-        //                         )
-        //                     )
-        //                 );
+        $mp = new MP ("618512736778458", "YOBMGVLitH7Y6bfGJ4IC6rDqVTA0lIbQ");
+        $mp->sandbox_mode(TRUE);
+        $preference_data = array (
+                            "items" => array (
+                                array (
+                                    "title" => "Test",
+                                    "quantity" => 1,
+                                    "currency_id" => "ARS",
+                                    "unit_price" => 10.4
+                                )
+                            )
+                        );
 
-        // $preference = $mp->create_preference ($preference_data);
+        $preference = $mp->create_preference ($preference_data);
 
         // print_r ($preference);
         // exit();
-        return view('sitio.carrito_pagar', compact('portada', 'contenidoCarrito', 'versionUnica', 'precio_envio', 'totalFinal'));
+
+        return view('sitio.carrito_pagar', compact('portada', 'contenidoCarrito', 'versionUnica', 'precio_envio', 'totalFinal', 'preference'));
+    }
+
+    public function enviarCompraAMercadoPago(){
+
     }
 
     public function guardarCompra(){
+        // direccion de entrega
+        $direccion_entrega= new SeccionCarritoDireccion();
+        $direccion_entrega->fk_usuario= Auth::id();
+        $direccion_entrega->tipo= 'entrega';
+        $direccion_entrega->direccion= Session::get('entrega_direccion');
+        $direccion_entrega->direccion2= Session::get('entrega_direccion2');
+        $direccion_entrega->codigo_postal= Session::get('entrega_codigo_postal');
+        $direccion_entrega->ciudad= Session::get('entrega_ciudad');
+        $direccion_entrega->provincia= Session::get('entrega_provincia');
+        $direccion_entrega->pais= Session::get('entrega_pais');
+        $direccion_entrega->telefono_domicilio= Session::get('entrega_telefono_domicilio');
+        $direccion_entrega->telefono_celular= Session::get('entrega_telefono_celular');
+        $direccion_entrega->comentario= Session::get('entrega_comentario');
+
+        $direccion_entrega->save();
+
+        // direccion de facturacion
+        $direccion_facturacion= new SeccionCarritoDireccion();
+        $direccion_facturacion->fk_usuario= Auth::id();
+        $direccion_facturacion->tipo= 'facturacion';
+        $direccion_facturacion->direccion= Session::get('facturacion_direccion');
+        $direccion_facturacion->direccion2= Session::get('facturacion_direccion2');
+        $direccion_facturacion->codigo_postal= Session::get('facturacion_codigo_postal');
+        $direccion_facturacion->ciudad= Session::get('facturacion_ciudad');
+        $direccion_facturacion->provincia= Session::get('facturacion_provincia');
+        $direccion_facturacion->pais= Session::get('facturacion_pais');
+        $direccion_facturacion->telefono_domicilio= Session::get('facturacion_telefono_domicilio');
+        $direccion_facturacion->telefono_celular= Session::get('facturacion_telefono_celular');
+        $direccion_facturacion->comentario= Session::get('facturacion_comentario');
+
+        $direccion_facturacion->save();
+
+        // compra del cliente
         $compra= new SeccionCarritoCompra();
 
         $compra->codigo_compra= uniqid();
@@ -361,10 +400,39 @@ class PaginaCarritoController extends Controller
         $compra->precio_envio= Session::get('precio_envio');
         $compra->precio_total= Session::get('precio_total');
         $compra->estado_compra= 'iniciado';
-        $compra->fecha_compra= now();
-        // $compra->fk_direccion_entrega= 
-        // $compra->fk_direccion_facturacion= 
-        echo($compra->precio_envio);
-        exit();
+        $compra->fecha_compra= Carbon::now('America/Argentina/Buenos_Aires');
+
+        $fk_direccion_entrega= SeccionCarritoDireccion::where('tipo', '=', 'entrega')
+                                    ->select('id')
+                                    ->latest('id')
+                                    ->first();
+        $compra->fk_direccion_entrega= $fk_direccion_entrega->id;
+
+        $fk_direccion_facturacion= SeccionCarritoDireccion::where('tipo', '=', 'facturacion')
+                                    ->select('id')
+                                    ->latest('id')
+                                    ->first();
+        $compra->fk_direccion_facturacion= $fk_direccion_facturacion->id;
+
+        $compra->save();
+
+        // cada articulo comprado
+        $id_compra_guardada= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
+                                ->select('id')
+                                ->max('id');
+        $carrito= Cart::content();
+        foreach ($carrito as $key => $value) {
+            $cadaVersionComprada= new SeccionCarritoVersionComprada();
+            $cadaVersionComprada->fk_compra= $id_compra_guardada;
+            $cadaVersionComprada->fk_version= $value->id;
+            $cadaVersionComprada->cantidad= $value->qty;
+            // RESTAR STOCK
+            $cadaVersionComprada->save();
+        }
+
+
+        Session::flash('guardado', 'La compra fue realizada correctamente');
+
+        return redirect('carrito/elegir/pago');
     }
 }

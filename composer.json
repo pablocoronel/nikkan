@@ -12,7 +12,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "mercadopago/sdk": "0.5.2"
+        "mercadopago/sdk": "0.5.2",
+        "nesbot/carbon": "^1.22"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
