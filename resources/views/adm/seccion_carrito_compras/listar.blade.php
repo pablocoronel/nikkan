@@ -30,9 +30,9 @@
 					<tbody>
 						@foreach($variable as $key)
 						<tr>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>{{$key['id']}}</td>
+							<td>{{$key['codigo_compra']}}</td>
+							<td>{{$key['estado_compra']}}</td>
 							<td><a href="{{action('SeccionCarritoCompraController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
 						</tr>
 						@endforeach

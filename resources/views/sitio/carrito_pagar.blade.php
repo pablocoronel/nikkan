@@ -145,7 +145,7 @@
   </div>
 
   <div class="container">
-    <a href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pay</a>
+    <a href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pagar con MercadoPago</a>
   </div>
 </div>
 @include('sitio.partial.footer')
