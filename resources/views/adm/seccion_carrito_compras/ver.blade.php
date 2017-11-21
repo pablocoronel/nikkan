@@ -42,37 +42,15 @@
 				</div>
 
 				{{-- Formulario --}}
-				{{ Form::open(['action' => ['SeccionTiendaFamiliaController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
+				{{-- {{ Form::open(['action' => ['SeccionContactoMapaController@'.$accion, $objeto->id], 'method' => $verbo, 'class' => 'form-horizontal', 'files' => true]) }}
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
 
-				    	 <div class="form-group">
-				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
+				    	<div class="form-group">
+				    		{!! Form::label('codigo', 'Código Google maps', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('nombre', $objeto->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
-							</div>
-				        </div>
-
-				        {{-- <div class="form-group">
-				        	{!! Form::label('vinculo', 'Vinculo', ['class' => 'col-sm-3 control-label']) !!}
-				            <div class="col-sm-7">
-				            	{!! Form::text('vinculo', $objeto->vinculo, ['class' => 'form-control', 'placeholder' => 'Vinculo']) !!}
-					        </div>
-				        </div> --}}
-
-				        <div class="form-group">
-				        	{!! Form::label('imagen', 'Imagen (400x400px)', ['class' => 'col-sm-3 control-label']) !!}
-				            <div class="col-sm-7">
-				            	<img src="{{ asset($objeto->ruta)}}" alt="" style="max-width: 100px;" class="img img-responsive">
-				        		{!! Form::file('imagen') !!}
-					        </div>
-				        </div>
-
-				        <div class="form-group">
-				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
-				    		<div class="col-sm-7">
-								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
+								{!! Form::text('codigo', $objeto->codigo, ['class' => 'form-control', 'placeholder' => 'Codigo de Google maps']) !!}
 							</div>
 				        </div>
 
@@ -80,7 +58,52 @@
 				        	{!! Form::submit('Guardar', ['class' => 'btn btn-lg btn-success btn-block']) !!}
 					    </div>
 				    </fieldset>
-				{!! Form::close() !!}
+				{!! Form::close() !!} --}}
+				<table class="table">
+					<thead>
+						<tr>
+							<td>Producto</td>
+							<td>Precio/U</td>
+							<td>Descuento</td>
+							<td>Precio con desc.</td>
+							<td>Cantidad</td>
+							<td>Precio subtotal</td>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($variable as $cadaCompra)
+							<tr>
+								<td>
+									<p>
+										Nombre: {{$cadaCompra['productoNombre']}}
+									</p>
+									<p>
+										Talle: {{$cadaCompra['talleNombre']}}
+									</p>
+									<p>
+										Color: {{$cadaCompra['colorNombre']}}
+									</p>
+								</td>
+								<td>
+									${{$cadaCompra['productoPrecioOriginal']}}
+								</td>
+								<td>
+									{{$cadaCompra['productoDescuento']}}%
+								</td>
+								<td>
+									${{$cadaCompra['productoPrecioConDescuento']}}
+								</td>
+								<td>
+									{{$cadaCompra['cantidad']}}
+								</td>
+								<td>
+									${{$cadaCompra['productoPrecioConDescuento'] * $cadaCompra['cantidad']}}
+								</td>
+							</tr>
+						@endforeach
+					</tbody>
+				</table>
+
 			</div>
 	    </div>
 	</div>

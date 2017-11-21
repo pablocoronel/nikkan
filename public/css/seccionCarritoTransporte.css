@@ -1,0 +1,37 @@
+h2{
+	font-family: 'texgyreadventor-regular';
+	color: #000000;
+	font-size: 30px;
+	margin-bottom: 25px;
+}
+
+p{
+	font-family: 'texgyreadventor-regular';
+	color: #000000;
+	font-size: 14px;
+}
+#lugar{
+	background-color: #000000 !important;
+}
+#lugar p{
+	color: #FFFFFF !important;
+}
+
+#textoTerminos p, #textoTerminos p a{
+	font-family: 'texgyreadventor-regular';
+	color: #000000;
+	font-size: 14px;	
+}
+
+input[type="submit"]{
+	background-color: #f4bfd9;
+	color: #FFFFFF;
+	font-size: 16px;
+	text-align: center;
+	border: 1px solid #f4bfd9;
+}
+
+input[type="submit"]:hover, input[type="submit"]:active, input[type="submit"]:focus, input[type="submit"]:visited, input[type="submit"]:active:focus, input[type="submit"]:active:hover {
+	background-color: #f4bfd9;
+	border-color: #f4bfd9;
+}

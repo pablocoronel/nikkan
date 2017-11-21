@@ -3,14 +3,14 @@
 @section('titulo', 'Carrito')
 
 @section('scriptsParticulares')
-  <link rel="stylesheet" href="{{asset('css/seccionCarrito.css')}}">
+  <link rel="stylesheet" href="{{asset('css/seccionCarritoDireccion.css')}}">
 @endsection
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
   <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
-<div class="container">
+<div class="container" style="position: relative; z-index: 0;">
   
   {{-- Mensajes --}}
       <div class="row">
@@ -215,7 +215,7 @@
   </div>
   
   <div class="container">
-    <a href="{{url('carrito/elegir/transporte')}}" class="btn btn-primary">Siguiente</a>
+    <a href="{{url('carrito/elegir/transporte')}}" class="btn btn-primary" id="btn-siguiente">Transporte</a>
   </div>
 </div>
 @include('sitio.partial.footer')

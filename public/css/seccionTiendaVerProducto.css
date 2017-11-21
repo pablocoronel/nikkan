@@ -14,12 +14,17 @@
 }
 #contenedorGaleriaProductoDetalle #contenedorImagenGrande{
     text-align: center;
-    border: 1px solid #EEEEEE;
+    /*border: 1px solid #EEEEEE;*/
+}
+
+#contenedorGaleriaProductoDetalle #contenedorImagenGrande img{
+    text-align: center;
+    margin: 0 auto;
 }
 
 #contenedorGaleriaProductoDetalle #contenedorImagenChica{
     text-align: center;
-    border: 1px solid #EEEEEE;
+    /*border: 1px solid #EEEEEE;*/
     margin-top: 25px;
 }
 
@@ -41,3 +46,61 @@
 }
 
  /*fin galeria*/
+
+ #contenedorDetalles h1{
+    font-family: 'texgyreadventor-regular';
+    color: #000000;
+ }
+
+  #contenedorDetalles h2 #precioTachado{
+    font-family: 'texgyreadventor-regular';
+    color: #aaaaaa;
+    font-size: 25px;
+ }
+ #contenedorDetalles hr{
+    border-color: #f4bfd9;
+ }
+
+ #contenedorDetalles p{
+    color: #999999;
+    font-size: 16px;
+    font-family: 'texgyreadventor-regular';
+ }
+
+ #cajaGuia img{
+    max-height: 230px;
+ }
+
+ #contenedorDetalles h3{
+    font-family: 'texgyreadventor-regular';
+    color: #000000;
+ }
+
+ select{
+    font-size: 15px;
+    font-family: 'texgyreadventor-regular';
+    color: #565656;
+    font-style: italic;
+    border-radius: 35px 35px 35px 35px;
+    -moz-border-radius: 35px 35px 35px 35px;
+    -webkit-border-radius: 35px 35px 35px 35px;
+    border: 1px solid #f4bfd9;
+}
+input[type="number"]{
+    border-radius: 35px;
+    border: 1px solid #f4bfd9;
+    height: 30px;
+    width: 60px;
+    text-align: center;
+}
+
+input[type="submit"]{
+    border-radius: 5px;
+    border: 1px solid #f4bfd9;
+    height: 40px;
+    width: 170px;
+    text-align: center;
+    background-color: #f4bfd9;
+    color: #FFFFFF;
+    margin-top: 20px;
+}

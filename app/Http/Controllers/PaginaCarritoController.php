@@ -83,7 +83,13 @@ class PaginaCarritoController extends Controller
         }else{
 
             if ($request->cantidadElegidos > $version->stock) {
-                $request->session()->flash('stockNoDisponible', 'Stock no disponible para el talle y color elegido, máximo '.$version->stock);
+                if ($version->stock < 1) {
+                    $mensajeStock= 'Stock no disponible para el talle y color elegido';
+                }else{
+                    $mensajeStock= 'Stock no disponible para el talle y color elegido, máximo '.$version->stock;
+                }
+
+                $request->session()->flash('stockNoDisponible', $mensajeStock);
                 return back();
             }
 
@@ -208,6 +214,8 @@ class PaginaCarritoController extends Controller
         // $_SESSION['entrega_telefono_celular']= $request->get('telefono_celular');
         // $_SESSION['entrega_comentario']= $request->get('comentario');
 
+        $request->session()->put('entrega', 'facturación guardada');
+        
         $request->session()->flash('guardadoDireccionEntrega', 'Dirección de entrega guardada');
         return back();
     }
@@ -233,6 +241,8 @@ class PaginaCarritoController extends Controller
         // $_SESSION['facturacion_telefono_celular']= $request->get('telefono_celular');
         // $_SESSION['facturacion_comentario']= $request->get('comentario');
 
+        $request->session()->put('facturacion', 'facturación guardada');
+
         $request->session()->flash('guardadoDireccionFacturacion', 'Dirección de facturación guardada');
         return back();
     }
@@ -241,10 +251,10 @@ class PaginaCarritoController extends Controller
     public function verFormularioTransporte(){
         if (!Session::exists('facturacion')) {
             Session::flash('completar_facturacion', 'complete la dirección de facturacion');
-            return redirect('elegir-direccion');
+            return redirect('carrito/elegir/direccion');
         }elseif (!Session::exists('entrega')) {
             Session::flash('completar_entrega', 'complete la dirección de entrega');
-            return redirect('elegir-direccion');
+            return redirect('carrito/elegir/direccion');
         }
 
         $portada= SeccionColeccionPortada::find(1);
@@ -426,7 +436,17 @@ class PaginaCarritoController extends Controller
             $cadaVersionComprada->fk_compra= $id_compra_guardada;
             $cadaVersionComprada->fk_version= $value->id;
             $cadaVersionComprada->cantidad= $value->qty;
+            
             // RESTAR STOCK
+            $tablaStock= SeccionTiendaVersion::where('id', '=', $value->id)->first();
+            $tablaStock->stock= $tablaStock->stock - $value->qty;
+            if ($tablaStock->stock < 0) {
+                $tablaStock->stock= 0;
+            }
+
+            $tablaStock->save();
+
+
             $cadaVersionComprada->save();
         }
 

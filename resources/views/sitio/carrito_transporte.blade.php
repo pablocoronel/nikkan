@@ -3,14 +3,14 @@
 @section('titulo', 'Carrito')
 
 @section('scriptsParticulares')
-  <link rel="stylesheet" href="{{asset('css/seccionCarrito.css')}}">
+  <link rel="stylesheet" href="{{asset('css/seccionCarritoTransporte.css')}}">
 @endsection
 
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
   <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
-<div class="container">
+<div class="container" style="position: relative; z-index: 0;">
   
   {{-- Mensajes --}}
       <div class="row">
@@ -52,11 +52,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 1, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7" id="lugar">
                         <p>TIERRA DEL FUEGO </p>
                         <p>Delivery time: Entre 7 y 10 días hábiles desde el despacho notificado por mail</p>
                       </div>
@@ -71,11 +71,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 2, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7"  id="lugar">
                         <p>NEU- RN- CHB- SCRUZ- CHCO- JUY- SALTA- CRTES- MIS</p>
                         <p>Delivery time: Entre 7 y 10 días hábiles desde el despacho notificado por mail</p>
                       </div>
@@ -90,11 +90,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 3, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7"  id="lugar">
                         <p>SAN LUIS- LA PAMPA- FORMOSA- CATAMARCA- LA RIOJA- TUCUMAN- SGO </p>
                         <p>Delivery time: Entre 7 y 10 días hábiles desde el despacho notificado por mail </p>
                       </div>
@@ -109,11 +109,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 4, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7"  id="lugar">
                         <p>CORDOBA- MENDOZA- SAN JUAN- ENTRE RIOS- SANTA FE  </p>
                         <p>Delivery time: Entre 7 y 10 días hábiles desde el despacho notificado por mail </p>
                       </div>
@@ -128,11 +128,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 5, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7"  id="lugar">
                         <p>GBA  </p>
                         <p>Delivery time: 3 día hábil desde el despacho notificado por mail </p>
                       </div>
@@ -147,11 +147,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 6, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7"  id="lugar">
                         <p>CABA  </p>
                         <p>Delivery time: 1 día hábil desde el despacho notificado por mail </p>
                       </div>
@@ -166,11 +166,11 @@
                       <div class="col-xs-12 col-sm-1">
                         {!! Form::radio('transporte', 7, ['class' => 'form-control']) !!}
                       </div>
-                      <div class="col-xs-12 col-sm-2">
+                      <div class="col-xs-12 col-sm-1">
                         <img src="{{asset('images/varios/transporte.jpg')}}" class="img img-responsive" alt="" style="max-width: 50px; ">
                       </div>
                       
-                      <div class="col-xs-12 col-sm-6">
+                      <div class="col-xs-12 col-sm-7"  id="lugar">
                         <p>Retiro Por Showroom  </p>
                         <p>Delivery time: Retiro en showroom, consultar disponibilidad, el mejor precio y tiempo</p>
                       </div>
@@ -180,12 +180,12 @@
                       </div>
                   </div>
 
-                  <div class="col-xs-12 col-sm-12">
+                  <div class="col-xs-12 col-sm-12" id="textoTerminos">
                     <p>{{ Form::checkbox('terminos') }} He leído y acepto las <a href="{{url('carrito/elegir/transporte/terminos')}}" target="_blank">condiciones generales de venta</a></p>
                   </div>
                       
                   <div class="col-sm-4 col-sm-offset-4">
-                    {!! Form::submit('Guardar', ['class' => 'btn btn-lg btn-success btn-block']) !!}
+                    {!! Form::submit('Elegir', ['class' => 'btn btn-lg btn-success btn-block']) !!}
                   </div>
               </fieldset>
           {!! Form::close() !!}

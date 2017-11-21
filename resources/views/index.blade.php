@@ -25,7 +25,7 @@
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
     {{-- slider --}}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: -1;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: 0;">
       <!-- Indicators -->
       <ol class="carousel-indicators">
         @foreach($slider as $key => $value)
@@ -70,7 +70,7 @@
 
     
     {{-- Destacados --}}
-    <div class="container-fluid" id="contenedorDestacados">
+    <div class="container-fluid" id="contenedorDestacados" style="position: relative; z-index: 0;">
         @foreach($destacados as $cadaDestacado)
         <div class="">
           <a href="{{$cadaDestacado->vinculo}}" target="_blank">

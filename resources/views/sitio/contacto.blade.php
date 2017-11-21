@@ -10,7 +10,7 @@
 @include('sitio.partial.menuPrincipal')
   <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
-  <div class="container">
+  <div class="container" style="position: relative; z-index: 0;">
     <iframe src="{{$mapa->codigo}}" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
   
     <div class="row">

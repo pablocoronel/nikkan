@@ -4,7 +4,6 @@
     <div id="datosEmpresa">
       <div id="telefono">
         <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
-        
         {{ $telefonoEmpresa->texto}}
       </div>
 
@@ -27,7 +26,7 @@
   </div>
 
   {{-- menu --}}
-  <nav class="navbar" data-spy="affix" data-offset-top="47">
+  <nav class="navbar" data-spy="affix" data-offset-top="47" id="affix-barra">
      <div class="container" id="contenedorMenuPrincipal">
         <!-- Brand and toggle get grouped for better mobile display -->
         <!-- Logo y boton hamburguesa -->
@@ -58,6 +57,8 @@
           <ul class="nav navbar-nav navbar-right">
             @if(Auth::check())
               <li><a href="{{URL::asset('login/cerrar-sesion')}}">Salir</a></li>
+            @else
+              <li><a href="{{URL::asset('login/iniciar-sesion')}}">Entrar</a></li>
             @endif
             <li><a href="{{URL::asset('carrito')}}"><img src="{{asset('images/varios/shopping-bag.png')}}" alt="" id="imagenBolsa"></a></li>
           </ul>

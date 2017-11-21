@@ -9,7 +9,7 @@
 @section('contenido')
 @include('sitio.partial.menuPrincipal')
 	{{-- slider --}}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: -1;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: 0;">
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         @foreach($slider as $key => $value)

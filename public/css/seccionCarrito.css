@@ -1,0 +1,59 @@
+table img{
+	max-height: 70px;
+}
+table thead{
+	color: #000000;
+	font-size: 18px;
+	font-family: 'texgyreadventor-regular';
+}
+table tbody{
+	color: #000000;
+	font-size: 15px;
+	font-family: 'texgyreadventor-regular';
+}
+#filaTotal{
+	background-color: #eeeeee;
+}
+
+input[type="number"]{
+	width: 40px;
+}
+#btn-cantidad{
+	background-color: #333333;
+	border-color: #333333;
+	text-align: center;
+	height: 25px;
+	margin-bottom: 5px;
+}
+#btn-cantidad:hover, #btn-cantidad:active, #btn-cantidad:focus, #btn-cantidad:visited, #btn-cantidad:active:focus, #btn-cantidad:active:hover {
+	background-color: #333333;
+	border-color: #333333;
+	text-align: center;
+	height: 25px;
+	margin-bottom: 5px;
+}
+
+#btn-vaciar{
+	background-color: #333333;
+	border-color: #333333;
+	text-align: center;
+	height: 35px;
+	margin-bottom: 5px;
+}
+#btn-vaciar:hover, #btn-vaciar:active, #btn-vaciar:focus, #btn-vaciar:visited, #btn-vaciar:active:focus, #btn-vaciar:active:hover {
+	background-color: #333333;
+	border-color: #333333;
+}
+
+
+#btn-siguiente{
+	background-color: #f4bfd9;
+	border-color: #f4bfd9;
+	text-align: center;
+	height: 35px;
+	margin-bottom: 5px;
+}
+#btn-siguiente:hover, #btn-siguiente:active, #btn-siguiente:focus, #btn-siguiente:visited, #btn-siguiente:active:focus, #btn-siguiente:active:hover {
+	background-color: #f4bfd9;
+	border-color: #f4bfd9;
+}

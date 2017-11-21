@@ -1,5 +1,12 @@
 <footer>
 	<div class="container" id="contenedorFooter">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4"></div>
+			<div class="col-xs-12 col-sm-4" id="sitemap">
+				<img src="{{asset($logoFooter->ruta)}}" class="img img-responsive" alt="">
+			</div>
+			<div class="col-xs-12 col-sm-4"></div>
+		</div>
 		<div class="col-xs-12 col-md-4" id="contenedorDatos">
 			<h4>CONTACTANOS</h4>
 			<ul>
@@ -22,7 +29,7 @@
 			</ul>
 		</div>
 		<div class="col-xs-12 col-md-4" id="sitemap">
-			<img src="{{asset($logoFooter->ruta)}}" class="img img-responsive" alt="">
+			
 			<ul>
 				<li><a href="{{asset('/')}}">HOME</a></li>
 				<li><a href="{{asset('empresa')}}">NIKKA</a></li>

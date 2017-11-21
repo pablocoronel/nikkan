@@ -10,7 +10,7 @@
 @include('sitio.partial.menuPrincipal')
 	<img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
-	<div class="container" id="contenedorProducto">
+	<div class="container" id="contenedorProducto" style="position: relative; z-index: 0;">
 		<div class="col-xs-12 col-sm-6" id="contenedorGaleriaProductoDetalle">
              <div class="col-xs-12">
                 <div id="contenedorImagenGrande">
@@ -27,7 +27,7 @@
               @endforeach
         </div>
 
-        <div class="col-xs-12 col-sm-6">
+        <div class="col-xs-12 col-sm-6" id="contenedorDetalles">
         	<h1>{{$producto->nombre}}</h1>
 
         	@if($producto->descuento > 0)
@@ -36,15 +36,16 @@
         			<span>${{$producto->precio_con_descuento}}</span>
         		</h2>
         	@else
-				<h2>
+				    <h2>
         			<span>${{$producto->precio_con_descuento}}</span>
         		</h2>
         	@endif
 
+          <hr>
         	<p>{{$producto->descripcion}}</p>
 
-			<div class="col-xs-12 col-sm-6">
-        		<img src="{{asset($producto->guia_de_talle)}}" alt="">
+			<div class="col-xs-12 col-sm-6" id="cajaGuia">
+        		<img src="{{asset($producto->guia_de_talle)}}" class="img img-responsive" alt="">
 			</div>
 
 			<div class="col-xs-12 col-sm-6">
@@ -70,7 +71,7 @@
 
         		{{ Form::number('cantidadElegidos', 1, ['min' => '1']) }}
 
-        		{{ Form::submit('Añadir al carrito') }}
+        		{{ Form::submit('AÑADIR AL CARRITO') }}
 
 			{!! Form::close() !!}
 			</div>

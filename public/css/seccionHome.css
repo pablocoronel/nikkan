@@ -17,4 +17,11 @@
 	margin-bottom: 40px;
 	/*z-index: -5;*/
 	/*background-color: red;*/
+	text-align: center;
+}
+
+#contenedorDestacados p{
+	font-family: 'texgyreadventor-regular';
+	font-size: 16px;
+	margin-top: 10px;
 }

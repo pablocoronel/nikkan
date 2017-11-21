@@ -11,7 +11,7 @@
   <img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
   {{-- slider --}}
-    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: -1;">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: 0;">
       <!-- Wrapper for slides -->
       <div class="carousel-inner">
         @foreach($slider as $key => $value)

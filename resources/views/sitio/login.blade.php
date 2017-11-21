@@ -3,7 +3,7 @@
 @section('titulo', 'Iniciar sesión')
 
 @section('scriptsParticulares')
-  <link rel="stylesheet" href="{{asset('css/seccionCarritoLogin.css')}}">
+  <link rel="stylesheet" href="{{asset('css/seccionLogin.css')}}">
 @endsection
 
 @section('contenido')
@@ -58,11 +58,11 @@
           {!!Form::close()!!}
         </div>
 
-        <div class="col-xs-12 col-sm-2">
+        <div class="col-xs-12 col-sm-1">
           
         </div>
 
-        <div class="col-xs-12 col-sm-5">
+        <div class="col-xs-12 col-sm-6">
           <h2>Registrarse</h2>
 
           {{ Form::open(['action' => ['LoginController@registrarCliente'], 'method' => 'post', 'class' => 'form-horizontal']) }}

@@ -10,7 +10,7 @@
 @include('sitio.partial.menuPrincipal')
 	<img src="{{asset($portada->ruta)}}" alt="" class="img img-responsive">
 
-	<div class="container-fluid" style="z-index: -1;">
+	<div class="container-fluid" style="position: relative; z-index: 0;">
 		<div class="col-xs-12 col-md-6">
 			{{-- slider --}}
 		    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="position: relative; z-index: -1;">

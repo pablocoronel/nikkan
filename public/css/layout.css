@@ -23,7 +23,8 @@
 @media (min-width: 992px) {
   #contendorCabeceraMenu{
     position: absolute;
-    z-index: 1;
+    /*position: relative;*/
+    z-index: 5;
     width: 100%;
   }
 }
@@ -106,6 +107,7 @@
 
 
 /*ocultar cabecera y cambio de color del menu*/
+@media screen and (min-width: 768px) {
 .affix {
       top: 0;
       width: 100%;
@@ -143,12 +145,18 @@
     background-color: #f4bfd9 !important;
     color: #FFFFFF;
   }
-
+}
 /*fin menu principal*/
 
 @media screen and (max-width: 768px) {
+  #affix-barra{
+    width: 100%;
+  }
+
   #contendorCabeceraMenu{
-    position: relative !important;
+    /*position: relative !important;*/
+    position: relative;
+    z-index: 5;
   }
   #cabecera{
     background-color: #FFFFFF;
@@ -169,13 +177,19 @@
     background-color: #FFFFFF;
   }
 
-  #menuPrincipal .nav>li>a:hover{
-    background-color: #FFFFFF !important;
+  #menuPrincipal li{
+    background-color: #f4bfd9 !important;
     color: #f4bfd9;
+    height: 50px;
+  }
+
+  #menuPrincipal .nav>li>a:hover{
+    background-color: #f4bfd9 !important;
+    color: #FFFFFF;
   }
   #menuPrincipal .nav>li>a{
-    background-color: #FFFFFF !important;
-    color: #000000;
+    background-color: #f4bfd9 !important;
+    color: #FFFFFF;
   }
 
 }
@@ -187,6 +201,7 @@ footer{
   min-height: 300px;
   max-height: 300px;
   width: 100%;
+  top: 30px;
 }
 
 footer h4{
@@ -195,7 +210,7 @@ footer h4{
 }
 
 #contenedorFooter{
-  padding-top: 40px;
+  padding-top: 30px;
 }
 
 footer ul{
