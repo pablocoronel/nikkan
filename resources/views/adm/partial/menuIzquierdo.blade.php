@@ -92,6 +92,13 @@
                     <li>
                         <a href="{{URL::asset('adm/tienda/talle/')}}">Ver talle</a>
                     </li>
+
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/cupon/crear')}}">Crear cupón</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/cupon/')}}">Ver cupón</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

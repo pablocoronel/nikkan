@@ -154,6 +154,9 @@ Route::group(['prefix' => 'adm'], function() {
 
 		    // version de cada producto
 			Route::resource('producto/{idProducto}/version', 'SeccionTiendaVersionController');
+
+			// cupones
+			Route::resource('cupon', 'SeccionTiendaCuponController');
 		});
 
 		// CRUD empresa
