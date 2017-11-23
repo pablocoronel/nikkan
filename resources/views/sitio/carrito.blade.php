@@ -85,6 +85,45 @@
           </tr>
           @endforeach
 
+          {{-- subtotal --}}
+          <tr id="filaTotal">
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+              Subtotal productos:
+            </td>
+            <td>
+              {{Cart::total()}}
+            </td>
+          </tr>
+
+          {{-- cupones --}}
+          <tr id="filaTotal">
+            <td>Cupón</td>
+            <td>
+              {{ Form::open(['action' => ['PaginaCarritoController@ingresarCupon'], 'method' => 'post', 'class' => 'form-horizontal']) }}
+                {{csrf_field()}}
+                {!! Form::text('cupon', '', ['class' => 'form-control', 'placeholder' => 'Cupón']) !!}
+
+                {!! Form::submit('Ingresar', ['class' => 'btn btn-xs btn-active btn-block']) !!}
+              {!! Form::close() !!}
+            </td>
+            <td>
+              @if(Session::has('cupon'))
+                {{Session::get('cupon')}}
+              @endif
+            </td>
+            <td></td>
+            <td>
+              Descuento por cupón:
+            </td>
+            <td>
+              {{Cart::total()}}
+            </td>
+          </tr>
+
           {{-- total --}}
           <tr id="filaTotal">
             <td></td>

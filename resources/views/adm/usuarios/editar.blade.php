@@ -46,6 +46,7 @@
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
+				    	{{-- <input name="id" type="hidden" value="{{$objeto->id}}"> --}}
 
 				        <div class="form-group">
 				        	{!! Form::label('usuario', 'Usuario', ['class' => 'col-sm-3 control-label']) !!}

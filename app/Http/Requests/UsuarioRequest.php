@@ -20,7 +20,6 @@ class UsuarioRequest extends FormRequest
             // return false;
         // }
     }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -50,6 +49,10 @@ class UsuarioRequest extends FormRequest
                     //
                     'nombre' => 'required',
                     'apellido' => 'required',
+                    // 'usuario' => 'required|unique:users,usuario,'.$this->all()['id'],
+                    // 'email' => 'required|email|unique:users,email,'.$this->all()['id'],
+                    'usuario' => 'required|unique:users,usuario',
+                    'email' => 'required|email|unique:users,email',
                     'usuario' => 'required|unique:users,usuario',
                     'email' => 'required|email|unique:users,email',
                     'fecha_nacimiento' => 'required|date_format:"Y-m-d"',

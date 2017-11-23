@@ -88,6 +88,29 @@
 							</div>
 				        </div>
 
+				        {{-- productos --}}
+				        <div class="form-group">
+				        	{!! Form::label('producto_asignado', 'Productos válidos', ['class' => 'col-sm-3 control-label']) !!}
+				        	<div class="col-sm-9">
+					        	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Elegir productos válidos</button>
+								
+								<div class="collapse" id="collapseExample">
+									  	@foreach($productos as $key => $cadaProducto)
+									  		<div class="col-xs-4 col-sm-3">
+									  			<div class="row" style="border: 1px solid #EEEEEE;padding-bottom: 5px;">
+									  				<div class="col-xs-2">
+														{!! Form::checkbox("producto[$key]", $cadaProducto->id) !!}
+									  				</div>
+									  				<div class="col-xs-2">
+									  					<span>{{$cadaProducto->nombre}}</span>
+									  				</div>
+									  			</div>
+									  		</div>
+								  		@endforeach
+								</div>
+							</div>
+				        </div>
+
 				        <div class="col-sm-4 col-sm-offset-4">
 				        	{!! Form::submit('Guardar', ['class' => 'btn btn-lg btn-success btn-block']) !!}
 					    </div>

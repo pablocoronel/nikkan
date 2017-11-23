@@ -22,6 +22,9 @@
 // config email
 // http://www.derekbliss.com/post/laravel-streamsocketenablecrypto-ssl-operation-failed-with-code-1
 
+// debug sql
+// https://scotch.io/tutorials/debugging-queries-in-laravel
+
 use App\Mail\EmailDeContacto;
 // use Request;
 
@@ -51,7 +54,7 @@ Route::group(['prefix' => 'carrito'], function() {
 	Route::get('vaciar', 'PaginaCarritoController@vaciarCarrito');
 	Route::delete('quitarItem', 'PaginaCarritoController@eliminarProductoDelCarrito');
 	Route::post('actualizarCantidadItem', 'PaginaCarritoController@actualizarCantidadItem');
-
+	Route::post('ingresarCupon', 'PaginaCarritoController@ingresarCupon');
 
 	Route::group(['prefix' => 'elegir'], function() {
 		Route::get('direccion', 'PaginaCarritoController@verFormularioDireccion');

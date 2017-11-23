@@ -7,7 +7,8 @@ use App\Http\Requests\SeccionTiendaCuponRequest;
 
 // Modelo
 use App\SeccionTiendaCupon;
-
+use App\SeccionTiendaProducto;
+use App\SeccionTiendaCuponProducto;
 // 
 use Session;
 
@@ -34,8 +35,10 @@ class SeccionTiendaCuponController extends Controller
      */
     public function create()
     {
-        //
-        return view('adm.seccion_tienda_cupones.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear cupón']);
+        // lista de productos
+        $productos= SeccionTiendaProducto::all();
+
+        return view('adm.seccion_tienda_cupones.crear', compact('productos'), ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear cupón']);
     }
 
     /**
@@ -46,7 +49,6 @@ class SeccionTiendaCuponController extends Controller
      */
     public function store(SeccionTiendaCuponRequest $request)
     {
-        // guardar sin imagen
         $objeto= new SeccionTiendaCupon([
             'codigo_cupon' => $request->get('codigo_cupon'),
             'vigencia_inicio' => $request->get('vigencia_inicio'),
@@ -57,6 +59,17 @@ class SeccionTiendaCuponController extends Controller
         ]);
 
         $objeto->save();
+
+        // productos que usan el cupon
+        $ultimoCupon= SeccionTiendaCupon::latest()->first();
+        foreach ($request->producto as $key => $value) {
+            $producto_cupon= new SeccionTiendaCuponProducto();
+        
+            $producto_cupon->fk_cupon= $ultimoCupon->id;
+            $producto_cupon->fk_producto= $value;
+
+            $producto_cupon->save();
+        }
 
         // para mostrar msj de exito
         Session::flash('guardado', 'creado correctamente');
@@ -84,7 +97,27 @@ class SeccionTiendaCuponController extends Controller
     {
         //
         $objeto= SeccionTiendaCupon::find($id);
-        return view('adm.seccion_tienda_cupones.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar cupón']);
+
+        // lista de productos
+        $productos= SeccionTiendaProducto::all();
+
+        // productos usados por el cupon
+        $productosTildados= SeccionTiendaCuponProducto::where('fk_cupon', '=', $id)
+                                ->get();
+        
+
+        foreach ($productos as $key => $value) {
+            $value['tildado']= false;
+            foreach ($productosTildados as $keyTildados => $valueTildados) {
+                if ($valueTildados->fk_producto == $value->id) {
+                    $value['tildado']= true;
+                }
+            }
+        }
+
+        // dd($productos);
+
+        return view('adm.seccion_tienda_cupones.editar', compact('objeto', 'productos'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar cupón']);
     }
 
     /**
@@ -104,8 +137,25 @@ class SeccionTiendaCuponController extends Controller
         $objeto->tipo_descuento = $request->get('tipo_descuento');
         $objeto->descuento_porcentual = $request->get('descuento_porcentual');
         $objeto->descuento_monetario = $request->get('descuento_monetario');
-        
+
         $objeto->save();
+
+        // productos usados por el cupon
+        // borrar anteriores
+        $productosAnteriores= SeccionTiendaCuponProducto::where('fk_cupon', '=', $id)
+                                    ->delete();
+                                    
+        if (isset($request->producto)) {
+        // guardar nuevos
+            foreach ($request->producto as $key => $value) {
+                $producto_cupon= new SeccionTiendaCuponProducto();
+            
+                $producto_cupon->fk_cupon= $id;
+                $producto_cupon->fk_producto= $value;
+
+                $producto_cupon->save();
+            }
+        }
 
         $request->session()->flash('guardado', 'cambios guardados');
         return back();

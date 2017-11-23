@@ -51,6 +51,7 @@
 				    		{!! Form::label('codigo_cupon', 'Código de cupón', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('codigo_cupon', $objeto->codigo_cupon, ['class' => 'form-control', 'placeholder' => $objeto->codigo_cupon, 'disabled' => 'disabled']) !!}
+								{{-- {!! Form::text('codigo_cupon', $objeto->codigo_cupon, ['class' => 'form-control', 'placeholder' => 'Código de cupón']) !!} --}}
 							</div>
 				        </div>
 
@@ -86,6 +87,29 @@
 				    		{!! Form::label('descuento_monetario', 'Descuento monetario', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('descuento_monetario', $objeto->descuento_monetario, ['class' => 'form-control', 'placeholder' => 'Descuento monetario']) !!}
+							</div>
+				        </div>
+
+				        {{-- productos --}}
+				        <div class="form-group">
+				        	{!! Form::label('producto_asignado', 'Productos válidos', ['class' => 'col-sm-3 control-label']) !!}
+				        	<div class="col-sm-9">
+					        	<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Elegir productos válidos</button>
+								
+								<div class="collapse" id="collapseExample">
+									  	@foreach($productos as $key => $cadaProducto)
+									  		<div class="col-xs-4 col-sm-3">
+									  			<div class="row" style="border: 1px solid #EEEEEE;padding-bottom: 5px;">
+									  				<div class="col-xs-2">
+															{!! Form::checkbox("producto[$key]", $cadaProducto->id, $cadaProducto->tildado) !!}
+									  				</div>
+									  				<div class="col-xs-2">
+									  					<span>{{$cadaProducto->nombre}}</span>
+									  				</div>
+									  			</div>
+									  		</div>
+								  		@endforeach
+								</div>
 							</div>
 				        </div>
 

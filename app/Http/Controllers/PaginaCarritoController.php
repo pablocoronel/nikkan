@@ -25,6 +25,9 @@ use App\SeccionCarritoCompra;
 use App\SeccionCarritoDireccion;
 use App\SeccionCarritoVersionComprada;
 
+use App\SeccionTiendaCupon;
+use App\SeccionTiendaCuponProducto;
+
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Carbon\Carbon;
 
@@ -454,5 +457,38 @@ class PaginaCarritoController extends Controller
         Session::flash('guardado', 'La compra fue realizada correctamente');
 
         return redirect('carrito/elegir/pago');
+    }
+
+    // cupones
+    public function ingresarCupon(Request $request){
+        $cupon= SeccionTiendaCupon::where('codigo_cupon', '=', $request->cupon)->first();
+
+        if (!$cupon) {
+            $request->session()->flash('cupon', 'No es un cupón válido');
+            return back();
+        }
+
+        $productosDelCupon= SeccionTiendaCuponProducto::where('fk_cupon', '=', $cupon->id)
+                            ->pluck('id')
+                            ->toArray();
+
+// dd($productosDelCupon);
+
+        $versionesDelCupon= SeccionTiendaCuponProducto::whereIn('fk_producto', $productosDelCupon)
+                                ->toSql();
+dd($versionesDelCupon);
+
+        $carrito= Cart::content();
+
+        // foreach ($carrito as $key => $value) {
+        //     if ($value->id == ) {
+        //         # code...
+        //     }
+        // }
+
+        
+
+        $request->session()->flash('cupon', 'existe');
+        return back();
     }
 }
