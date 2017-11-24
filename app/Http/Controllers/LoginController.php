@@ -64,6 +64,8 @@ class LoginController extends Controller
         Auth::logout();
         Cart::destroy();
 
+        Session::flush();
+
         return redirect('/');
     }
 

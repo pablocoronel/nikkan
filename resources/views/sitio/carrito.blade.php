@@ -31,6 +31,7 @@
             <td>Descripción</td>
             <td>Precio unitario</td>
             <td>Cantidad</td>
+            <td>Desc. cupón</td>
             <td>Quitar</td>
             <td>Total</td>
           </th>
@@ -68,7 +69,15 @@
                  <button class="btn btn-xs btn-success" type="submit" id="btn-cantidad">cambiar</button>
               </form>
               <a href=""></a>
-            </td>  
+            </td>
+
+            <td>
+              @if(Session::has('descuentosAplicados'))
+                @if(in_array($item->id, Session::get('descuentosAplicados')[$item->id]))
+                  ${{Session::get("descuentosAplicados")[$item->id]['descuento_cupon']}}
+                @endif
+              @endif
+            </td>
             
             <td>
               <form action="{{url('carrito/quitarItem')}}" method="post">
@@ -87,6 +96,7 @@
 
           {{-- subtotal --}}
           <tr id="filaTotal">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>
@@ -116,16 +126,18 @@
               @endif
             </td>
             <td></td>
+            <td></td>
             <td>
-              Descuento por cupón:
+              {{-- Descuento por cupón: --}}
             </td>
             <td>
-              {{Cart::total()}}
+              {{-- {{Cart::total()}} --}}
             </td>
           </tr>
 
           {{-- total --}}
           <tr id="filaTotal">
+            <td></td>
             <td></td>
             <td></td>
             <td></td>

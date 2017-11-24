@@ -468,27 +468,46 @@ class PaginaCarritoController extends Controller
             return back();
         }
 
-        $productosDelCupon= SeccionTiendaCuponProducto::where('fk_cupon', '=', $cupon->id)
-                            ->pluck('id')
+        $productosAdmitidosCupon= SeccionTiendaCuponProducto::where('fk_cupon', '=', $cupon->id)
+                            ->pluck('fk_producto')
                             ->toArray();
 
-// dd($productosDelCupon);
+// dd($productosAdmitidosCupon);
 
-        $versionesDelCupon= SeccionTiendaCuponProducto::whereIn('fk_producto', $productosDelCupon)
-                                ->toSql();
-dd($versionesDelCupon);
+        $versionesAdmitidasCupon= SeccionTiendaVersion::whereIn('fk_producto', $productosAdmitidosCupon)
+                                ->pluck('id')
+                                ->toArray();
+// dd($versionesAdmitidasCupon);
 
         $carrito= Cart::content();
+        $valorADescontar= 0;
+        $descuentosAplicados= array();
+        $clavesDeDescuentoAplicados= array();
+        foreach ($carrito as $key => $value) {
+            if (in_array($value->id, $versionesAdmitidasCupon)) {
+                if (in_array($value->id, $clavesDeDescuentoAplicados)) {
+                    // aca
+                    var_dump($clavesDeDescuentoAplicados);
+                    exit();
+                    if ($cupon->tipo_descuento == 'porcentual') {
+                        $valorADescontar= ($value->price * $cupon->descuento_porcentual) / 100;
+                        $value->price= $value->price - $valorADescontar;
+                    }elseif ($cupon->tipo_descuento == 'monetario') {
+                        $valorADescontar= $cupon->descuento_monetario;
+                        $value->price= $value->price - $valorADescontar;
+                    }
+                    
+                    // grabar descuento para mostrar
+                    array_push($clavesDeDescuentoAplicados, $value->id);
+                    $descuentosAplicados[$value->id]['id']= $value->id;
+                    $descuentosAplicados[$value->id]['descuento_cupon']= $valorADescontar * $value->qty;
+                }
+            }
+        }
+                // dd($clavesDeDescuentoAplicados);
 
-        // foreach ($carrito as $key => $value) {
-        //     if ($value->id == ) {
-        //         # code...
-        //     }
-        // }
+        $request->session()->put('descuentosAplicados', $descuentosAplicados);
 
-        
-
-        $request->session()->flash('cupon', 'existe');
         return back();
     }
 }

@@ -18,8 +18,8 @@ class CrearTablaCarritoCompras extends Migration
             $table->increments('id');
             $table->string('codigo_compra')->unique();
             $table->integer('fk_usuario');
-            $table->float('precio_total', 8, 2);
-            $table->float('precio_envio', 8, 2);
+            $table->decimal('precio_total', 8, 2);
+            $table->decimal('precio_envio', 8, 2);
             $table->string('estado_compra');
             $table->dateTime('fecha_compra');
             $table->integer('fk_direccion_entrega');

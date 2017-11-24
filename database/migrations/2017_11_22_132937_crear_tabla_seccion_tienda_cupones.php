@@ -21,7 +21,7 @@ class CrearTablaSeccionTiendaCupones extends Migration
             $table->date('vigencia_fin');
             $table->string('tipo_descuento');
             $table->integer('descuento_porcentual')->nullable();
-            $table->integer('descuento_monetario')->nullable();
+            $table->decimal('descuento_monetario', 8, 2)->nullable();
             $table->timestamps();
         });
     }

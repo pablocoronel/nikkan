@@ -18,5 +18,5 @@ class SeccionTiendaVersion extends Model
      *
      * @var array
      */
-    protected $fillable = ['fk_producto', 'fk_color', 'fk_talle', 'stock'];
+    protected $fillable = ['fk_producto', 'fk_color', 'fk_talle', 'stock', 'codigo_producto'];
 }

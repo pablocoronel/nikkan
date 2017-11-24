@@ -20,8 +20,8 @@ class CrearTablaSeccionTiendaProducto extends Migration
             $table->string('nombre');
             $table->string('ruta');
             $table->text('descripcion');
-            $table->float('precio_original', 8, 2);
-            $table->float('precio_con_descuento', 8, 2);
+            $table->decimal('precio_original', 8, 2);
+            $table->decimal('precio_con_descuento', 8, 2);
             $table->integer('descuento');
             $table->string('coleccion');
             $table->string('guia_de_talle');
