@@ -3,9 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-use Auth;
-use App\SeccionTiendaCupon;
 
 class SeccionTiendaCuponRequest extends FormRequest
 {
@@ -31,7 +28,6 @@ class SeccionTiendaCuponRequest extends FormRequest
      */
     public function rules()
     {
-        // $cupon= new SeccionTiendaCupon();
         switch ($this->method()) {
             //crear
             case 'POST':
@@ -49,9 +45,7 @@ class SeccionTiendaCuponRequest extends FormRequest
             case 'PATCH':
                 return [
                     //
-                    // 'codigo_cupon' => 'required|'.Rule::unique('seccion_tienda_cupones')->ignore($cupon->id),
-                    // 'codigo_cupon' => 'required|unique:seccion_tienda_cupones,codigo_cupon,'.Auth::user()->id,
-                    // 'codigo_cupon' => 'required|',
+                    'codigo_cupon' => 'required|unique:seccion_tienda_cupones,codigo_cupon,'.$this->all()['id'],
                     'vigencia_inicio' => 'required|date_format:"Y-m-d"|before:vigencia_fin',
                     'vigencia_fin' => 'required|date_format:"Y-m-d"|after:vigencia_inicio',
                     'tipo_descuento' => 'required',

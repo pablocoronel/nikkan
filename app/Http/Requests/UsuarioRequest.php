@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Auth;
 
 class UsuarioRequest extends FormRequest
 {
@@ -49,12 +48,8 @@ class UsuarioRequest extends FormRequest
                     //
                     'nombre' => 'required',
                     'apellido' => 'required',
-                    // 'usuario' => 'required|unique:users,usuario,'.$this->all()['id'],
-                    // 'email' => 'required|email|unique:users,email,'.$this->all()['id'],
-                    'usuario' => 'required|unique:users,usuario',
-                    'email' => 'required|email|unique:users,email',
-                    'usuario' => 'required|unique:users,usuario',
-                    'email' => 'required|email|unique:users,email',
+                    'usuario' => 'required|unique:users,usuario,'.$this->all()['id'],
+                    'email' => 'required|email|unique:users,email,'.$this->all()['id'],
                     'fecha_nacimiento' => 'required|date_format:"Y-m-d"',
                     'tratamiento' => 'required',
                     // 'nivel' => 'required',

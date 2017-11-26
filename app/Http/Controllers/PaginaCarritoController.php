@@ -486,9 +486,6 @@ class PaginaCarritoController extends Controller
         foreach ($carrito as $key => $value) {
             if (in_array($value->id, $versionesAdmitidasCupon)) {
                 if (in_array($value->id, $clavesDeDescuentoAplicados)) {
-                    // aca
-                    var_dump($clavesDeDescuentoAplicados);
-                    exit();
                     if ($cupon->tipo_descuento == 'porcentual') {
                         $valorADescontar= ($value->price * $cupon->descuento_porcentual) / 100;
                         $value->price= $value->price - $valorADescontar;
@@ -499,6 +496,9 @@ class PaginaCarritoController extends Controller
                     
                     // grabar descuento para mostrar
                     array_push($clavesDeDescuentoAplicados, $value->id);
+                    var_dump($clavesDeDescuentoAplicados);
+                    exit();
+
                     $descuentosAplicados[$value->id]['id']= $value->id;
                     $descuentosAplicados[$value->id]['descuento_cupon']= $valorADescontar * $value->qty;
                 }

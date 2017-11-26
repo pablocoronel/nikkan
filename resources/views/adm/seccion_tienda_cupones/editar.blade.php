@@ -46,11 +46,12 @@
 					{{csrf_field()}}
 				    <fieldset>
 				    	<input name="_method" type="hidden" value="PATCH">
-
+						<input name="id" type="hidden" value="{{$objeto->id}}">
+						
 				    	<div class="form-group">
 				    		{!! Form::label('codigo_cupon', 'Código de cupón', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('codigo_cupon', $objeto->codigo_cupon, ['class' => 'form-control', 'placeholder' => $objeto->codigo_cupon, 'disabled' => 'disabled']) !!}
+								{!! Form::text('codigo_cupon', $objeto->codigo_cupon, ['class' => 'form-control', 'placeholder' => $objeto->codigo_cupon]) !!}
 								{{-- {!! Form::text('codigo_cupon', $objeto->codigo_cupon, ['class' => 'form-control', 'placeholder' => 'Código de cupón']) !!} --}}
 							</div>
 				        </div>
