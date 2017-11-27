@@ -1,0 +1,31 @@
+#contenedorTextoCentral{
+	text-align: center;
+	height: 350px;
+	/*background-color: red;*/
+}
+
+#contenedorTextoCentral h1{
+	margin-top: 100px;
+	color: #000000;
+	font-family: 'texgyreadventor-regular';
+	font-weight: 600;
+}
+
+#contenedorTextoCentral hr{
+	border-style: dotted;
+	border-color: #000000;
+}
+
+#contenedorTextoCentral p{
+	color: #999999;
+	font-family: 'texgyreadventor-regular';
+	font-weight: 400;
+	margin-top: 80px;
+	/*background-color: red;*/
+	position: relative;
+	/*bottom: 50px;*/
+}
+
+footer{
+	top: 0px;
+}

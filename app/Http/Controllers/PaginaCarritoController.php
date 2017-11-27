@@ -131,6 +131,18 @@ class PaginaCarritoController extends Controller
 
     public function vaciarCarrito(){
         Cart::destroy();
+
+        if (Session::has('cuponUsado')) {
+            Session::forget('cuponUsado');
+        }
+        if (Session::has('descuentoPorcentualCupon')) {
+            Session::forget('descuentoPorcentualCupon');
+        }
+
+        if (Session::has('descuentosAplicados')) {
+            Session::forget('descuentosAplicados');
+        }
+
         return back();
     }
 
@@ -439,6 +451,7 @@ class PaginaCarritoController extends Controller
             $cadaVersionComprada->fk_compra= $id_compra_guardada;
             $cadaVersionComprada->fk_version= $value->id;
             $cadaVersionComprada->cantidad= $value->qty;
+            $cadaVersionComprada->precio_final_cupon= $value->price;
             
             // RESTAR STOCK
             $tablaStock= SeccionTiendaVersion::where('id', '=', $value->id)->first();
@@ -472,41 +485,57 @@ class PaginaCarritoController extends Controller
                             ->pluck('fk_producto')
                             ->toArray();
 
-// dd($productosAdmitidosCupon);
 
         $versionesAdmitidasCupon= SeccionTiendaVersion::whereIn('fk_producto', $productosAdmitidosCupon)
                                 ->pluck('id')
                                 ->toArray();
-// dd($versionesAdmitidasCupon);
 
         $carrito= Cart::content();
         $valorADescontar= 0;
         $descuentosAplicados= array();
-        $clavesDeDescuentoAplicados= array();
         foreach ($carrito as $key => $value) {
             if (in_array($value->id, $versionesAdmitidasCupon)) {
-                if (in_array($value->id, $clavesDeDescuentoAplicados)) {
-                    if ($cupon->tipo_descuento == 'porcentual') {
+                if ($cupon->tipo_descuento == 'porcentual') {
+                    if (Session::has('cuponUsado')) {
+                        $valorADescontar= 0;
+                        $mostarDescuentoCupon= Session::get('descuentoPorcentualCupon'.$value->id);
+                    }else{
                         $valorADescontar= ($value->price * $cupon->descuento_porcentual) / 100;
-                        $value->price= $value->price - $valorADescontar;
-                    }elseif ($cupon->tipo_descuento == 'monetario') {
-                        $valorADescontar= $cupon->descuento_monetario;
-                        $value->price= $value->price - $valorADescontar;
+                        Session::put('descuentoPorcentualCupon'.$value->id, $valorADescontar);
+                        $mostarDescuentoCupon= $valorADescontar;
                     }
-                    
-                    // grabar descuento para mostrar
-                    array_push($clavesDeDescuentoAplicados, $value->id);
-                    var_dump($clavesDeDescuentoAplicados);
-                    exit();
 
-                    $descuentosAplicados[$value->id]['id']= $value->id;
-                    $descuentosAplicados[$value->id]['descuento_cupon']= $valorADescontar * $value->qty;
+                    $value->price= $value->price - $valorADescontar;
+                }elseif ($cupon->tipo_descuento == 'monetario') {
+                    if (Session::has('cuponUsado')) {
+                        $valorADescontar= 0;
+                        $mostarDescuentoCupon= $cupon->descuento_monetario;
+                    }else{
+                        $valorADescontar= $cupon->descuento_monetario;
+                        $mostarDescuentoCupon= $valorADescontar;   
+                    }
+
+                    $value->price= $value->price - $valorADescontar;
+                    if ($value->price < 0) {
+                        $value->price= 0;    
+                    }
                 }
+                
+                $descuentosAplicados[$value->id]['id']= $value->id;
+                $descuentosAplicados[$value->id]['descuento_cupon']= $mostarDescuentoCupon;
+            
+            }else{
+                $descuentosAplicados[$value->id]['id']= $value->id;
+                $descuentosAplicados[$value->id]['descuento_cupon']= 0;
             }
+
         }
-                // dd($clavesDeDescuentoAplicados);
+        // marcar cupon como usado
+        Session::put('cuponUsado', 'Ya ingreso un cupón');
 
         $request->session()->put('descuentosAplicados', $descuentosAplicados);
+
+        // dd($descuentosAplicados);
 
         return back();
     }

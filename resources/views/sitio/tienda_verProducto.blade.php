@@ -48,8 +48,25 @@
         		<img src="{{asset($producto->guia_de_talle)}}" class="img img-responsive" alt="">
 			</div>
 
-			<div class="col-xs-12 col-sm-6">
-				@if(Session::has('noExisteVersion'))
+			<div class="col-xs-12 col-sm-6" id="cajaTalleColor">
+
+        {{ Form::open(['action' => ['PaginaCarritoController@agregarAlCarrito'], 'method' => 'post', 'class' => 'form-horizontal']) }}
+            {{csrf_field()}}
+
+            {{ Form::hidden('idProducto', $producto->id) }}
+            <h3>Talles</h3>
+            {{ Form::select('talle', $listadoTalles) }}
+        
+            <h3>Colores</h3>
+            {{ Form::select('color', $listadoColores) }}
+
+            {{ Form::number('cantidadElegidos', 1, ['min' => '1']) }}
+
+            {{ Form::submit('AÑADIR AL CARRITO') }}
+
+        {!! Form::close() !!}
+				
+        @if(Session::has('noExisteVersion'))
 					<div class="alert alert-error">
 						<p>{{Session::get('noExisteVersion')}}</p>
 					</div>
@@ -58,22 +75,6 @@
             <p>{{Session::get('stockNoDisponible')}}</p>
           </div>
 				@endif
-
-   			{{ Form::open(['action' => ['PaginaCarritoController@agregarAlCarrito'], 'method' => 'post', 'class' => 'form-horizontal']) }}
-        		{{csrf_field()}}
-
-            {{ Form::hidden('idProducto', $producto->id) }}
-        		<h3>Talles</h3>
-				    {{ Form::select('talle', $listadoTalles) }}
-				
-        		<h3>Colores</h3>
-        		{{ Form::select('color', $listadoColores) }}
-
-        		{{ Form::number('cantidadElegidos', 1, ['min' => '1']) }}
-
-        		{{ Form::submit('AÑADIR AL CARRITO') }}
-
-			{!! Form::close() !!}
 			</div>
 
         </div>

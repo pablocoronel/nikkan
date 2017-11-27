@@ -27,5 +27,23 @@
         @endforeach
       </div>
     </div>
+
+    <div class="container" id="contenedorTextoCentral">
+      <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+        <h1>{{ $portada->titulo }}</h1>
+        
+        <div class="col-xs-5">
+          <hr>
+        </div>
+        <div class="col-xs-2">
+          <img src="{{asset('images/varios/gato.png')}}" alt="">
+        </div>
+        <div class="col-xs-5">
+          <hr>
+        </div>
+
+        <p>{{ strip_tags($portada->texto) }}</p>
+      </div>
+    </div>
 @include('sitio.partial.footer')
 @endsection

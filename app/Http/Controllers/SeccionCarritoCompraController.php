@@ -10,7 +10,7 @@ use App\SeccionCarritoDireccion;
 use App\SeccionCarritoVersionComprada;
 
 use App\SeccionTiendaVersion;
-
+use App\Usuario;
 use DB;
 
 class SeccionCarritoCompraController extends Controller
@@ -84,7 +84,26 @@ class SeccionCarritoCompraController extends Controller
 
         ->where('seccion_carrito_versiones_compradas.fk_compra', '=', $id)->get();
 
-        return view('adm.seccion_carrito_compras.ver', ['variable' => $objeto, 'nombreDeAccion' => 'Ver compra']);
+
+        $idUsuario= SeccionCarritoCompra::where('id', '=', $objeto[0]->fk_compra)
+                            ->pluck('fk_usuario');
+
+
+
+        $cliente= Usuario::where('id', '=', $idUsuario)->get()->toArray();
+        // dd($cliente);
+
+        $idDireccionEntrega= SeccionCarritoCompra::where('id', '=', $objeto[0]->fk_compra)
+                            ->pluck('fk_direccion_entrega');
+
+        $direccionEntrega= SeccionCarritoDireccion::where('id', '=', $idDireccionEntrega)->get()->toArray();
+
+        $idDireccionFacturacion= SeccionCarritoCompra::where('id', '=', $objeto[0]->fk_compra)
+                            ->pluck('fk_direccion_facturacion');
+
+        $direccionFacturacion= SeccionCarritoDireccion::where('id', '=', $idDireccionFacturacion)->get()->toArray();
+
+        return view('adm.seccion_carrito_compras.ver', ['variable' => $objeto, 'cliente' => $cliente, 'direccionEntrega' => $direccionEntrega, 'direccionFacturacion' => $direccionFacturacion, 'nombreDeAccion' => 'Ver compra']);
     }
 
     /**

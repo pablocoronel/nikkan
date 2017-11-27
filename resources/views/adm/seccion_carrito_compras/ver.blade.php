@@ -12,6 +12,10 @@
 	</div>
 	<!-- /.row -->
 
+	
+
+
+	{{-- compras --}}
 	<div class="row">
 	    <div class="col-xs-12 col-md-8 col-md-offset-2">
 	        <div class="panel panel-default">
@@ -65,9 +69,10 @@
 							<td>Producto</td>
 							<td>Precio/U</td>
 							<td>Descuento</td>
-							<td>Precio con desc.</td>
+							<td>Precio c/desc.</td>
 							<td>Cantidad</td>
-							<td>Precio subtotal</td>
+							<td>Desc p/cupón</td>
+							<td>Precio final</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -97,7 +102,10 @@
 									{{$cadaCompra['cantidad']}}
 								</td>
 								<td>
-									${{$cadaCompra['productoPrecioConDescuento'] * $cadaCompra['cantidad']}}
+									${{ ($cadaCompra['productoPrecioConDescuento'] - $cadaCompra['precio_final_cupon']) * $cadaCompra['cantidad']}}
+								</td>
+								<td>
+									${{$cadaCompra['precio_final_cupon']}}
 								</td>
 							</tr>
 						@endforeach
@@ -107,5 +115,161 @@
 			</div>
 	    </div>
 	</div>
+
+	{{-- datos de cliente --}}
+	<div class="row">
+	    <div class="col-xs-12 col-md-8 col-md-offset-2">
+	        <div class="panel panel-default">
+	        	<div class="panel-heading">
+	                <h3 class="panel-title">Datos de cliente</h3>
+	            </div>
+	            
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Usuario</td>
+							<td>{{$cliente[0]['usuario']}}</td>
+						</tr>
+
+						<tr>
+							<td>Nombre</td>
+							<td>{{$cliente[0]['nombre']}}</td>
+						</tr>
+
+						<tr>
+							<td>Apellido</td>
+							<td>{{$cliente[0]['apellido']}}</td>
+						</tr>
+
+						<tr>
+							<td>Email</td>
+							<td>{{$cliente[0]['email']}}</td>
+						</tr>
+
+						<tr>
+							<td>Fecha de nacimiento</td>
+							<td>{{$cliente[0]['fecha_nacimiento']}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+	    </div>
+	</div>
+
+	{{-- direccion de envio --}}
+	<div class="row">
+	    <div class="col-xs-12 col-md-8 col-md-offset-2">
+	        <div class="panel panel-default">
+	        	<div class="panel-heading">
+	                <h3 class="panel-title">Dirección de entrega</h3>
+	            </div>
+	            
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Dirección 1</td>
+							<td>{{$direccionEntrega[0]['direccion']}}</td>
+						</tr>
+
+						<tr>
+							<td>Dirección 2</td>
+							<td>{{$direccionEntrega[0]['direccion2']}}</td>
+						</tr>
+
+						<tr>
+							<td>Código postal</td>
+							<td>{{$direccionEntrega[0]['codigo_postal']}}</td>
+						</tr>
+
+						<tr>
+							<td>Ciudad</td>
+							<td>{{$direccionEntrega[0]['ciudad']}}</td>
+						</tr>
+
+						<tr>
+							<td>Provincia</td>
+							<td>{{$direccionEntrega[0]['provincia']}}</td>
+						</tr>
+						<tr>
+							<td>País</td>
+							<td>{{$direccionEntrega[0]['pais']}}</td>
+						</tr>
+						<tr>
+							<td>Teléfono celular</td>
+							<td>{{$direccionEntrega[0]['telefono_celular']}}</td>
+						</tr>
+						<tr>
+							<td>Teléfono de domicilio</td>
+							<td>{{$direccionEntrega[0]['telefono_domicilio']}}</td>
+						</tr>
+						<tr>
+							<td>Comentarios</td>
+							<td>{{$direccionEntrega[0]['comentario']}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+	    </div>
+	</div>
+
+	{{-- direccion de envio --}}
+	<div class="row">
+	    <div class="col-xs-12 col-md-8 col-md-offset-2">
+	        <div class="panel panel-default">
+	        	<div class="panel-heading">
+	                <h3 class="panel-title">Dirección de facturación</h3>
+	            </div>
+	            
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Dirección 1</td>
+							<td>{{$direccionFacturacion[0]['direccion']}}</td>
+						</tr>
+
+						<tr>
+							<td>Dirección 2</td>
+							<td>{{$direccionFacturacion[0]['direccion2']}}</td>
+						</tr>
+
+						<tr>
+							<td>Código postal</td>
+							<td>{{$direccionFacturacion[0]['codigo_postal']}}</td>
+						</tr>
+
+						<tr>
+							<td>Ciudad</td>
+							<td>{{$direccionFacturacion[0]['ciudad']}}</td>
+						</tr>
+
+						<tr>
+							<td>Provincia</td>
+							<td>{{$direccionFacturacion[0]['provincia']}}</td>
+						</tr>
+						<tr>
+							<td>País</td>
+							<td>{{$direccionFacturacion[0]['pais']}}</td>
+						</tr>
+						<tr>
+							<td>Teléfono celular</td>
+							<td>{{$direccionFacturacion[0]['telefono_celular']}}</td>
+						</tr>
+						<tr>
+							<td>Teléfono de domicilio</td>
+							<td>{{$direccionFacturacion[0]['telefono_domicilio']}}</td>
+						</tr>
+						<tr>
+							<td>Comentarios</td>
+							<td>{{$direccionFacturacion[0]['comentario']}}</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+	    </div>
+	</div>
+
 
 @endsection

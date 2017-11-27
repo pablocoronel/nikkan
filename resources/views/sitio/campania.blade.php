@@ -3,7 +3,7 @@
 @section('titulo', 'Campaña')
 
 @section('scriptsParticulares')
-  {{-- <link rel="stylesheet" href="{{asset('css/seccionCampania.css')}}"> --}}
+  <link rel="stylesheet" href="{{asset('css/seccionCampania.css')}}">
 @endsection
 
 @section('contenido')

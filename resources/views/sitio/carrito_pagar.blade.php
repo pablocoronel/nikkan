@@ -50,6 +50,7 @@
             <td>Descripción</td>
             <td>Precio unitario</td>
             <td>Cantidad</td>
+            <td>Desc. cupón/U</td>
             <td>Total</td>
           </th>
         </thead>
@@ -63,30 +64,42 @@
                   @endif
                 @endforeach
 
-              <tr>
-            <td>
-              <img src="{{asset($item->rutaProducto)}}" class="img img-responsive" alt="">
-            </td>
-            
-            <td>
-              <p>Nombre: {{$item->nombreProducto}} {{$item->nombreColor}}</p>
-              <p>Talle: {{$item->nombreTalle}}</p>
-              <p>Código: {{$item->codigo_producto}}</p>              
-            </td>
-            <td>
-              ${{$item->precioConDescuento}}
-            </td>
-                <td>
-                  {{$cantidadActual}}
-                </td>
-                <td>
-                  ${{$item->precioConDescuento * $cantidadActual}}
-                </td>
-              </tr>
+            <tr>
+              <td>
+                <img src="{{asset($item->rutaProducto)}}" class="img img-responsive" alt="">
+              </td>
+              
+              <td>
+                <p>Nombre: {{$item->nombreProducto}} {{$item->nombreColor}}</p>
+                <p>Talle: {{$item->nombreTalle}}</p>
+                <p>Código: {{$item->codigo_producto}}</p>              
+              </td>
+              <td>
+                ${{$item->precioConDescuento}}
+              </td>
+              <td>
+                {{$cantidadActual}}
+              </td>
+              <td>
+                @if(Session::has('descuentosAplicados'))
+                @if(isset(Session::get('descuentosAplicados')[$item->id]))
+                  @if(in_array($item->id, Session::get('descuentosAplicados')[$item->id]))
+                    ${{Session::get("descuentosAplicados")[$item->id]['descuento_cupon']}}
+                  @endif
+                @endif
+              @endif
+              </td>
+              <td>
+                @php($producto= Cart::get($rowId))
+                @php($precio_con_cupon= $producto->price)
+                ${{$precio_con_cupon * $cantidadActual}}
+              </td>
+            </tr>
               @endforeach
 
               {{-- subtotal productos --}}
               <tr id="filaTotal">
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -99,6 +112,7 @@
               </tr>
 
               <tr id="filaTotal">
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -115,6 +129,7 @@
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
                 <td>
                   Total:
                 </td>
@@ -124,13 +139,14 @@
               </tr>
 
 
-              <tr id="filaTotal">
+              {{-- <tr id="filaTotal">
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-              </tr>
+                <td></td>
+              </tr> --}}
           </tbody>
       </table>
       </div>

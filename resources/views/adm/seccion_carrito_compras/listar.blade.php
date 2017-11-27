@@ -47,7 +47,7 @@
 							{!! Form::close() !!}
 
 							<td>${{$key['precio_total']}}</td>
-							<td><a class="btn btn-primary" target="_blank" href="{{action('SeccionCarritoCompraController@show', $key['id'])}}">Ver artículos</a></td>
+							<td><a class="btn btn-primary" target="_blank" href="{{action('SeccionCarritoCompraController@show', $key['id'])}}">Ver detalle</a></td>
 						</tr>
 
 						@endforeach
@@ -57,6 +57,7 @@
 							<td></td>
 							<td></td>
 							<td>{{$variable->links()}}</td>
+							<td></td>
 							<td></td>
 							<td></td>
 							<td></td>					

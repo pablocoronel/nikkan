@@ -19,7 +19,7 @@ class CrearTablaCarritoArticulosComprados extends Migration
             $table->integer('fk_compra');
             $table->integer('fk_version');
             $table->integer('cantidad');
-
+            $table->decimal('precio_final_cupon', 8, 2);
             $table->timestamps();
         });
     }

@@ -31,7 +31,7 @@
             <td>Descripción</td>
             <td>Precio unitario</td>
             <td>Cantidad</td>
-            <td>Desc. cupón</td>
+            <td>Desc. cupón/U</td>
             <td>Quitar</td>
             <td>Total</td>
           </th>
@@ -73,8 +73,10 @@
 
             <td>
               @if(Session::has('descuentosAplicados'))
-                @if(in_array($item->id, Session::get('descuentosAplicados')[$item->id]))
-                  ${{Session::get("descuentosAplicados")[$item->id]['descuento_cupon']}}
+                @if(isset(Session::get('descuentosAplicados')[$item->id]))
+                  @if(in_array($item->id, Session::get('descuentosAplicados')[$item->id]))
+                    ${{Session::get("descuentosAplicados")[$item->id]['descuento_cupon']}}
+                  @endif
                 @endif
               @endif
             </td>
@@ -89,7 +91,10 @@
               </form>
             </td>
             <td>
-              ${{$item->precioConDescuento * $cantidadActual}}
+              @php($producto= Cart::get($rowId))
+              @php($precio_con_cupon= $producto->price)
+
+              ${{ $precio_con_cupon * $cantidadActual}}
             </td>
           </tr>
           @endforeach
@@ -115,7 +120,7 @@
             <td>
               {{ Form::open(['action' => ['PaginaCarritoController@ingresarCupon'], 'method' => 'post', 'class' => 'form-horizontal']) }}
                 {{csrf_field()}}
-                {!! Form::text('cupon', '', ['class' => 'form-control', 'placeholder' => 'Cupón']) !!}
+                {!! Form::text('cupon', '', ['class' => 'form-control', 'placeholder' => 'Cupón', 'required' => 'required']) !!}
 
                 {!! Form::submit('Ingresar', ['class' => 'btn btn-xs btn-active btn-block']) !!}
               {!! Form::close() !!}
@@ -123,6 +128,10 @@
             <td>
               @if(Session::has('cupon'))
                 {{Session::get('cupon')}}
+              @endif
+
+              @if(Session::has('cuponUsado'))
+                {{ Session::get('cuponUsado') }}
               @endif
             </td>
             <td></td>

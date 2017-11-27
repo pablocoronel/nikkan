@@ -15,6 +15,9 @@
 #contenedorGaleriaProductoDetalle #contenedorImagenGrande{
     text-align: center;
     /*border: 1px solid #EEEEEE;*/
+    /*background-color: red;*/
+    min-height: 520px;
+    max-height: 520px;
 }
 
 #contenedorGaleriaProductoDetalle #contenedorImagenGrande img{
@@ -46,11 +49,21 @@
 }
 
  /*fin galeria*/
+ #contenedorDetalles{
+    /*background-color: blue;*/
+    min-height: 480px;
+ }
 
  #contenedorDetalles h1{
     font-family: 'texgyreadventor-regular';
     color: #000000;
+    margin-top: 0px;
  }
+
+  #contenedorDetalles h2{
+    margin-top: 0px;  
+    /*background-color: red;*/
+  }
 
   #contenedorDetalles h2 #precioTachado{
     font-family: 'texgyreadventor-regular';
@@ -65,6 +78,12 @@
     color: #999999;
     font-size: 16px;
     font-family: 'texgyreadventor-regular';
+ }
+
+ #cajaGuia, #cajaTalleColor{
+    /*background-color: red;*/
+    position: relative;
+    bottom: -30px;
  }
 
  #cajaGuia img{

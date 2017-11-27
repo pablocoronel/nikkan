@@ -31,6 +31,11 @@
 						<div id="contenedorNombreProducto">
 							<p>{{$cadaProducto->nombre}}</p>
 						</div>
+
+						<div id="linitaProducto">
+							<hr>
+						</div>
+
 						<div id="contenedorPrecio">
 							<p>
 								@if($cadaProducto->descuento > 0)
