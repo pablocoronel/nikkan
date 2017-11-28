@@ -35,8 +35,8 @@ class EmailDeContacto extends Mailable
      */
     public function build()
     {
-        $remitente= 'prueba@mail.com';
-        $destinatario= 'prueba@mail.com';
+        $remitente= 'soporte@osole.es';
+        $destinatario= 'soporte@osole.es';
         $asunto= 'Contacto - Nikka-n';
 
         $this->from($remitente)

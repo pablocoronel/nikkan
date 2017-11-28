@@ -8,6 +8,29 @@
 	width: 400px;
 }
 
+#cajaDeTexto h3{
+	color: #000000;
+	font-size: 60px;
+	font-family: 'texgyreadventor-regular';
+}
+
+@media screen and (max-width: 768px) {
+	#cajaDeTexto{
+		background-color: transparent;
+		color: #000000;
+		top: 20%;
+		left: 65%;
+		height: 150px;
+		width: 100px;
+	}
+
+	#cajaDeTexto h3{
+		color: #000000;
+		font-size: 20px;
+		font-family: 'texgyreadventor-regular';
+	}
+}
+
 /*destacados*/
 #contenedorDestacados{
 	position: relative;

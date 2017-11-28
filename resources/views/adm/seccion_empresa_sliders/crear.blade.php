@@ -46,7 +46,7 @@
 					{{csrf_field()}}
 				    <fieldset>
 				        <div class="form-group">
-				        	{!! Form::label('imagen', 'Imagen (1900x750px)', ['class' => 'col-sm-3 control-label']) !!}
+				        	{!! Form::label('imagen', 'Imagen (590x790px)', ['class' => 'col-sm-3 control-label']) !!}
 				            <div class="col-sm-7">
 				        		{!! Form::file('imagen') !!}
 					        </div>
