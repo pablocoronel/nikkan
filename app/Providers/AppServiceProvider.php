@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 
 use App\RedesSociales;
 use App\DatoEmpresa;
-use App\logo;
+use App\Logo;
 
 class AppServiceProvider extends ServiceProvider
 {

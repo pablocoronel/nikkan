@@ -155,12 +155,12 @@
                   <a href="{{url('carrito/elegir/transporte')}}" class="btn btn-primary" id="btn-siguiente">Atrás</a>
               </div>
 
-  <div class="container">
+  {{-- <div class="container">
     <a href="{{url('carrito/elegir/pago-guardar')}}" class="btn btn-primary">Simular pago en administrador</a>
-  </div>
+  </div> --}}
 
   <div class="container">
-    <a href="<?php echo $preference['response']['sandbox_init_point']; ?>" target="_blank">Pagar con MercadoPago</a>
+    <a class="btn btn-success" href="<?php echo $preference['response']['sandbox_init_point']; ?>" target="_blank">Pagar con MercadoPago</a>
   </div>
 </div>
 @include('sitio.partial.footer')

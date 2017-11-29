@@ -351,26 +351,71 @@ class PaginaCarritoController extends Controller
         $collection = Collection::make($coleccionVersiones);
         $versionUnica= $collection->unique();
 
-        // precios:
-        $precio_productos= Cart::total();
-        $precio_envio= Session::get('precio_envio');
+        $precio_productos= str_replace(",", "", Cart::total());
+
+        if (Session::has('precio_envio')) {
+            $precio_envio= Session::get('precio_envio');
+        }else{
+            $precio_envio= 0;
+        }
+
         $totalFinal= $precio_productos + $precio_envio;
+        // dd($totalFinal);
         Session::put('precio_total', $totalFinal);
 
 
-        // Mercado pago
+        // Mercado pago *******************************************************
+        // terminar con /
+        $dominioDelSitio= "http://localhost/nikkan/public/";
+
         $mp = new MP ("618512736778458", "YOBMGVLitH7Y6bfGJ4IC6rDqVTA0lIbQ");
         $mp->sandbox_mode(TRUE);
+
+        $itemsParaMP= array();
+        $carritoMP= Cart::content();
+
+        foreach ($carritoMP as $key => $value) {
+            $versionMP= SeccionTiendaVersion::join('seccion_tienda_productos', 'seccion_tienda_productos.id', '=', 'seccion_tienda_versiones.fk_producto')
+                        ->join('seccion_tienda_talles', 'seccion_tienda_talles.id', '=', 'seccion_tienda_versiones.fk_talle')
+                        ->join('seccion_tienda_colores', 'seccion_tienda_colores.id', '=', 'seccion_tienda_versiones.fk_color')
+                        ->select(DB::raw('seccion_tienda_versiones.*, 
+                                            seccion_tienda_productos.nombre as nombreProducto,
+                                            seccion_tienda_productos.precio_con_descuento as precioConDescuento,
+                                            seccion_tienda_productos.ruta as rutaProducto,
+                                            seccion_tienda_productos.descripcion as descripcionProducto,
+
+                                            seccion_tienda_talles.nombre as nombreTalle,
+                                            seccion_tienda_colores.nombre as nombreColor'))
+                        ->where('seccion_tienda_versiones.id', '=', $value->id)
+                        ->first();
+
+
+            $agregarItemMP = array(
+                'id' => $versionMP->codigo_producto,
+                "picture_url" => $dominioDelSitio.$versionMP->codigo_producto,
+                "title" => $versionMP->nombreProducto,
+                "quantity" => (int)$value->qty,
+                "currency_id" => "ARS",
+                "unit_price" => $value->price
+                );
+
+            array_push($itemsParaMP, $agregarItemMP);
+        }
+
+
         $preference_data = array (
-                            "items" => array (
-                                array (
-                                    "title" => "Test",
-                                    "quantity" => 1,
-                                    "currency_id" => "ARS",
-                                    "unit_price" => 10.4
+                            "items" => $itemsParaMP,
+                            "back_urls" => array(
+                                    // "success" => "http://nikka-n.com/carrito/elegir/pago-guardar",
+                                    // "failure" => "http://nikka-n.com/carrito/elegir/pago",
+                                    // "pending" => "http://nikka-n.com/carrito/elegir/pago-guardar"
+                                
+                                    "success" => $dominioDelSitio."carrito/elegir/pago-guardar",
+                                    "failure" => $dominioDelSitio."carrito/elegir/pago",
+                                    "pending" => $dominioDelSitio."carrito/elegir/pago-guardar"
                                 )
-                            )
                         );
+        // dd($preference_data);
 
         $preference = $mp->create_preference ($preference_data);
 
