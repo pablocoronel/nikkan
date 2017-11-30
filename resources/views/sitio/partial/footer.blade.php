@@ -51,5 +51,17 @@
 				@endforeach
 			</ul>
 		</div>
+
+	</div>
+
+	{{-- afip --}}
+	<div class="container" id="contenedorPdfAfip">
+		<div class="row">
+			<div class="col-xs-12">
+			<a href="{{asset('documents/afip/afip.pdf')}}" target="_blank">
+				Constancia de inscripción en AFIP
+			</a>
+			</div>
+		</div>
 	</div>
 </footer>

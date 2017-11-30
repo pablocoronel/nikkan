@@ -160,7 +160,7 @@
   </div> --}}
 
   <div class="container">
-    <a class="btn btn-success" href="<?php echo $preference['response']['sandbox_init_point']; ?>" target="_blank">Pagar con MercadoPago</a>
+    <a class="btn btn-success" href="<?php echo $preference['response']['sandbox_init_point']; ?>">Pagar con MercadoPago</a>
   </div>
 </div>
 @include('sitio.partial.footer')

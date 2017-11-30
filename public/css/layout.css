@@ -293,3 +293,18 @@ footer #redes ul li a img{
     text-align: left;
   }
 }
+
+/*afip*/
+#contenedorPdfAfip{
+  text-align: center;
+  background-color: #FFFFFF !important;
+  height: 25px;
+  position: relative;
+  bottom: -55px;
+}
+
+#contenedorPdfAfip a{
+  color: #777777;
+  font-size: 12px;
+  text-decoration: none;
+}

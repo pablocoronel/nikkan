@@ -66,15 +66,21 @@
 
         {!! Form::close() !!}
 				
-        @if(Session::has('noExisteVersion'))
-					<div class="alert alert-error">
-						<p>{{Session::get('noExisteVersion')}}</p>
-					</div>
-        @elseif(Session::has('stockNoDisponible'))
-          <div class="alert alert-warning">
-            <p>{{Session::get('stockNoDisponible')}}</p>
-          </div>
-				@endif
+        <div id="cajaMensajes">
+          @if(Session::has('noExisteVersion'))
+            <div class="alert alert-error">
+              <p>{{Session::get('noExisteVersion')}}</p>
+            </div>
+          @elseif(Session::has('stockNoDisponible'))
+            <div class="alert alert-warning">
+              <p>{{Session::get('stockNoDisponible')}}</p>
+            </div>
+          @elseif(Session::has('agregado'))
+            <div class="alert alert-success">
+              <p>{{Session::get('agregado')}}</p>
+            </div>
+          @endif
+        </div>
 			</div>
 
         </div>

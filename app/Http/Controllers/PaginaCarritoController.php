@@ -112,16 +112,7 @@ class PaginaCarritoController extends Controller
             // agregado al carrito
             Cart::add(['id' => $version->id, 'name' => $version->nombreProducto, 'qty' => $request->cantidadElegidos, 'price' => $version->precioProducto])->associate('SeccionTiendaProducto');
 
-            // actualizar stock
-            // $version->stock = $version->stock - $request->cantidadElegidos;
-            // $version->save();
-
-            // guardar compra
-            // $compra= new SeccionCarritoCompra();
-            // $compra->fk_version= $version->id;
-            // $compra->stock_reservado = $request->cantidadElegidos;
-            // $compra->estado_pago= 'reservado';
-            // $compra->save();
+            $request->session()->flash('agregado', 'Agregado al carrito');
 
             return back();
         }
@@ -402,14 +393,20 @@ class PaginaCarritoController extends Controller
             array_push($itemsParaMP, $agregarItemMP);
         }
 
+        $agregarCostoEnvio = array(
+                'id' => 'costo_envio',
+                "picture_url" => '',
+                "title" => 'costo de envio',
+                "quantity" => 1,
+                "currency_id" => "ARS",
+                "unit_price" => $precio_envio);
+
+        array_push($itemsParaMP, $agregarCostoEnvio);
+
 
         $preference_data = array (
                             "items" => $itemsParaMP,
                             "back_urls" => array(
-                                    // "success" => "http://nikka-n.com/carrito/elegir/pago-guardar",
-                                    // "failure" => "http://nikka-n.com/carrito/elegir/pago",
-                                    // "pending" => "http://nikka-n.com/carrito/elegir/pago-guardar"
-                                
                                     "success" => $dominioDelSitio."carrito/elegir/pago-guardar",
                                     "failure" => $dominioDelSitio."carrito/elegir/pago",
                                     "pending" => $dominioDelSitio."carrito/elegir/pago-guardar"
