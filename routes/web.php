@@ -63,7 +63,7 @@ Route::group(['prefix' => 'carrito'], function() {
 		Route::post('transporte/proceso', 'PaginaCarritoController@almacenarTransporte');
 		
 		Route::get('pago', 'PaginaCarritoController@verFormularioDePago');
-		Route::get('pago-guardar', 'PaginaCarritoController@guardarCompra');
+		Route::get('pago-guardar/{resultadoPago}', 'PaginaCarritoController@guardarCompra');
 	});
 });
 

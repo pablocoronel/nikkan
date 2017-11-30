@@ -28,12 +28,19 @@
 
               
               {{-- exito --}}
-              @if(Session::has('guardado'))
+              @if(Session::has('guardadoExito'))
                   <div class="alert alert-success" role="alert">
-                      {{Session::get('guardado', '')}}
+                      {{Session::get('guardadoExito', '')}}
                   </div>
-              @endif            
-              
+              @elseif(Session::has('guardadoPendiente'))
+                  <div class="alert alert-warning" role="alert">
+                      {{Session::get('guardadoPendiente', '')}}
+                  </div>
+              @elseif(Session::has('guardadoFallo'))
+                  <div class="alert alert-warning" role="alert">
+                      {{Session::get('guardadoFallo', '')}}
+                  </div>
+              @endif              
               
           </div>  
       </div>

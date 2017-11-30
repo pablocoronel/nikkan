@@ -30,6 +30,7 @@ use App\SeccionTiendaCuponProducto;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Carbon\Carbon;
+use App\Shipnow;
 
 use DB;
 use Session;
@@ -406,11 +407,17 @@ class PaginaCarritoController extends Controller
 
         $preference_data = array (
                             "items" => $itemsParaMP,
+                            "payer" => array(
+                                "name" => Auth::user()->nombre,
+                                "surname" => Auth::user()->apellido,
+                                "email" => Auth::user()->email
+                            ),
                             "back_urls" => array(
-                                    "success" => $dominioDelSitio."carrito/elegir/pago-guardar",
-                                    "failure" => $dominioDelSitio."carrito/elegir/pago",
-                                    "pending" => $dominioDelSitio."carrito/elegir/pago-guardar"
-                                )
+                                "success" => $dominioDelSitio."carrito/elegir/pago-guardar/success",
+                                "failure" => $dominioDelSitio."carrito/elegir/pago-guardar/failure",
+                                "pending" => $dominioDelSitio."carrito/elegir/pago-guardar/pending"
+                            ),
+                            "notification_url" => $dominioDelSitio."notifications"
                         );
         // dd($preference_data);
 
@@ -426,90 +433,176 @@ class PaginaCarritoController extends Controller
 
     }
 
-    public function guardarCompra(){
-        // direccion de entrega
-        $direccion_entrega= new SeccionCarritoDireccion();
-        $direccion_entrega->fk_usuario= Auth::id();
-        $direccion_entrega->tipo= 'entrega';
-        $direccion_entrega->direccion= Session::get('entrega_direccion');
-        $direccion_entrega->direccion2= Session::get('entrega_direccion2');
-        $direccion_entrega->codigo_postal= Session::get('entrega_codigo_postal');
-        $direccion_entrega->ciudad= Session::get('entrega_ciudad');
-        $direccion_entrega->provincia= Session::get('entrega_provincia');
-        $direccion_entrega->pais= Session::get('entrega_pais');
-        $direccion_entrega->telefono_domicilio= Session::get('entrega_telefono_domicilio');
-        $direccion_entrega->telefono_celular= Session::get('entrega_telefono_celular');
-        $direccion_entrega->comentario= Session::get('entrega_comentario');
+    public function guardarCompra($resultadoPago){
+        if ($resultadoPago == 'success' || $resultadoPago == 'pending') {
+            // direccion de entrega
+            $direccion_entrega= new SeccionCarritoDireccion();
+            $direccion_entrega->fk_usuario= Auth::id();
+            $direccion_entrega->tipo= 'entrega';
+            $direccion_entrega->direccion= Session::get('entrega_direccion');
+            $direccion_entrega->direccion2= Session::get('entrega_direccion2');
+            $direccion_entrega->codigo_postal= Session::get('entrega_codigo_postal');
+            $direccion_entrega->ciudad= Session::get('entrega_ciudad');
+            $direccion_entrega->provincia= Session::get('entrega_provincia');
+            $direccion_entrega->pais= Session::get('entrega_pais');
+            $direccion_entrega->telefono_domicilio= Session::get('entrega_telefono_domicilio');
+            $direccion_entrega->telefono_celular= Session::get('entrega_telefono_celular');
+            $direccion_entrega->comentario= Session::get('entrega_comentario');
 
-        $direccion_entrega->save();
+            $direccion_entrega->save();
 
-        // direccion de facturacion
-        $direccion_facturacion= new SeccionCarritoDireccion();
-        $direccion_facturacion->fk_usuario= Auth::id();
-        $direccion_facturacion->tipo= 'facturacion';
-        $direccion_facturacion->direccion= Session::get('facturacion_direccion');
-        $direccion_facturacion->direccion2= Session::get('facturacion_direccion2');
-        $direccion_facturacion->codigo_postal= Session::get('facturacion_codigo_postal');
-        $direccion_facturacion->ciudad= Session::get('facturacion_ciudad');
-        $direccion_facturacion->provincia= Session::get('facturacion_provincia');
-        $direccion_facturacion->pais= Session::get('facturacion_pais');
-        $direccion_facturacion->telefono_domicilio= Session::get('facturacion_telefono_domicilio');
-        $direccion_facturacion->telefono_celular= Session::get('facturacion_telefono_celular');
-        $direccion_facturacion->comentario= Session::get('facturacion_comentario');
+            // direccion de facturacion
+            $direccion_facturacion= new SeccionCarritoDireccion();
+            $direccion_facturacion->fk_usuario= Auth::id();
+            $direccion_facturacion->tipo= 'facturacion';
+            $direccion_facturacion->direccion= Session::get('facturacion_direccion');
+            $direccion_facturacion->direccion2= Session::get('facturacion_direccion2');
+            $direccion_facturacion->codigo_postal= Session::get('facturacion_codigo_postal');
+            $direccion_facturacion->ciudad= Session::get('facturacion_ciudad');
+            $direccion_facturacion->provincia= Session::get('facturacion_provincia');
+            $direccion_facturacion->pais= Session::get('facturacion_pais');
+            $direccion_facturacion->telefono_domicilio= Session::get('facturacion_telefono_domicilio');
+            $direccion_facturacion->telefono_celular= Session::get('facturacion_telefono_celular');
+            $direccion_facturacion->comentario= Session::get('facturacion_comentario');
 
-        $direccion_facturacion->save();
+            $direccion_facturacion->save();
 
-        // compra del cliente
-        $compra= new SeccionCarritoCompra();
+            // compra del cliente
+            $compra= new SeccionCarritoCompra();
 
-        $compra->codigo_compra= uniqid();
-        $compra->fk_usuario= Auth::id();
-        $compra->precio_envio= Session::get('precio_envio');
-        $compra->precio_total= Session::get('precio_total');
-        $compra->estado_compra= 'iniciado';
-        $compra->fecha_compra= Carbon::now('America/Argentina/Buenos_Aires');
-
-        $fk_direccion_entrega= SeccionCarritoDireccion::where('tipo', '=', 'entrega')
-                                    ->select('id')
-                                    ->latest('id')
-                                    ->first();
-        $compra->fk_direccion_entrega= $fk_direccion_entrega->id;
-
-        $fk_direccion_facturacion= SeccionCarritoDireccion::where('tipo', '=', 'facturacion')
-                                    ->select('id')
-                                    ->latest('id')
-                                    ->first();
-        $compra->fk_direccion_facturacion= $fk_direccion_facturacion->id;
-
-        $compra->save();
-
-        // cada articulo comprado
-        $id_compra_guardada= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
-                                ->select('id')
-                                ->max('id');
-        $carrito= Cart::content();
-        foreach ($carrito as $key => $value) {
-            $cadaVersionComprada= new SeccionCarritoVersionComprada();
-            $cadaVersionComprada->fk_compra= $id_compra_guardada;
-            $cadaVersionComprada->fk_version= $value->id;
-            $cadaVersionComprada->cantidad= $value->qty;
-            $cadaVersionComprada->precio_final_cupon= $value->price;
-            
-            // RESTAR STOCK
-            $tablaStock= SeccionTiendaVersion::where('id', '=', $value->id)->first();
-            $tablaStock->stock= $tablaStock->stock - $value->qty;
-            if ($tablaStock->stock < 0) {
-                $tablaStock->stock= 0;
+            $guardarEstadoCompra= '';
+            if ($resultadoPago == 'success') {
+                $guardarEstadoCompra= 'pagado';
+            }elseif ($resultadoPago == 'pending') {
+                $guardarEstadoCompra= 'iniciado';
             }
 
-            $tablaStock->save();
+            $compra->codigo_compra= uniqid();
+            $compra->fk_usuario= Auth::id();
+            $compra->precio_envio= Session::get('precio_envio');
+            $compra->precio_total= Session::get('precio_total');
+            $compra->estado_compra= $guardarEstadoCompra;
+            $compra->fecha_compra= Carbon::now('America/Argentina/Buenos_Aires');
+
+            $fk_direccion_entrega= SeccionCarritoDireccion::where('tipo', '=', 'entrega')
+                                        ->select('id')
+                                        ->latest('id')
+                                        ->first();
+            $compra->fk_direccion_entrega= $fk_direccion_entrega->id;
+
+            $fk_direccion_facturacion= SeccionCarritoDireccion::where('tipo', '=', 'facturacion')
+                                        ->select('id')
+                                        ->latest('id')
+                                        ->first();
+            $compra->fk_direccion_facturacion= $fk_direccion_facturacion->id;
+
+            $compra->save();
+
+            // cada articulo comprado
+            $id_compra_guardada= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
+                                    ->select('id')
+                                    ->max('id');
+            $carrito= Cart::content();
+            foreach ($carrito as $key => $value) {
+                $cadaVersionComprada= new SeccionCarritoVersionComprada();
+                $cadaVersionComprada->fk_compra= $id_compra_guardada;
+                $cadaVersionComprada->fk_version= $value->id;
+                $cadaVersionComprada->cantidad= $value->qty;
+                $cadaVersionComprada->precio_final_cupon= $value->price;
+                
+                // RESTAR STOCK
+                $tablaStock= SeccionTiendaVersion::where('id', '=', $value->id)->first();
+                $tablaStock->stock= $tablaStock->stock - $value->qty;
+                if ($tablaStock->stock < 0) {
+                    $tablaStock->stock= 0;
+                }
+
+                $tablaStock->save();
 
 
-            $cadaVersionComprada->save();
+                $cadaVersionComprada->save();
+            }
+
+            // shipnow
+            if ($resultadoPago == 'success') {
+                $codigoDeCompra= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
+                                    ->select('codigo_compra')
+                                    ->max('id');
+
+                $entrega_direccion= Session::get('entrega_direccion');
+                $entrega_direccion2= Session::get('entrega_direccion2');
+                $entrega_codigoPostal= Session::get('entrega_codigo_postal');
+                $entrega_ciudad= Session::get('entrega_ciudad');
+                $entrega_provincia= Session::get('entrega_provincia');
+                $entrega_pais= Session::get('entrega_pais');
+                $entrega_telefonoDomicilio= Session::get('entrega_telefono_domicilio');
+                $entrega_telefonoCelular= Session::get('entrega_telefono_celular');
+                $entrega_comentario= Session::get('entrega_comentario');
+
+                $carritoShipnow= Cart::content();
+                $itemsDeShipnow = array();
+                foreach ($carritoShipnow as $key => $value) {
+                    // SEGUIR ACA
+                    $agregarItemShipnow = array(
+                        "id" => $value->id,
+                        "external_reference" => "70089453/A",
+                        "quantity" => $value->qty,
+                        "unit_price" => $value->price,
+                        "title" => "Blue Shoes",
+                        "image_url" => "https://cdn.shipnow.com.ar/items/2827.png"
+                        );
+
+                    array_push($itemsDeShipnow, $agregarItemShipnow);
+                }
+
+                $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+
+                try {
+                    $shipnow->login();
+                } catch (Exception $e) {
+                    echo 'Error: '.$e->getMessage();
+                } finally {
+
+                    $order = [
+                        'external_reference' => $codigoDeCompra,
+                        'ship_to' => [
+                            'name' => Auth::user()->nombre,
+                            'last_name' => Auth::user()->apellido,
+                            "phone" => $entrega_telefonoCelular,
+                            'zip_code' => $entrega_codigoPostal,
+                            'address_line' => $entrega_direccion,
+                            'city' => $entrega_ciudad,
+                            'state' => $entrega_provincia,
+                            'email' => Auth::user()->email
+                        ],
+                        'items'   => $itemsDeShipnow,
+                        'status' => 'ready_to_pick',
+                        'shipping_options' => [
+                            'service_code' => 'sit',
+                            'carrier_code' => 'ni puta idea que es esto, fijate en la api'
+                        ]
+                    ];
+
+                    try {
+                        $response = $shipnow->createOrder($order);
+                    } catch (Exception $e) {
+                        echo 'Error: '.$e->getMessage();
+                    }
+
+                    dd($response);
+                }
+            }
+
+
+            if ($resultadoPago == 'success') {
+                Session::flash('guardadoExito', 'La compra fue realizada correctamente');
+            }elseif ($resultadoPago == 'pending') {
+                Session::flash('guardadoPendiente', 'La compra está pendiente de pago');
+            }
+
+        }elseif ($resultadoPago == 'failure') {
+            Session::flash('guardadoFallo', 'No se realizó la compra');
         }
-
-
-        Session::flash('guardado', 'La compra fue realizada correctamente');
 
         return redirect('carrito/elegir/pago');
     }
