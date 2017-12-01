@@ -54,24 +54,35 @@ class Shipnow extends Model
         if($this->token != "") {
             $curl = curl_init();
 
+            $pedidos= json_encode($order, JSON_HEX_AMP);
+
+            // var_dump($pedidos);
+            // exit();
+
             curl_setopt_array($curl, array(
 //                CURLOPT_URL => "https://api.shipnow.com.ar/orders",
                 CURLOPT_URL => "https://api-staging.shipnow.com.ar/orders", // API DE PRUEBA
                 CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_POSTFIELDS => http_build_query($order),
+                CURLOPT_POSTFIELDS => $pedidos,
                 CURLOPT_ENCODING => "",
                 CURLOPT_MAXREDIRS => 10,
                 CURLOPT_TIMEOUT => 30,
                 CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POST => true,
                 CURLOPT_CAINFO => $this->cacert,
                 CURLOPT_HTTPHEADER => array(
                     "authorization: Token token=".$this->token,
-                    "cache-control: no-cache"
+                    "cache-control: no-cache",
                 ),
             ));
 
-            $response = json_decode(curl_exec($curl), true);
+            $mandar= curl_exec($curl);
+            $response = json_decode($mandar, true);
+        
+            var_dump($response);
+            exit();
+        
             $err = curl_error($curl);
 
             curl_close($curl);

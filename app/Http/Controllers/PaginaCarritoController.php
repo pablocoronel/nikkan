@@ -39,6 +39,10 @@ use Auth;
 
 class PaginaCarritoController extends Controller
 {
+    public function __construct()
+    {
+        define('DOMINIO_SITIO', "http://localhost/nikkan/public/");
+    }
     //
     public function listarCarrito(){
         $portada= SeccionColeccionPortada::find(1);
@@ -358,7 +362,7 @@ class PaginaCarritoController extends Controller
 
         // Mercado pago *******************************************************
         // terminar con /
-        $dominioDelSitio= "http://localhost/nikkan/public/";
+        $dominioDelSitio= DOMINIO_SITIO;
 
         $mp = new MP ("618512736778458", "YOBMGVLitH7Y6bfGJ4IC6rDqVTA0lIbQ");
         $mp->sandbox_mode(TRUE);
@@ -434,7 +438,10 @@ class PaginaCarritoController extends Controller
     }
 
     public function guardarCompra($resultadoPago){
-        if ($resultadoPago == 'success' || $resultadoPago == 'pending') {
+        $dominioDelSitio= DOMINIO_SITIO;
+
+        // if ($resultadoPago == 'success' || $resultadoPago == 'pending') {
+        if ($resultadoPago == 'success' || $resultadoPago == 'pending' || $resultadoPago == 'failure') {
             // direccion de entrega
             $direccion_entrega= new SeccionCarritoDireccion();
             $direccion_entrega->fk_usuario= Auth::id();
@@ -524,10 +531,12 @@ class PaginaCarritoController extends Controller
             }
 
             // shipnow
-            if ($resultadoPago == 'success') {
+            // if ($resultadoPago == 'success') {
+            if ($resultadoPago == 'failure') {
                 $codigoDeCompra= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
                                     ->select('codigo_compra')
-                                    ->max('id');
+                                    ->latest('id')->first();
+                
 
                 $entrega_direccion= Session::get('entrega_direccion');
                 $entrega_direccion2= Session::get('entrega_direccion2');
@@ -542,14 +551,28 @@ class PaginaCarritoController extends Controller
                 $carritoShipnow= Cart::content();
                 $itemsDeShipnow = array();
                 foreach ($carritoShipnow as $key => $value) {
-                    // SEGUIR ACA
+                    
+                    $versionSN= SeccionTiendaVersion::join('seccion_tienda_productos', 'seccion_tienda_productos.id', '=', 'seccion_tienda_versiones.fk_producto')
+                        ->join('seccion_tienda_talles', 'seccion_tienda_talles.id', '=', 'seccion_tienda_versiones.fk_talle')
+                        ->join('seccion_tienda_colores', 'seccion_tienda_colores.id', '=', 'seccion_tienda_versiones.fk_color')
+                        ->select(DB::raw('seccion_tienda_versiones.*, 
+                                            seccion_tienda_productos.nombre as nombreProducto,
+                                            seccion_tienda_productos.precio_con_descuento as precioConDescuento,
+                                            seccion_tienda_productos.ruta as rutaProducto,
+                                            seccion_tienda_productos.descripcion as descripcionProducto,
+
+                                            seccion_tienda_talles.nombre as nombreTalle,
+                                            seccion_tienda_colores.nombre as nombreColor'))
+                        ->where('seccion_tienda_versiones.id', '=', $value->id)
+                        ->first();
+
                     $agregarItemShipnow = array(
                         "id" => $value->id,
-                        "external_reference" => "70089453/A",
+                        "external_reference" => $versionSN->codigo_producto,
                         "quantity" => $value->qty,
                         "unit_price" => $value->price,
-                        "title" => "Blue Shoes",
-                        "image_url" => "https://cdn.shipnow.com.ar/items/2827.png"
+                        "title" => $versionSN->nombreProducto,
+                        "image_url" => $dominioDelSitio.$versionSN->rutaProducto
                         );
 
                     array_push($itemsDeShipnow, $agregarItemShipnow);
@@ -562,9 +585,8 @@ class PaginaCarritoController extends Controller
                 } catch (Exception $e) {
                     echo 'Error: '.$e->getMessage();
                 } finally {
-
                     $order = [
-                        'external_reference' => $codigoDeCompra,
+                        'external_reference' => $codigoDeCompra->codigo_compra,
                         'ship_to' => [
                             'name' => Auth::user()->nombre,
                             'last_name' => Auth::user()->apellido,
@@ -577,10 +599,7 @@ class PaginaCarritoController extends Controller
                         ],
                         'items'   => $itemsDeShipnow,
                         'status' => 'ready_to_pick',
-                        'shipping_options' => [
-                            'service_code' => 'sit',
-                            'carrier_code' => 'ni puta idea que es esto, fijate en la api'
-                        ]
+                        'shipping_category' => 'economic'
                     ];
 
                     try {

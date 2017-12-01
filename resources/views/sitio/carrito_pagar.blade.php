@@ -33,7 +33,7 @@
                       {{Session::get('guardadoExito', '')}}
                   </div>
               @elseif(Session::has('guardadoPendiente'))
-                  <div class="alert alert-warning" role="alert">
+                  <div class="alert alert-success" role="alert">
                       {{Session::get('guardadoPendiente', '')}}
                   </div>
               @elseif(Session::has('guardadoFallo'))
@@ -144,16 +144,6 @@
                   ${{$totalFinal}}
                 </td>
               </tr>
-
-
-              {{-- <tr id="filaTotal">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr> --}}
           </tbody>
       </table>
       </div>
