@@ -49,6 +49,57 @@ class Shipnow extends Model
         }
     }
 
+// ************************
+    public function createProduct($prod)
+    {
+        if($this->token != "") {
+            $curl = curl_init();
+
+            $productos= json_encode($prod, JSON_HEX_AMP);
+
+            // var_dump($productos);
+            // exit();
+
+            curl_setopt_array($curl, array(
+//                CURLOPT_URL => "https://api.shipnow.com.ar/products",
+                CURLOPT_URL => "https://api-staging.shipnow.com.ar/products", // API DE PRUEBA
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_POSTFIELDS => $productos,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POST => true,
+                CURLOPT_CAINFO => $this->cacert,
+                CURLOPT_HTTPHEADER => array(
+                    "authorization: Token token=".$this->token,
+                    "cache-control: no-cache",
+                    "content-type: application/json"
+                ),
+            ));
+
+            $mandar= curl_exec($curl);
+            $response = json_decode($mandar, true);
+        
+            // var_dump($response);
+            // exit();
+        
+            $err = curl_error($curl);
+
+            curl_close($curl);
+
+            if ($err) {
+                throw new Exception($err);
+            } else {
+                return $response;
+            }
+        } else {
+            throw new Exception("Token no especificado");
+        }
+    }
+// **************************
+
     public function createOrder($order) {
 
         if($this->token != "") {
@@ -74,14 +125,15 @@ class Shipnow extends Model
                 CURLOPT_HTTPHEADER => array(
                     "authorization: Token token=".$this->token,
                     "cache-control: no-cache",
+                "content-type: application/json"
                 ),
             ));
 
             $mandar= curl_exec($curl);
             $response = json_decode($mandar, true);
         
-            var_dump($response);
-            exit();
+            // var_dump($response);
+            // exit();
         
             $err = curl_error($curl);
 

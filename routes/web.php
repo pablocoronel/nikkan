@@ -67,7 +67,7 @@ Route::group(['prefix' => 'carrito'], function() {
 	});
 });
 
-
+Route::get('notifications/topic/{topic?}/id/{id?}', 'IpnMercadoPagoController@index');
 
 
  

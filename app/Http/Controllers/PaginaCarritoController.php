@@ -533,6 +533,8 @@ class PaginaCarritoController extends Controller
             // shipnow
             // if ($resultadoPago == 'success') {
             if ($resultadoPago == 'failure') {
+                $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+                
                 $codigoDeCompra= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
                                     ->select('codigo_compra')
                                     ->latest('id')->first();
@@ -566,25 +568,42 @@ class PaginaCarritoController extends Controller
                         ->where('seccion_tienda_versiones.id', '=', $value->id)
                         ->first();
 
-                    $agregarItemShipnow = array(
-                        "id" => $value->id,
-                        "external_reference" => $versionSN->codigo_producto,
-                        "quantity" => $value->qty,
-                        "unit_price" => $value->price,
-                        "title" => $versionSN->nombreProducto,
-                        "image_url" => $dominioDelSitio.$versionSN->rutaProducto
-                        );
+                    // *** crear producto shipnow
+                    $crear_producto= [
+                        'external_reference' => $versionSN->codigo_producto,
+                        'title' => $versionSN->nombreProducto,
+                        'image_url' => $dominioDelSitio.$versionSN->rutaProducto
+                    ];
 
-                    array_push($itemsDeShipnow, $agregarItemShipnow);
+                    try {
+                        $shipnow->login();
+                    } catch (Exception $e) {
+                        echo 'Error: '.$e->getMessage();
+                    } finally {
+                        $responseProducto = $shipnow->createProduct($crear_producto);
+                        
+                        // dd($responseProducto['id']);
+                        dd($responseProducto);
+
+                        $agregarItemShipnow = array(
+                            "id" => $responseProducto['id'],
+                            "external_reference" => $versionSN->codigo_producto,
+                            "quantity" => $value->qty,
+                            "unit_price" => $value->price,
+                            "title" => $versionSN->nombreProducto,
+                            "image_url" => $dominioDelSitio.$versionSN->rutaProducto
+                            );
+
+                        array_push($itemsDeShipnow, $agregarItemShipnow);
+                    }
                 }
 
-                $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
 
-                try {
-                    $shipnow->login();
-                } catch (Exception $e) {
-                    echo 'Error: '.$e->getMessage();
-                } finally {
+                // try {
+                //     $shipnow->login();
+                // } catch (Exception $e) {
+                //     echo 'Error: '.$e->getMessage();
+                // } finally {
                     $order = [
                         'external_reference' => $codigoDeCompra->codigo_compra,
                         'ship_to' => [
@@ -599,7 +618,11 @@ class PaginaCarritoController extends Controller
                         ],
                         'items'   => $itemsDeShipnow,
                         'status' => 'ready_to_pick',
-                        'shipping_category' => 'economic'
+                        'shipping_category' => 'economic',
+                        'shipping_option' => [
+                            'service_code' => 'oca_pap_estandar',
+                            'carrier_code' => 'oca'
+                        ]
                     ];
 
                     try {
@@ -609,7 +632,7 @@ class PaginaCarritoController extends Controller
                     }
 
                     dd($response);
-                }
+                // }
             }
 
 
