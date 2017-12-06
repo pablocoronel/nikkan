@@ -14,7 +14,9 @@
 		<div class="col-xs-12 col-sm-6" id="contenedorGaleriaProductoDetalle">
              <div class="col-xs-12">
                 <div id="contenedorImagenGrande">
+                  @if(isset($galeria[0]))
                   <img id="imagenGrande" src="{{asset($galeria[0]->ruta)}}" alt="" class="img img-responsive">
+                  @endif
                 </div>
               </div>
 

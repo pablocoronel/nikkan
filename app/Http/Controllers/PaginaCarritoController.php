@@ -215,16 +215,6 @@ class PaginaCarritoController extends Controller
         $request->session()->put('entrega_telefono_celular', $request->get('telefono_celular'));
         $request->session()->put('entrega_comentario', $request->get('comentario'));
         
-        // $_SESSION['entrega_direccion']= $request->get('direccion');
-        // $_SESSION['entrega_direccion2']= $request->get('direccion2');
-        // $_SESSION['entrega_codigo_postal']= $request->get('codigo_postal');
-        // $_SESSION['entrega_ciudad']= $request->get('ciudad');
-        // $_SESSION['entrega_provincia']= $request->get('provincia');
-        // $_SESSION['entrega_pais']= $request->get('pais');
-        // $_SESSION['entrega_telefono_domicilio']= $request->get('telefono_domicilio');
-        // $_SESSION['entrega_telefono_celular']= $request->get('telefono_celular');
-        // $_SESSION['entrega_comentario']= $request->get('comentario');
-
         $request->session()->put('entrega', 'facturación guardada');
         
         $request->session()->flash('guardadoDireccionEntrega', 'Dirección de entrega guardada');
@@ -241,16 +231,6 @@ class PaginaCarritoController extends Controller
         $request->session()->put('facturacion_telefono_domicilio', $request->get('telefono_domicilio'));
         $request->session()->put('facturacion_telefono_celular', $request->get('telefono_celular'));
         $request->session()->put('facturacion_comentario', $request->get('comentario'));
-
-        // $_SESSION['facturacion_direccion']= $request->get('direccion');
-        // $_SESSION['facturacion_direccion2']= $request->get('direccion2');
-        // $_SESSION['facturacion_codigo_postal']= $request->get('codigo_postal');
-        // $_SESSION['facturacion_ciudad']= $request->get('ciudad');
-        // $_SESSION['facturacion_provincia']= $request->get('provincia');
-        // $_SESSION['facturacion_pais']= $request->get('pais');
-        // $_SESSION['facturacion_telefono_domicilio']= $request->get('telefono_domicilio');
-        // $_SESSION['facturacion_telefono_celular']= $request->get('telefono_celular');
-        // $_SESSION['facturacion_comentario']= $request->get('comentario');
 
         $request->session()->put('facturacion', 'facturación guardada');
 
@@ -356,12 +336,11 @@ class PaginaCarritoController extends Controller
         }
 
         $totalFinal= $precio_productos + $precio_envio;
-        // dd($totalFinal);
         Session::put('precio_total', $totalFinal);
 
 
         // Mercado pago *******************************************************
-        // terminar con /
+        // terminar url con /
         $dominioDelSitio= DOMINIO_SITIO;
 
         $mp = new MP ("618512736778458", "YOBMGVLitH7Y6bfGJ4IC6rDqVTA0lIbQ");
@@ -408,6 +387,8 @@ class PaginaCarritoController extends Controller
 
         array_push($itemsParaMP, $agregarCostoEnvio);
 
+        $MP_external_reference= 'nikkan'.uniqid();
+        Session::put('MP_external_reference', $MP_external_reference);
 
         $preference_data = array (
                             "items" => $itemsParaMP,
@@ -421,20 +402,14 @@ class PaginaCarritoController extends Controller
                                 "failure" => $dominioDelSitio."carrito/elegir/pago-guardar/failure",
                                 "pending" => $dominioDelSitio."carrito/elegir/pago-guardar/pending"
                             ),
-                            "notification_url" => $dominioDelSitio."notifications"
+                            "notification_url" => $dominioDelSitio."notifications",
+                            "external_reference" => $MP_external_reference,
                         );
-        // dd($preference_data);
-
+        
         $preference = $mp->create_preference ($preference_data);
-
-        // print_r ($preference);
-        // exit();
+        // dd($preference);
 
         return view('sitio.carrito_pagar', compact('portada', 'contenidoCarrito', 'versionUnica', 'precio_envio', 'totalFinal', 'preference'));
-    }
-
-    public function enviarCompraAMercadoPago(){
-
     }
 
     public function guardarCompra($resultadoPago){
@@ -484,7 +459,9 @@ class PaginaCarritoController extends Controller
                 $guardarEstadoCompra= 'iniciado';
             }
 
-            $compra->codigo_compra= uniqid();
+            // descomentar esto
+            $compra->codigo_compra= Session::get('MP_external_reference');
+            // $compra->codigo_compra= uniqid();
             $compra->fk_usuario= Auth::id();
             $compra->precio_envio= Session::get('precio_envio');
             $compra->precio_total= Session::get('precio_total');
@@ -531,9 +508,10 @@ class PaginaCarritoController extends Controller
             }
 
             // shipnow
-            // if ($resultadoPago == 'success') {
-            if ($resultadoPago == 'failure') {
-                $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+            if ($resultadoPago == 'success') {
+            // if ($resultadoPago == 'failure') {
+                //$shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+                $shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");
                 
                 $codigoDeCompra= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
                                     ->select('codigo_compra')
@@ -568,48 +546,35 @@ class PaginaCarritoController extends Controller
                         ->where('seccion_tienda_versiones.id', '=', $value->id)
                         ->first();
 
-                    // *** crear producto shipnow
-                    $crear_producto= [
-                        'external_reference' => $versionSN->codigo_producto,
-                        'title' => $versionSN->nombreProducto,
-                        'image_url' => $dominioDelSitio.$versionSN->rutaProducto
-                    ];
-
-                    try {
-                        $shipnow->login();
-                    } catch (Exception $e) {
-                        echo 'Error: '.$e->getMessage();
-                    } finally {
-                        $responseProducto = $shipnow->createProduct($crear_producto);
-                        
-                        // dd($responseProducto['id']);
-                        dd($responseProducto);
-
-                        $agregarItemShipnow = array(
-                            "id" => $responseProducto['id'],
-                            "external_reference" => $versionSN->codigo_producto,
-                            "quantity" => $value->qty,
-                            "unit_price" => $value->price,
-                            "title" => $versionSN->nombreProducto,
-                            "image_url" => $dominioDelSitio.$versionSN->rutaProducto
-                            );
-
-                        array_push($itemsDeShipnow, $agregarItemShipnow);
-                    }
+                    $agregarItemShipnow = array(
+                        "id" => $versionSN->id_shipnow,
+                        "external_reference" => $versionSN->codigo_producto,
+                        "quantity" => $value->qty,
+                        "unit_price" => $value->price,
+                        "title" => $versionSN->nombreProducto,
+                        "image_url" => $dominioDelSitio.$versionSN->rutaProducto
+                        );
+                    array_push($itemsDeShipnow, $agregarItemShipnow);
                 }
 
-
-                // try {
-                //     $shipnow->login();
-                // } catch (Exception $e) {
-                //     echo 'Error: '.$e->getMessage();
-                // } finally {
+                try {
+                    // descomentar
+                    $shipnow->login();
+                } catch (Exception $e) {
+                    echo 'Error: '.$e->getMessage();
+                } finally {
+                    $telefono= '';
+                    if ($entrega_telefonoCelular != '') {
+                        $telefono= $entrega_telefonoCelular;
+                    }else{
+                        $telefono= $entrega_telefonoDomicilio;
+                    }
                     $order = [
                         'external_reference' => $codigoDeCompra->codigo_compra,
                         'ship_to' => [
                             'name' => Auth::user()->nombre,
                             'last_name' => Auth::user()->apellido,
-                            "phone" => $entrega_telefonoCelular,
+                            "phone" => $telefono,
                             'zip_code' => $entrega_codigoPostal,
                             'address_line' => $entrega_direccion,
                             'city' => $entrega_ciudad,
@@ -617,12 +582,7 @@ class PaginaCarritoController extends Controller
                             'email' => Auth::user()->email
                         ],
                         'items'   => $itemsDeShipnow,
-                        'status' => 'ready_to_pick',
-                        'shipping_category' => 'economic',
-                        'shipping_option' => [
-                            'service_code' => 'oca_pap_estandar',
-                            'carrier_code' => 'oca'
-                        ]
+                        "shipping_category" => "economic",
                     ];
 
                     try {
@@ -631,8 +591,8 @@ class PaginaCarritoController extends Controller
                         echo 'Error: '.$e->getMessage();
                     }
 
-                    dd($response);
-                // }
+                    // dd($response);
+                }
             }
 
 
@@ -640,6 +600,9 @@ class PaginaCarritoController extends Controller
                 Session::flash('guardadoExito', 'La compra fue realizada correctamente');
             }elseif ($resultadoPago == 'pending') {
                 Session::flash('guardadoPendiente', 'La compra está pendiente de pago');
+            }
+            elseif ($resultadoPago == 'failure') {
+                Session::flash('guardadoPendiente', 'prueba con falla');
             }
 
         }elseif ($resultadoPago == 'failure') {

@@ -99,6 +99,12 @@
                     <li>
                         <a href="{{URL::asset('adm/tienda/cupon/')}}">Ver cupón</a>
                     </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/transporte/crear')}}">Crear Transporte</a>
+                    </li>
+                    <li>
+                        <a href="{{URL::asset('adm/tienda/transporte/')}}">Ver Transporte</a>
+                    </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>

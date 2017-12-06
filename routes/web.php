@@ -157,6 +157,9 @@ Route::group(['prefix' => 'adm'], function() {
 
 			// cupones
 			Route::resource('cupon', 'SeccionTiendaCuponController');
+
+			// precios de envio
+			Route::resource('transporte', 'SeccionTiendaTransporteController');
 		});
 
 		// CRUD empresa

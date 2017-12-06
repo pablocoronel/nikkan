@@ -85,7 +85,7 @@ class SeccionTiendaVersionController extends Controller
             'fk_talle' => $request->get('fk_talle'),
             'stock' => $request->get('stock'),
             // 'codigo_producto' => $codigo_producto,
-            'id_shipnow' => $responseProducto['id']
+            // 'id_shipnow' => $responseProducto['id']
         ]);
 
         $objeto->save();
@@ -94,20 +94,19 @@ class SeccionTiendaVersionController extends Controller
         $nombre_producto= substr(strtoupper($producto->nombre), 0, 3);
         $nombre_color= substr(strtoupper($color->nombre), 0, 3);
         $nombre_talle= $talle->nombre;
-        // aca
         $id_version= SeccionTiendaVersion::max('id');
 
-        $codigo_producto= $razon_social.$nombre_producto.$nombre_color.$nombre_talle;
+        $codigo_producto= $razon_social.$nombre_producto.$nombre_color.$nombre_talle.'-'.$id_version;
 
         //version
-        $objeto= SeccionTiendaVersion::find($id);
+        $objeto= SeccionTiendaVersion::find($id_version);
         $objeto->codigo_producto = $codigo_producto;
         $objeto->save();
 
 
         // shipnow
-        $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
-
+        //$shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+        $shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");
 
         try {
             $shipnow->login();
@@ -122,6 +121,9 @@ class SeccionTiendaVersionController extends Controller
             
             $responseProducto = $shipnow->createProduct($crear_producto);
             
+            $objeto= SeccionTiendaVersion::find($id_version);
+            $objeto->id_shipnow = $responseProducto['id'];
+            $objeto->save();
             // dd($responseProducto);
         }
 
@@ -168,27 +170,6 @@ class SeccionTiendaVersionController extends Controller
         foreach($matrizListadoTalle as $arr) {
             $arrayListadoTalle[$arr->id] = $arr->nombre;
         }
-
-        // *****************
-        // $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
-
-        // $crear_producto= [
-        //     'external_reference' => $objeto->codigo_producto,
-        //     'title' => $producto->nombre,
-        //     'image_url' => $producto->ruta
-        // ];
-
-        // try {
-        //     $shipnow->login();
-        // } catch (Exception $e) {
-        //     echo 'Error: '.$e->getMessage();
-        // } finally {
-        //     $responseProducto = $shipnow->createProduct($crear_producto);
-            
-        //     dd($responseProducto);
-        // }
-
-        // ***************
         
         return view('adm.seccion_tienda_versiones.editar', compact('objeto', 'producto', 'arrayListadoColor', 'arrayListadoTalle'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar version']);
     }
@@ -212,7 +193,7 @@ class SeccionTiendaVersionController extends Controller
         $nombre_color= substr(strtoupper($color->nombre), 0, 3);
         $nombre_talle= $talle->nombre;
 
-        $codigo_producto= $razon_social.$nombre_producto.$nombre_color.$nombre_talle;
+        $codigo_producto= $razon_social.$nombre_producto.$nombre_color.$nombre_talle.'-'.$id;
 
         // version
         $objeto = SeccionTiendaVersion::find($id);
@@ -221,7 +202,7 @@ class SeccionTiendaVersionController extends Controller
         $objeto->fk_color = $request->get('fk_color');
         $objeto->fk_talle = $request->get('fk_talle');
         $objeto->stock = $request->get('stock');
-        $objeto->codigo_producto = $codigo_producto;
+        // $objeto->codigo_producto = $codigo_producto;
 
         $objeto->save();
 
