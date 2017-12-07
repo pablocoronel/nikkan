@@ -22,6 +22,14 @@
 // config email
 // http://www.derekbliss.com/post/laravel-streamsocketenablecrypto-ssl-operation-failed-with-code-1
 
+// ejemplo mp
+// http://germankuber.com.ar/mercagado-pago-checkout-basico
+
+// ejemplo 2
+// https://pastebin.com/PcdWNkFt
+
+// consulta ipn
+// https://groups.google.com/forum/#!topic/mercadopago-developers/rZqEmTkLwtg
 
 use App\Mail\EmailDeContacto;
 
