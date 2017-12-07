@@ -35,12 +35,12 @@ class SeccionTiendaProductoRequest extends FormRequest
                     //
                     'fk_categoria' => 'required',
                     'nombre' => 'required',
-                    'imagen' => 'required',
+                    'imagen' => 'required|image',
                     'descripcion' => 'required',
-                    'precio_original' => 'required',
+                    'precio_original' => 'required|numeric',
                     'descuento' => 'required',
                     'coleccion' => 'required',
-                    'peso' => 'required',
+                    'peso' => 'required|numeric|integer',
                     'orden' => 'required',
                 ];
                 break;
@@ -52,10 +52,10 @@ class SeccionTiendaProductoRequest extends FormRequest
                     'fk_categoria' => 'required',
                     'nombre' => 'required',
                     'descripcion' => 'required',
-                    'precio_original' => 'required',
+                    'precio_original' => 'required|numeric',
                     'descuento' => 'required',
                     'coleccion' => 'required',
-                    'peso' => 'required',
+                    'peso' => 'required|numeric|integer',
                     'orden' => 'required',
                 ];
                 break;

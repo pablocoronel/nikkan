@@ -23,6 +23,7 @@
 				<table class="table table-striped table-bordered table-responsive">
 					<thead>
 						<td>Provincia</td>
+						<td>Peso</td>
 						<td>Editar</td>
 						<td>Eliminar</td>
 					</thead>
@@ -30,6 +31,7 @@
 						@foreach($variable as $key)
 						<tr>
 							<td>{{$key["provincia"]}}</td>
+							<td>Entre {{$key["peso_minimo"]/1000}} y {{$key["peso_maximo"]/1000}} Kg.</td>
 							<td><a href="{{action('SeccionTiendaTransporteController@edit', $key['id'])}}" class="btn btn-primary">Editar</a></td>
 							<td>
 								<form action="{{action('SeccionTiendaTransporteController@destroy', $key['id'])}}" method="post">
@@ -41,6 +43,14 @@
 						</tr>
 						@endforeach
 					</tbody>
+					<tfoot>
+						<tr>
+							<td></td>
+							<td>{{$variable->links()}}</td>
+							<td></td>
+							<td></td>					
+						</tr>
+					</tfoot>
 				</table>
 			</div>
 	    </div>

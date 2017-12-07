@@ -214,8 +214,11 @@
       </div>
   </div>
   
-  <div class="container">
+  {{-- <div class="container">
     <a href="{{url('carrito/elegir/transporte')}}" class="btn btn-primary" id="btn-siguiente">Transporte</a>
+  </div> --}}
+  <div class="container">
+    <a href="{{url('carrito/elegir/pago')}}" class="btn btn-primary" id="btn-siguiente">Siguiente</a>
   </div>
 </div>
 @include('sitio.partial.footer')

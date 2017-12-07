@@ -35,7 +35,7 @@ class SeccionTiendaFamiliaRequest extends FormRequest
                     //
                     'nombre' => 'required',
                     // 'vinculo' => 'required',
-                    'imagen' => 'required',
+                    'imagen' => 'required|image',
                     'orden' => 'required',
                 ];
                 break;

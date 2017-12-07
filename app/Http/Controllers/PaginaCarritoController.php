@@ -28,6 +28,8 @@ use App\SeccionCarritoVersionComprada;
 use App\SeccionTiendaCupon;
 use App\SeccionTiendaCuponProducto;
 
+use App\SeccionTiendaTransporte;
+
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Carbon\Carbon;
 use App\Shipnow;
@@ -174,7 +176,8 @@ class PaginaCarritoController extends Controller
         $portada= SeccionColeccionPortada::find(1);
 
         $listadoProvincia = array(
-        'Ciudad de Buenos Aires' => 'Ciudad de Buenos Aires',
+        'Capital Federal' => 'Capital Federal',
+        'Buenos Aires (GBA)' => 'Buenos Aires (GBA)',
         'Buenos Aires' => 'Buenos Aires', 
         'Catamarca' => 'Catamarca',
         'Chaco' => 'Chaco',
@@ -258,47 +261,47 @@ class PaginaCarritoController extends Controller
         return view('sitio.carrito_terminos', compact('texto'));   
     }
 
-    public function almacenarTransporte(CarritoTransporteRequest $request){
-        $request->session()->put('zona_envio', $request->transporte);
+    // public function almacenarTransporte(CarritoTransporteRequest $request){
+    //     $request->session()->put('zona_envio', $request->transporte);
 
-        switch ($request->transporte) {
-            case 1:
-                $precio_envio= 738.10;
-                break;
+    //     switch ($request->transporte) {
+    //         case 1:
+    //             $precio_envio= 738.10;
+    //             break;
 
-            case 2:
-                $precio_envio= 350.90;
-                break;
+    //         case 2:
+    //             $precio_envio= 350.90;
+    //             break;
 
-            case 3:
-                $precio_envio= 292.82;
-                break;
+    //         case 3:
+    //             $precio_envio= 292.82;
+    //             break;
 
-            case 4:
-                $precio_envio= 260.15;
-                break;
+    //         case 4:
+    //             $precio_envio= 260.15;
+    //             break;
 
-            case 5:
-                $precio_envio= 223.85;
-                break;
+    //         case 5:
+    //             $precio_envio= 223.85;
+    //             break;
 
-            case 6:
-                $precio_envio= 181.50;
-                break;
+    //         case 6:
+    //             $precio_envio= 181.50;
+    //             break;
 
-            case 7:
-                $precio_envio= 0;
-                break;
+    //         case 7:
+    //             $precio_envio= 0;
+    //             break;
             
-            default:
-                $precio_envio= 0;
-                break;
-        }
+    //         default:
+    //             $precio_envio= 0;
+    //             break;
+    //     }
 
-        $request->session()->put('precio_envio', $precio_envio);
+    //     $request->session()->put('precio_envio', $precio_envio);
 
-        return redirect('carrito/elegir/pago');
-    }
+    //     return redirect('carrito/elegir/pago');
+    // }
 
     public function verFormularioDePago(){
         $portada= SeccionColeccionPortada::find(1);
@@ -329,10 +332,31 @@ class PaginaCarritoController extends Controller
 
         $precio_productos= str_replace(",", "", Cart::total());
 
-        if (Session::has('precio_envio')) {
-            $precio_envio= Session::get('precio_envio');
-        }else{
-            $precio_envio= 0;
+        // if (Session::has('precio_envio')) {
+        //     $precio_envio= Session::get('precio_envio');
+        // }else{
+        //     $precio_envio= 0;
+        // }
+
+        // envio calculado
+        if (Session::has('entrega_provincia')) {
+            $pesoTotalCarrito= 0;
+
+            foreach ($contenidoCarrito as $key => $value) {
+                $pesoDeProducto= SeccionTiendaVersion::join('seccion_tienda_productos', 'seccion_tienda_productos.id', '=', 'seccion_tienda_versiones.fk_producto')
+                    ->where('seccion_tienda_versiones.id', '=', $value->id)
+                    ->value('peso');
+                    // dd($pesoDeProducto * $value->qty);
+                    $pesoTotalCarrito+= $pesoDeProducto * $value->qty;
+            }
+
+            // dd($pesoTotalCarrito);
+            $precio_envio_sin_iva= SeccionTiendaTransporte::where('provincia', '=', Session::get('entrega_provincia'))
+                                    ->where('peso_minimo', '<', $pesoTotalCarrito)
+                                    ->where('peso_maximo', '>=', $pesoTotalCarrito)
+                                    ->value('precio');
+            $precio_envio= $precio_envio_sin_iva * 1.21;
+            // dd($precio_envio_sin_iva.'-'.$precio_envio);
         }
 
         $totalFinal= $precio_productos + $precio_envio;

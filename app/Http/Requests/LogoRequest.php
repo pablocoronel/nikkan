@@ -31,7 +31,7 @@ class LogoRequest extends FormRequest
         //editar
         return [
             //
-            'imagen' => 'required',
+            'imagen' => 'required|image',
         ];
     }
 }

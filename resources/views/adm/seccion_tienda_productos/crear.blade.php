@@ -103,9 +103,9 @@
 				        </div>
 
 				        <div class="form-group">
-				    		{!! Form::label('peso', 'Peso', ['class' => 'col-sm-3 control-label']) !!}
+				    		{!! Form::label('peso', 'Peso (gr.)', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('peso', '', ['class' => 'form-control', 'placeholder' => 'Peso']) !!}
+								{!! Form::text('peso', '', ['class' => 'form-control', 'placeholder' => 'Peso (gr.)']) !!}
 							</div>
 				        </div> 
 

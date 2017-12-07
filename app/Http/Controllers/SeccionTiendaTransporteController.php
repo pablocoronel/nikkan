@@ -21,7 +21,8 @@ class SeccionTiendaTransporteController extends Controller
     public function index()
     {
         //
-        $objeto= SeccionTiendaTransporte::all()->toArray();
+        $objeto= SeccionTiendaTransporte::orderBy('provincia', 'asc')->paginate(15);
+        // ->toArray();
 
 
         return view('adm.seccion_tienda_transportes.listar', ['variable' => $objeto, 'nombreDeAccion' => 'Lista de transportes']);
@@ -35,7 +36,34 @@ class SeccionTiendaTransporteController extends Controller
     public function create()
     {
         //
-        return view('adm.seccion_tienda_transportes.crear', ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear transporte']);
+        $listadoProvincia = array(
+        'Capital Federal' => 'Capital Federal',
+        'Buenos Aires (GBA)' => 'Buenos Aires (GBA)',
+        'Buenos Aires' => 'Buenos Aires', 
+        'Catamarca' => 'Catamarca',
+        'Chaco' => 'Chaco',
+        'Chubut' => 'Chubut',
+        'Córdoba' => 'Córdoba',
+        'Corrientes' => 'Corrientes',
+        'Entre Ríos' => 'Entre Ríos',
+        'Formosa' => 'Formosa',
+        'Jujuy' => 'Jujuy',
+        'La Pampa' => 'La Pampa',
+        'La Rioja' => 'La Rioja',
+        'Mendoza' => 'Mendoza',
+        'Misiones' => 'Misiones',
+        'Neuquén' => 'Neuquén',
+        'Río Negro' => 'Río Negro',
+        'Salta' => 'Salta',
+        'San Juan' => 'San Juan',
+        'San Luis' => 'San Luis',
+        'Santa Cruz' => 'Santa Cruz',
+        'Santa Fe' => 'Santa Fe',
+        'Santiago del Estero' => 'Santiago del Estero',
+        'Tierra del Fuego' => 'Tierra del Fuego',
+        'Tucumán' => 'Tucumán');
+
+        return view('adm.seccion_tienda_transportes.crear', compact('listadoProvincia'), ['accion' => 'store', 'verbo' => 'post', 'nombreDeAccion' => 'Crear transporte']);
     }
 
     /**
@@ -46,10 +74,16 @@ class SeccionTiendaTransporteController extends Controller
      */
     public function store(SeccionTiendaTransporteRequest $request)
     {
-        // guardar sin imagen
+        $peso= explode('-', $request->get('peso'));
+        $peso_minimo= $peso[0];
+        $peso_maximo= $peso[1];
+
         $objeto= new SeccionTiendaTransporte([
-            'nombre' => $request->get('nombre'),
-            'orden' => $request->get('orden'),
+            'provincia' => $request->get('provincia'),
+            'peso_minimo' => $peso_minimo,
+            'peso_maximo' => $peso_maximo,
+            'precio' => $request->get('precio'),
+            // 'orden' => $request->get('orden'),
         ]);
 
         $objeto->save();
@@ -79,8 +113,36 @@ class SeccionTiendaTransporteController extends Controller
     public function edit($id)
     {
         //
+        $listadoProvincia = array(
+        'Capital Federal' => 'Capital Federal',
+        'Buenos Aires (GBA)' => 'Buenos Aires (GBA)',
+        'Buenos Aires' => 'Buenos Aires', 
+        'Catamarca' => 'Catamarca',
+        'Chaco' => 'Chaco',
+        'Chubut' => 'Chubut',
+        'Córdoba' => 'Córdoba',
+        'Corrientes' => 'Corrientes',
+        'Entre Ríos' => 'Entre Ríos',
+        'Formosa' => 'Formosa',
+        'Jujuy' => 'Jujuy',
+        'La Pampa' => 'La Pampa',
+        'La Rioja' => 'La Rioja',
+        'Mendoza' => 'Mendoza',
+        'Misiones' => 'Misiones',
+        'Neuquén' => 'Neuquén',
+        'Río Negro' => 'Río Negro',
+        'Salta' => 'Salta',
+        'San Juan' => 'San Juan',
+        'San Luis' => 'San Luis',
+        'Santa Cruz' => 'Santa Cruz',
+        'Santa Fe' => 'Santa Fe',
+        'Santiago del Estero' => 'Santiago del Estero',
+        'Tierra del Fuego' => 'Tierra del Fuego',
+        'Tucumán' => 'Tucumán');
+
         $objeto= SeccionTiendaTransporte::find($id);
-        return view('adm.seccion_tienda_transportes.editar', compact('objeto'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar transporte']);
+
+        return view('adm.seccion_tienda_transportes.editar', compact('objeto', 'listadoProvincia'), ['accion' => 'update', 'verbo' => 'post', 'nombreDeAccion' => 'Editar transporte']);
     }
 
     /**
@@ -93,9 +155,16 @@ class SeccionTiendaTransporteController extends Controller
     public function update(SeccionTiendaTransporteRequest $request, $id)
     {
         //
+        $peso= explode('-', $request->get('peso'));
+        $peso_minimo= $peso[0];
+        $peso_maximo= $peso[1];
+
         $objeto = SeccionTiendaTransporte::find($id);
-        $objeto->nombre = $request->get('nombre');
-        $objeto->orden = $request->get('orden');
+        $objeto->provincia = $request->get('provincia');
+        $objeto->peso_minimo = $peso_minimo;
+        $objeto->peso_maximo = $peso_maximo;
+        $objeto->precio = $request->get('precio');
+        // $objeto->orden = $request->get('orden');
 
         $objeto->save();
 

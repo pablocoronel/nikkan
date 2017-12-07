@@ -30,6 +30,12 @@ class SeccionTiendaTransporteRequest extends FormRequest
     {
         return [
             //
+            'provincia' => 'required',
+            // 'peso_minimo' => 'required|numeric|integer',
+            // 'peso_maximo' => 'required|numeric|integer',
+            'peso' => 'required',
+            'precio' => 'required|numeric',
+            // 'orden' => 'required'
         ];
     }
 }

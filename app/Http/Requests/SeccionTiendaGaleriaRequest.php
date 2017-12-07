@@ -34,7 +34,7 @@ class SeccionTiendaGaleriaRequest extends FormRequest
                 return [
                     //
                     // 'fk_producto' => 'required',
-                    'imagen' => 'required',
+                    'imagen' => 'required|image',
                     'orden' => 'required',
                 ];
                 break;

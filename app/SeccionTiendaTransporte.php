@@ -18,5 +18,5 @@ class SeccionTiendaTransporte extends Model
      *
      * @var array
      */
-    protected $fillable = ['provincia', 'peso', 'precio', 'orden'];
+    protected $fillable = ['provincia', 'peso_minimo', 'peso_maximo', 'precio', 'orden'];
 }

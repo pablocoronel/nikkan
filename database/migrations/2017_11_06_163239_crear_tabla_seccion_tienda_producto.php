@@ -25,7 +25,7 @@ class CrearTablaSeccionTiendaProducto extends Migration
             $table->integer('descuento');
             $table->string('coleccion');
             $table->string('guia_de_talle');
-            $table->float('peso', 8, 2);
+            $table->integer('peso');
             $table->string('orden');
             $table->timestamps();
         });

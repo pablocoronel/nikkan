@@ -36,7 +36,7 @@ class SeccionCampaniaSliderRequest extends FormRequest
                     // 'texto' => 'required',
                     // 'vinculo' => 'required',
                     'imagen' => 'required',
-                    'orden' => 'required',
+                    'orden' => 'required|image',
                 ];
                 break;
 

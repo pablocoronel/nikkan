@@ -17,7 +17,8 @@ class CrearTablaTransorte extends Migration
         Schema::create('seccion_tienda_transportes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('provincia');
-            $table->float('peso', 8, 2);
+            $table->integer('peso_minimo');
+            $table->integer('peso_maximo');
             $table->decimal('precio');
             $table->string('orden');
             $table->timestamps();

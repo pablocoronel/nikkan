@@ -48,18 +48,46 @@
 				    	<input name="_method" type="hidden" value="PATCH">
 
 				    	<div class="form-group">
-				    		{!! Form::label('nombre', 'Nombre', ['class' => 'col-sm-3 control-label']) !!}
+				        	{!! Form::label('provincia', 'Provincia', ['class' => 'col-sm-3 control-label']) !!}
+							<div class="col-sm-7">
+								{!! Form::select('provincia', $listadoProvincia, $objeto->provincia) !!}
+				        	</div>
+				        </div>
+
+				        <div class="form-group">
+				        	{!! Form::label('peso', 'Peso', ['class' => 'col-sm-3 control-label']) !!}
+							<div class="col-sm-7">
+								{!! Form::select('peso', ['0-1000' => 'Hasta 1Kg', '1000-2000' => '1 a 2Kg', '2000-3000' => '2 a 3Kg'], $objeto->peso_minimo.'-'.$objeto->peso_maximo) !!}
+				        	</div>
+				        </div>
+
+				        {{-- <div class="form-group">
+				    		{!! Form::label('peso_minimo', 'Peso mínimo (gr.)', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
-								{!! Form::text('nombre', $objeto->nombre, ['class' => 'form-control', 'placeholder' => 'Nombre']) !!}
+								{!! Form::text('peso_minimo', $objeto->peso_minimo, ['class' => 'form-control', 'placeholder' => 'Peso mínimo`` (gr.)']) !!}
 							</div>
 				        </div>
 
 				        <div class="form-group">
+				    		{!! Form::label('peso_maximo', 'Peso máximo (gr.)', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('peso_maximo', $objeto->peso_maximo, ['class' => 'form-control', 'placeholder' => 'Peso máximo (gr.)']) !!}
+							</div>
+				        </div> --}}
+
+				    	<div class="form-group">
+				    		{!! Form::label('precio', 'Precio', ['class' => 'col-sm-3 control-label']) !!}
+				    		<div class="col-sm-7">
+								{!! Form::text('precio', $objeto->precio, ['class' => 'form-control', 'placeholder' => 'Precio']) !!}
+							</div>
+				        </div>
+
+				        {{-- <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
 							</div>
-				        </div>
+				        </div> --}}
 
 				        <div class="col-sm-4 col-sm-offset-4">
 				        	{!! Form::submit('Guardar', ['class' => 'btn btn-lg btn-success btn-block']) !!}

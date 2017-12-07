@@ -81,7 +81,9 @@ class IpnMercadoPagoController extends Controller
 			    }	
 		    }
 
-		    if($transaction_amount_payments >= $transaction_amount_order){		    	
+		    if($transaction_amount_payments >= $transaction_amount_order){
+
+                
 		    	// shipnow
                 // $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
 		    	$shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");

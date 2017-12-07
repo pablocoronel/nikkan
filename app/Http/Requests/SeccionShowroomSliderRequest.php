@@ -35,7 +35,7 @@ class SeccionShowroomSliderRequest extends FormRequest
                     //
                     // 'texto' => 'required',
                     // 'vinculo' => 'required',
-                    'imagen' => 'required',
+                    'imagen' => 'required|image',
                     'orden' => 'required',
                 ];
                 break;

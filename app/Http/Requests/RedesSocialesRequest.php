@@ -35,7 +35,7 @@ class RedesSocialesRequest extends FormRequest
                     //
                     'nombre' => 'required',
                     'vinculo' => 'required',
-                    'imagen' => 'required',
+                    'imagen' => 'required|image',
                     'ubicacion' => 'required',
                     'orden' => 'required',
                 ];
