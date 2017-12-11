@@ -85,8 +85,8 @@ class IpnMercadoPagoController extends Controller
 
                 
 		    	// shipnow
-                // $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
-		    	$shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");
+                $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+		    	// $shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");
 
 		    	// $idCompra= SeccionCarritoCompra::where('codigo_compra', '=', 'nikkan5a2812d342c14')
 		    	$idCompra= SeccionCarritoCompra::where('codigo_compra', '=', $payment_info["response"]["collection"]["external_reference"])

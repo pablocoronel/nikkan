@@ -18,5 +18,5 @@ class SeccionTiendaGaleria extends Model
      *
      * @var array
      */
-    protected $fillable = ['fk_producto', 'ruta', 'orden'];
+    protected $fillable = ['fk_producto', 'ruta', 'ruta_zoom', 'orden'];
 }

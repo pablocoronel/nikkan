@@ -3,7 +3,61 @@
 @section('titulo', $tipoDeColeccion)
 
 @section('scriptsParticulares')
+  <script type="text/javascript" src="{{asset('plugins/elevatezoom-master/jquery.elevateZoom-3.0.8.min.js')}}"></script>
   <link rel="stylesheet" href="{{asset('css/seccionTiendaVerProducto.css')}}">
+
+  <!-- Zoom en la tela -->
+  <style type="text/css">
+      .zoom {      
+      -webkit-transition: all 0.35s ease-in-out;    
+      -moz-transition: all 0.35s ease-in-out;    
+      transition: all 0.35s ease-in-out;     
+      cursor: -webkit-zoom-in;      
+      cursor: -moz-zoom-in;      
+      cursor: zoom-in;  
+      }     
+
+      .zoom:hover,  
+      .zoom:active,   
+      .zoom:focus {
+      /**adjust scale to desired size, 
+      add browser prefixes**/
+      -ms-transform: scale(2.5);    
+      -moz-transform: scale(2.5);  
+      -webkit-transform: scale(2.5);  
+      -o-transform: scale(2.5);  
+      transform: scale(2.5);    
+      position:relative;      
+      z-index:100;  
+      }
+
+      /**To keep upscaled images visible on mobile, 
+      increase left & right margins a bit**/  
+      @media only screen and (max-width: 768px) {   
+      ul.gallery {      
+      margin-left: 15vw;       
+      margin-right: 15vw;
+      }
+
+      /**TIP: Easy escape for touch screens,
+      give gallery's parent container a cursor: pointer.**/
+      .DivName {cursor: pointer}
+      }
+
+  </style>
+
+  <!-- // Zoom a la tela -->
+  <script type="text/javascript">
+      $(document).ready(function() {
+          $("#imagenGrande").elevateZoom({
+            zoomType        : "inner",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750
+
+          });  
+      });
+  </script>
 @endsection
 
 @section('contenido')
@@ -15,7 +69,7 @@
              <div class="col-xs-12">
                 <div id="contenedorImagenGrande">
                   @if(isset($galeria[0]))
-                  <img id="imagenGrande" src="{{asset($galeria[0]->ruta)}}" alt="" class="img img-responsive">
+                  <img id="imagenGrande" src="{{asset($galeria[0]->ruta)}}" alt="" class="img img-responsive" data-zoom-image="{{asset($galeria[0]->ruta_zoom)}}" alt="">
                   @endif
                 </div>
               </div>
@@ -23,7 +77,7 @@
               @foreach($galeria as $cadaGaleria)
                 <div class="col-xs-4 col-sm-2_personalizado">
                   <div id="contenedorImagenChica">
-                    <img src="{{asset($cadaGaleria->ruta)}}" alt="" class="img img-responsive" id="imagenChica{{$cadaGaleria->id}}" onClick="javascript: verImagenEnGrande(this);">
+                    <img src="{{asset($cadaGaleria->ruta)}}" imagenZoom="{{asset($cadaGaleria->ruta_zoom)}}" alt="{{asset($cadaGaleria->ruta_zoom)}}" class="img img-responsive" id="imagenChica{{$cadaGaleria->id}}" onClick="javascript: verImagenEnGrande(this);">
                   </div>
                 </div>
               @endforeach
@@ -94,9 +148,15 @@
 	<script>
         function verImagenEnGrande(img){
             var imagenChica= img.src;
+            var imagenChicaZoom= img.alt;
             var imagenGrande= document.getElementById('imagenGrande');
             
+            // alert(imagenGrande.data-zoom-image);
+
             imagenGrande.setAttribute("src", imagenChica);
+            imagenGrande.setAttribute("data-zoom-image", imagenChicaZoom);
+            // imagenGrande.setAttribute("alt", imagenChicaZoom);
+            
         }
     </script>
 @endsection

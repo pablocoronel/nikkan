@@ -57,6 +57,7 @@ class SeccionTiendaGaleriaController extends Controller
         $objeto= new SeccionTiendaGaleria([
             'fk_producto' => $idProducto,
             'ruta' => '',
+            'ruta_zoom' => '',
             'orden' => $request->get('orden'),
         ]);
 
@@ -76,6 +77,25 @@ class SeccionTiendaGaleriaController extends Controller
 
         // guardar ruta
         $objeto->ruta = $rutaConArchivo;
+
+        // zoom
+        $rutaDeCarpetaZoom= 'images/seccion_tienda_galerias/';
+        // $idArchivo= SeccionTiendaGaleria::max('id');
+        $nombreArchivoZoom= "galeria_".$idProducto."_".$idArchivo.'_zoom';
+        $extensionZoom= $request->imagen_zoom->extension();
+
+        $rutaConArchivoZoom= $rutaDeCarpetaZoom.$nombreArchivoZoom.'.'.$extensionZoom;
+
+        // Subir imagen:
+        $archivoZoom= $request->file('imagen_zoom');
+        Storage::put($rutaConArchivoZoom, File::get($archivoZoom));
+
+        // guardar ruta
+        $objeto->ruta_zoom = $rutaConArchivoZoom;
+
+        // ******
+
+
         $objeto->save();
 
         // para mostrar msj de exito
@@ -146,6 +166,27 @@ class SeccionTiendaGaleriaController extends Controller
             }
         }
 
+        // zoom
+        if ($request->hasFile('imagen_zoom')) {
+            //ruta de imagen
+            $rutaDeCarpetaZoom= 'images/seccion_tienda_galerias/';
+
+            $idArchivo= $id;
+
+            $nombreArchivoZoom= "galeria_".$idProducto."_".$idArchivo.'_zoom';
+            $extensionZoom= $request->imagen_zoom->extension();
+
+            $rutaConArchivoZoom= $rutaDeCarpetaZoom.$nombreArchivoZoom.'.'.$extensionZoom;
+
+            // Subir imagen:
+            $archivoZoom= $request->file('imagen_zoom');
+            Storage::put($rutaConArchivoZoom, File::get($archivoZoom));
+
+            if ($request->file('imagen_zoom')->isValid()) {
+                $objeto->ruta_zoom = $rutaConArchivoZoom;
+            }
+        }
+
         $objeto->save();
 
         $request->session()->flash('guardado', 'cambios guardados');
@@ -165,6 +206,7 @@ class SeccionTiendaGaleriaController extends Controller
         $objeto->delete();
 
         Storage::delete($objeto->ruta);
+        Storage::delete($objeto->ruta_zoom);
 
         return back();
     }

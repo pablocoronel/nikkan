@@ -439,8 +439,9 @@ class PaginaCarritoController extends Controller
     public function guardarCompra($resultadoPago){
         $dominioDelSitio= DOMINIO_SITIO;
 
-        // if ($resultadoPago == 'success' || $resultadoPago == 'pending') {
-        if ($resultadoPago == 'success' || $resultadoPago == 'pending' || $resultadoPago == 'failure') {
+        if ($resultadoPago == 'success' || $resultadoPago == 'pending') {
+        // para probar
+        // if ($resultadoPago == 'success' || $resultadoPago == 'pending' || $resultadoPago == 'failure') {
             // direccion de entrega
             $direccion_entrega= new SeccionCarritoDireccion();
             $direccion_entrega->fk_usuario= Auth::id();
@@ -534,8 +535,8 @@ class PaginaCarritoController extends Controller
             // shipnow
             if ($resultadoPago == 'success') {
             // if ($resultadoPago == 'failure') {
-                //$shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
-                $shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");
+                $shipnow = new \App\Shipnow("contacto@nikka-n.com.ar", "Drcooper2017", "/cacert/cacert.pem");
+                // $shipnow = new \App\Shipnow("soporte@osole.es", "Osole2017", "/cacert/cacert.pem");
                 
                 $codigoDeCompra= SeccionCarritoCompra::where('fk_usuario', '=', Auth::id())
                                     ->select('codigo_compra')
@@ -625,9 +626,9 @@ class PaginaCarritoController extends Controller
             }elseif ($resultadoPago == 'pending') {
                 Session::flash('guardadoPendiente', 'La compra está pendiente de pago');
             }
-            elseif ($resultadoPago == 'failure') {
-                Session::flash('guardadoPendiente', 'prueba con falla');
-            }
+            // elseif ($resultadoPago == 'failure') {
+            //     Session::flash('guardadoPendiente', 'prueba con falla');
+            // }
 
         }elseif ($resultadoPago == 'failure') {
             Session::flash('guardadoFallo', 'No se realizó la compra');

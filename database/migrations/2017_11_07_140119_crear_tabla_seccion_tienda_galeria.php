@@ -18,6 +18,7 @@ class CrearTablaSeccionTiendaGaleria extends Migration
             $table->increments('id');
             $table->integer('fk_producto');
             $table->string('ruta');
+            $table->string('ruta_zoom');
             $table->string('orden');
             $table->timestamps();
         });

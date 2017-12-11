@@ -56,6 +56,14 @@
 				        </div>
 
 				        <div class="form-group">
+				        	{!! Form::label('imagen_zoom', 'Imagen (1000x1000px)', ['class' => 'col-sm-3 control-label']) !!}
+				            <div class="col-sm-7">
+				            	<img src="{{ asset($objeto->ruta_zoom)}}" alt="" style="max-width: 100px;" class="img img-responsive">
+				        		{!! Form::file('imagen_zoom') !!}
+					        </div>
+				        </div>
+
+				        <div class="form-group">
 				    		{!! Form::label('orden', 'Orden', ['class' => 'col-sm-3 control-label']) !!}
 				    		<div class="col-sm-7">
 								{!! Form::text('orden', $objeto->orden, ['class' => 'form-control', 'placeholder' => 'Orden']) !!}
